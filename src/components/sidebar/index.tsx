@@ -18,7 +18,7 @@ const Sidebar = () => {
         <span className={styles.sidebar__separator} />
       </div>
 
-      <div className='flex md:flex-col justify-center md:space-y-5 md:flex-shrink font-mono md:px-5 gap-4 p-2 w-full'>
+      <div className='flex md:flex-col justify-center md:space-y-5 md:flex-shrink font-mono md:px-5 gap-4 p-2 w-full bg-gray-50 '>
         <CategoryButton
           icon={faGraduationCap}
           title='Academic'

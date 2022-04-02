@@ -6,7 +6,7 @@
   margin-bottom: 30px;
 
   @media (min-width: 668px) {
-    position: absolute;
+    position: sticky;
     right: 0;
     flex-direction: row;
     justify-content: flex-end;

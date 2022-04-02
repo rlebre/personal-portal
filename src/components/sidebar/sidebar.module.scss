@@ -2,10 +2,11 @@
   @media (min-width: 668px) {
     height: 100vh;
     width: 67px;
+    padding-top: 30px;
   }
 
   width: 100%;
-  padding-top: 30px;
+  padding-top: 5px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -18,6 +19,7 @@
   &__big {
     width: 280px;
     align-items: flex-start;
+    @apply bg-gray-50;
 
     @media (max-width: 668px) {
       @apply flex items-center;
@@ -113,7 +115,7 @@
 
     &__wrapper {
       margin-left: 30px;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       display: flex;
       justify-content: flex-start;
       width: 140px;
