@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Academic = () => {
-  return <div>Academic</div>;
+  return (
+    <div className='md:h-full flex justify-center items-center'>
+      <div className='md:pb-32'>Academic</div>
+    </div>
+  );
 };
 
 export default Academic;

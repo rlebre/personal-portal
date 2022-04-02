@@ -7,16 +7,16 @@ interface Props {
   icon: IconDefinition;
   title: string;
   onClick?: () => void;
-  classNames?: string;
+  className?: string;
 }
 
-export const CategoryButton = ({ icon, title, onClick, classNames }: Props) => {
+export const CategoryButton = ({ icon, title, onClick, className }: Props) => {
   const ref = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
 
   return (
-    <div ref={ref} className={`${styles.btn__category} ${classNames}`} onClick={onClick}>
+    <div ref={ref} className={`${styles.btn__category} ${className ? className : ''}`} onClick={onClick}>
       <FontAwesomeIcon icon={icon} className='w-6' />
-      <span>{title}</span>
+      <span className={styles.btn__title}>{title}</span>
     </div>
   );
 };

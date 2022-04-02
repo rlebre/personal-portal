@@ -1,11 +1,11 @@
-import '../assets/styles/globals.scss';
 import type { AppProps } from 'next/app';
-import React, { useEffect } from 'react';
 import Head from 'next/head';
+import React, { useEffect } from 'react';
+import '../assets/styles/globals.scss';
 import Layout from '../components/layout';
 import Academic from './academic';
-import Professional from './professional';
 import Hobbies from './hobbies';
+import Professional from './professional';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -27,6 +27,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta name='ruilebre.com' content='Personal website of Rui Lebre - software engineer.' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <title>Rui Lebre</title>
+        <link rel='icon' href='/logo.svg' />
       </Head>
       <>
         {withLayout ? (

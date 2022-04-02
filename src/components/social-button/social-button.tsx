@@ -11,7 +11,7 @@ interface Props {
 
 export const SocialButton = ({ icon, link, newPage }: Props) => {
   return (
-    <a className={styles.btn__social} href={link} target={newPage ? '_blank' : '_parent'}>
+    <a className={styles.btn__social} href={link} target={newPage ? '_blank' : '_parent'} rel='noreferrer'>
       <FontAwesomeIcon icon={icon} className='w-6 text-gray-500' />
     </a>
   );

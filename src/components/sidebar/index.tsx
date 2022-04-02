@@ -18,15 +18,17 @@ const Sidebar = () => {
         <span className={styles.sidebar__separator} />
       </div>
 
-      <div
-        className='flex flex-col justify-center space-y-5 flex-shrink font-mono'
-        style={{ width: '200px', marginLeft: '30px' }}
-      >
-        <CategoryButton icon={faGraduationCap} title='Academic' classNames='w-20 h-20' />
+      <div className='flex md:flex-col justify-center md:space-y-5 md:flex-shrink font-mono md:px-5 gap-4 p-2 w-full'>
+        <CategoryButton
+          icon={faGraduationCap}
+          title='Academic'
+          className='w-32'
+          onClick={() => router.push('/academic')}
+        />
 
-        <CategoryButton icon={faCode} title='Professional' />
+        <CategoryButton icon={faCode} title='Professional' onClick={() => router.push('/professional')} />
 
-        <CategoryButton icon={faCamera} title='Hobbies' />
+        <CategoryButton icon={faCamera} title='Hobbies' onClick={() => router.push('/hobbies')} />
       </div>
     </div>
   );

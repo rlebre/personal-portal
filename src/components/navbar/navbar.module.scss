@@ -1,9 +1,71 @@
 .navbar {
-  padding-top: 30px;
-  padding-right: 30px;
-  margin-bottom: 30px;
-  align-items: center;
+  position: sticky;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  flex-direction: column;
+  padding: 30px;
+  margin-bottom: 30px;
+
+  @media (min-width: 668px) {
+    position: absolute;
+    right: 0;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+.sidebar__header {
+  @media (min-width: 668px) {
+    display: none;
+    margin-bottom: 30px;
+  }
+
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__expanded {
+    justify-content: space-between;
+    padding-left: 15px;
+  }
+
+  &__logo {
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    @apply font-mono;
+    @apply text-gray-600;
+    cursor: pointer;
+  }
+
+  &__collapser {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-family: 'icons';
+    color: white;
+    cursor: pointer;
+
+    &__expanded {
+      align-self: flex-end;
+      margin-right: 15px;
+    }
+  }
+}
+
+.separator {
+  @media (max-width: 668px) {
+    width: 80%;
+    @apply bg-gray-600;
+    height: 2px;
+    flex-shrink: 0;
+    border-radius: 20px;
+
+    &__wrapper {
+      padding-left: 25px;
+      display: flex;
+      justify-content: flex-start;
+      width: 140px;
+    }
+  }
 }

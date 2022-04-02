@@ -1,6 +1,10 @@
 .sidebar {
-  height: 100vh;
-  width: 67px;
+  @media (min-width: 668px) {
+    height: 100vh;
+    width: 67px;
+  }
+
+  width: 100%;
   padding-top: 30px;
   align-items: center;
   display: flex;
@@ -14,17 +18,23 @@
   &__big {
     width: 280px;
     align-items: flex-start;
-  }
 
-  @media (max-width: 668px) {
-    width: 60px;
-
-    &__big {
-      display: none;
+    @media (max-width: 668px) {
+      @apply flex items-center;
     }
   }
 
+  @media (max-width: 668px) {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+
   &__header {
+    @media (max-width: 668px) {
+      display: none;
+    }
+
     margin-bottom: 30px;
     width: 100%;
     display: flex;
@@ -37,6 +47,10 @@
     }
 
     &__logo {
+      @media (max-width: 668px) {
+        display: none;
+      }
+
       font-size: 20px;
       margin-left: 15px;
       letter-spacing: 0.5px;
