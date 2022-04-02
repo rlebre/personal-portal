@@ -1,18 +1,18 @@
-import Head from 'next/head';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faGoogle, faLinkedinIn, faOrcid, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
+  faCamera,
+  faCode,
+  faGraduationCap,
+  faSwatchbook,
   faToggleOff,
   faToggleOn,
-  faSwatchbook,
-  faGraduationCap,
-  faCode,
-  faCamera,
 } from '@fortawesome/free-solid-svg-icons';
-import { faGoogle, faOrcid, faGithub, faLinkedinIn, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { useState } from 'react';
-import { SocialButton } from '../components/social-button/social-button';
-import { CategoryButton } from '../components/category-button/category-button';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Head from 'next/head';
 import router from 'next/router';
+import { useState } from 'react';
+import { CategoryButton } from '../components/category-button/category-button';
+import { SocialButton } from '../components/social-button/social-button';
 
 export default function Home() {
   const [toogle, setToogle] = useState(false);
@@ -60,9 +60,9 @@ export default function Home() {
         <div className='flex flex-col items-center md:flex-row justify-center md:space-x-20 space-y-5 md:space-y-0 flex-shrink font-mono'>
           <CategoryButton icon={faGraduationCap} title='Academic' onClick={() => onClick('/academic')} />
 
-          <CategoryButton icon={faCode} title='Professional' onClick={() => onClick('/professional')} />
+          <CategoryButton icon={faCode} title='Professional' />
 
-          <CategoryButton icon={faCamera} title='Hobbies' onClick={() => onClick('/hobbies')} />
+          <CategoryButton icon={faCamera} title='Hobbies' />
         </div>
       </main>
 
