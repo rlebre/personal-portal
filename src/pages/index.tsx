@@ -1,4 +1,3 @@
-import { faGithub, faGoogle, faLinkedinIn, faOrcid, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import {
   faCamera,
   faCode,
@@ -11,7 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import router from 'next/router';
 import { useCallback, useState } from 'react';
 import { CategoryButton } from '../components/category-button/category-button';
-import { SocialButton } from '../components/social-button/social-button';
+import Footer from '../components/footer';
 
 export default function Home() {
   const [toogle, setToogle] = useState(false);
@@ -22,7 +21,7 @@ export default function Home() {
 
   return (
     <div className='h-screen w-screen flex flex-col'>
-      <nav className='w-full h-8 flex justify-end items-end space-x-4 px-4'>
+      <nav className='w-full h-8 flex justify-end gap-4 p-4 mt-4 items-center'>
         <FontAwesomeIcon icon={faSwatchbook} className='h-5 text-gray-500' />
         <button onClick={() => setToogle(!toogle)}>
           <FontAwesomeIcon icon={toogle ? faToggleOff : faToggleOn} className='w-6 text-gray-500' />
@@ -43,17 +42,7 @@ export default function Home() {
         </div>
       </main>
 
-      <footer className='h-16 flex justify-center space-x-4'>
-        <SocialButton icon={faTwitter} link='https://twitter.com/ralebre/' newPage />
-
-        <SocialButton icon={faLinkedinIn} link='https://www.linkedin.com/in/rui-lebre-435279101/' newPage />
-
-        <SocialButton icon={faGithub} link='https://github.com/rlebre/' newPage />
-
-        <SocialButton icon={faOrcid} link='https://orcid.org/0000-0002-3230-0732' newPage />
-
-        <SocialButton icon={faGoogle} link='https://scholar.google.com/citations?user=WtJeCMMAAAAJ&hl=en-US' newPage />
-      </footer>
+      <Footer />
     </div>
   );
 }

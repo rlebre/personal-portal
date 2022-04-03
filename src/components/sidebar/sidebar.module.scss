@@ -1,8 +1,14 @@
 .sidebar {
   @media (min-width: 668px) {
-    height: 100vh;
-    width: 67px;
-    padding-top: 30px;
+    width: 280px;
+  }
+
+  @media (max-width: 668px) {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
 
   width: 100%;
@@ -17,19 +23,9 @@
   overflow-x: hidden;
 
   &__big {
-    width: 280px;
-    align-items: flex-start;
+    align-items: center;
+    @apply flex items-center;
     @apply bg-gray-50;
-
-    @media (max-width: 668px) {
-      @apply flex items-center;
-    }
-  }
-
-  @media (max-width: 668px) {
-    position: fixed;
-    width: 100%;
-    bottom: 0;
   }
 
   &__header {
@@ -43,18 +39,12 @@
     justify-content: center;
     align-items: center;
 
-    &__expanded {
-      justify-content: space-between;
-      padding-left: 15px;
-    }
-
     &__logo {
       @media (max-width: 668px) {
         display: none;
       }
 
       font-size: 20px;
-      margin-left: 15px;
       letter-spacing: 0.5px;
       @apply font-mono;
       @apply text-gray-600;

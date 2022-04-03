@@ -3,7 +3,6 @@ import Head from 'next/head';
 import React, { useEffect } from 'react';
 import '../assets/styles/globals.scss';
 import Layout from '../components/layout';
-import Academic from './academic';
 import Hobbies from './hobbies';
 import Professional from './professional';
 
@@ -14,7 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   let withLayout = false;
   switch (Component) {
-    case Academic:
     case Professional:
     case Hobbies:
       withLayout = true;
