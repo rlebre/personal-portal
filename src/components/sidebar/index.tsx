@@ -33,7 +33,10 @@ const Sidebar = () => {
           <CategoryButton icon={faCamera} title='Hobbies' onClick={() => router.push('/hobbies')} />
         </div>
       </div>
-      <Footer />
+
+      <div className='hidden md:flex'>
+        <Footer />
+      </div>
     </div>
   );
 };
