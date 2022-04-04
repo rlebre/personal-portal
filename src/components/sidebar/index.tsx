@@ -1,7 +1,7 @@
 import { faCamera, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { CategoryButton } from '../category-button/category-button';
+import { CategoryButton } from '../button/category-button';
 import Footer from '../footer';
 import styles from './sidebar.module.scss';
 
@@ -20,7 +20,7 @@ const Sidebar = () => {
           <span className={styles.sidebar__separator} />
         </div>
 
-        <div className='flex md:flex-col justify-center items-center md:py-8 gap-4 p-2 w-full bg-gray-50 '>
+        <div className='flex lg:flex-col justify-center items-center lg:py-8 gap-4 p-2 w-full bg-gray-50 '>
           <CategoryButton
             icon={faGraduationCap}
             title='Academic'
@@ -34,7 +34,7 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className='hidden md:flex'>
+      <div className='hidden lg:flex'>
         <Footer />
       </div>
     </div>

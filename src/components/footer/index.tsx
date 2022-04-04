@@ -3,7 +3,7 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
-import { SocialButton } from '../social-button/social-button';
+import { SocialButton } from '../button/social-button';
 
 const Footer = () => {
   return (

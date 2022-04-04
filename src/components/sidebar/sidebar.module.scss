@@ -1,9 +1,9 @@
 .sidebar {
-  @media (min-width: 668px) {
+  @media (min-width: 1024px) {
     width: 280px;
   }
 
-  @media (max-width: 668px) {
+  @media (max-width: 1024px) {
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -29,7 +29,7 @@
   }
 
   &__header {
-    @media (max-width: 668px) {
+    @media (max-width: 1024px) {
       display: none;
     }
 
@@ -40,7 +40,7 @@
     align-items: center;
 
     &__logo {
-      @media (max-width: 668px) {
+      @media (max-width: 1024px) {
         display: none;
       }
 

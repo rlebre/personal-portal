@@ -1,16 +1,9 @@
-import {
-  faCamera,
-  faCode,
-  faGraduationCap,
-  faSwatchbook,
-  faToggleOff,
-  faToggleOn,
-} from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import router from 'next/router';
 import { useCallback, useState } from 'react';
-import { CategoryButton } from '../components/category-button/category-button';
+import { CategoryButton } from '../components/button/category-button';
 import Footer from '../components/footer';
+import Navbar from '../components/navbar';
 
 export default function Home() {
   const [toogle, setToogle] = useState(false);
@@ -21,12 +14,7 @@ export default function Home() {
 
   return (
     <div className='h-screen w-screen flex flex-col'>
-      <nav className='w-full h-8 flex justify-end gap-4 p-4 mt-4 items-center'>
-        <FontAwesomeIcon icon={faSwatchbook} className='h-5 text-gray-500' />
-        <button onClick={() => setToogle(!toogle)}>
-          <FontAwesomeIcon icon={toogle ? faToggleOff : faToggleOn} className='w-6 text-gray-500' />
-        </button>
-      </nav>
+      <Navbar />
 
       <main className='h-full w-full md:space-y-32 flex flex-col justify-center'>
         <h1 className='text-5xl md:text-7xl text-gray-600 text-center my-8 font-mono font-bold tracking-widest'>

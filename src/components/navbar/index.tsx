@@ -1,5 +1,3 @@
-import { faSwatchbook, faToggleOn } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styles from './navbar.module.scss';
@@ -20,10 +18,10 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className='hidden md:flex gap-4 items-center'>
+      {/* <div className='hidden md:flex gap-4 items-center'>
         <FontAwesomeIcon icon={faSwatchbook} className='h-5 text-gray-500' />
         <FontAwesomeIcon icon={faToggleOn} className='w-6 text-gray-500' />
-      </div>
+      </div> */}
     </nav>
   );
 };
