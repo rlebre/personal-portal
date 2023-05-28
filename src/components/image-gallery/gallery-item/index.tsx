@@ -16,9 +16,8 @@ const GalleryItem = ({ className, imageUrl }: Props) => {
       <Image
         src={imageUrl}
         alt='image'
-        width='1000px'
-        height='1000px'
-        objectFit='contain'
+        width={1000}
+        height={1000}
         loading='eager'
         className='inset-0 rounded opacity-95 hover:opacity-100'
       />
