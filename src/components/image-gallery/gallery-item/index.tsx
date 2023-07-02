@@ -1,26 +1,48 @@
-import Image from 'next/image';
+import NextImage from 'next/image';
 import React from 'react';
+import useSWR from 'swr';
 
 interface Props {
-  className?: string;
   imageUrl: string;
 }
 
-const GalleryItem = ({ className, imageUrl }: Props) => {
+interface IProcessedImage {
+  width: number;
+  height: number;
+  src: string;
+}
+
+const processImage = async (imageUrl: string) => {
+  const imagePromise = new Promise((resolve, reject) => {
+    const img = new Image();
+    img.src = imageUrl;
+    img.onload = () =>
+      resolve({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+        src: imageUrl,
+      });
+    img.onerror = (error) => reject(error);
+  });
+
+  return await imagePromise;
+};
+
+const GalleryItem = ({ imageUrl }: Props) => {
+  const { data } = useSWR(imageUrl, processImage) as { data: IProcessedImage };
+
   return (
-    <div
-      className={`w-full rounded flex justify-center items-center shadow-md hover:shadow-lg hover:scale-105 hover:z-10 transition-all duration-200 bg-gray-100 md:p-5 max-h-screen ${
-        className ? className : ''
-      }`}
-    >
-      <Image
-        src={imageUrl}
-        alt='image'
-        width={1000}
-        height={1000}
-        loading='eager'
-        className='inset-0 rounded opacity-95 hover:opacity-100'
-      />
+    <div className='w-full rounded flex justify-center items-center shadow-md hover:shadow-lg hover:scale-105 hover:z-10 transition-all duration-200 bg-gray-100 mb-3 max-h-screen cursor-pointer'>
+      {data && (
+        <NextImage
+          src={data.src}
+          alt='image'
+          width={data.width}
+          height={data.height}
+          loading='eager'
+          className='rounded'
+        />
+      )}
     </div>
   );
 };

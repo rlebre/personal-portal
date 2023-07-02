@@ -11,12 +11,12 @@ interface Props {
 }
 
 export const CategoryButton = ({ icon, title, onClick, className }: Props) => {
-  const ref = useRef<HTMLDivElement>() as MutableRefObject<HTMLDivElement>;
+  const ref = useRef<HTMLButtonElement>() as MutableRefObject<HTMLButtonElement>;
 
   return (
-    <div ref={ref} className={`${styles.btn__category} ${className ? className : ''}`} onClick={onClick}>
+    <button ref={ref} className={`${styles.btn__category} ${className ? className : ''}`} onClick={onClick}>
       <FontAwesomeIcon icon={icon} className='w-6' />
       <span className={styles.btn__title}>{title}</span>
-    </div>
+    </button>
   );
 };

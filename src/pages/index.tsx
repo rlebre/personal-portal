@@ -6,7 +6,7 @@ import Footer from '../components/footer';
 import Navbar from '../components/navbar';
 
 export default function Home() {
-  const [toogle, setToogle] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   const onClick = useCallback((route: string) => {
     router.push(route);
