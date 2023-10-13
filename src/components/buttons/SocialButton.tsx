@@ -1,7 +1,7 @@
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import styles from './social-button.module.scss';
+import styles from './SocialButton.module.scss';
 
 interface Props {
   icon: IconDefinition;

@@ -5,6 +5,7 @@ import '../assets/styles/globals.scss';
 import Layout from '../components/layout';
 import Hobbies from './hobbies';
 import Professional from './professional';
+import { Modal } from '../components/modal';
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -28,6 +29,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel='icon' href='/logo.svg' />
       </Head>
       <>
+        {/* <Modal /> */}
+
         {withLayout ? (
           <Layout>
             <Component {...pageProps} />
