@@ -6,7 +6,7 @@ import path from 'path';
 import ImageGallery from '../../components/image-gallery/ImageGallery';
 // import { ModalService } from '../../components/modal/service';
 
-export const getContent = async () => {
+const getContent = async () => {
   const imagesPath = path.join(process.cwd(), 'public/images/hobbies');
   const fileList = fs
     .readdirSync(imagesPath, 'utf8')
@@ -22,7 +22,6 @@ export const getContent = async () => {
     content,
   };
 };
-
 
 const Hobbies = async () => {
   const { images, metadata, content } = await getContent();
@@ -40,6 +39,5 @@ const Hobbies = async () => {
     </div>
   );
 };
-
 
 export default Hobbies;
