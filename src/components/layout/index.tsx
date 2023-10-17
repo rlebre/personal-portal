@@ -9,12 +9,10 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className={styles.layout}>
+    <div id='layout-wrapper' className={`${styles.layout__component}`}>
+      <Navbar />
       <Sidebar />
-      <div id='layout-wrapper' className={`${styles.layout__component}`}>
-        <Navbar />
-        {children}
-      </div>
+      {children}
     </div>
   );
 };

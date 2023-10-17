@@ -1,6 +1,9 @@
 .sidebar {
   @media (min-width: 1024px) {
-    width: 280px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   @media (max-width: 1024px) {
@@ -24,7 +27,7 @@
 
   &__big {
     align-items: center;
-    @apply flex items-center;
+    @apply flex justify-between;
     @apply bg-gray-50;
   }
 
@@ -33,17 +36,11 @@
       display: none;
     }
 
-    margin-bottom: 30px;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 
     &__logo {
-      @media (max-width: 1024px) {
-        display: none;
-      }
-
       font-size: 20px;
       letter-spacing: 0.5px;
       @apply font-mono;
@@ -97,6 +94,12 @@
   }
 
   &__separator {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: flex;
+    }
+
     width: 80%;
     @apply bg-gray-600;
     height: 2px;

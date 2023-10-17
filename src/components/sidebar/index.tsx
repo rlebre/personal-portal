@@ -9,18 +9,19 @@ const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <div className='flex flex-col justify-between shadow-md items-center pt-5'>
+    <div className='flex justify-between shadow-md items-center md:px-20'>
       <div className={`${styles.sidebar} ${styles.sidebar__big}`}>
         <div className={`${styles.sidebar__header} ${styles.sidebar__header__expanded}`}>
           <h1 className={styles.sidebar__header__logo} onClick={() => router.push('/')}>
             Rui <span className='text-gray-700 font-extrabold'>Lebre</span>
           </h1>
         </div>
+
         <div className={styles.sidebar__separator__wrapper}>
           <span className={styles.sidebar__separator} />
         </div>
 
-        <div className='flex lg:flex-col justify-center items-center lg:py-8 gap-4 p-2 w-full bg-gray-50 '>
+        <div className='flex justify-center items-center gap-4 p-2 w-full lg:w-fit bg-gray-50 '>
           <CategoryButton
             icon={faGraduationCap}
             title='Academic'
@@ -32,10 +33,6 @@ const Sidebar = () => {
 
           <CategoryButton icon={faCamera} title='Hobbies' onClick={() => router.push('/hobbies')} />
         </div>
-      </div>
-
-      <div className='hidden lg:flex'>
-        <Footer />
       </div>
     </div>
   );

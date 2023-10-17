@@ -6,13 +6,12 @@ const Navbar = () => {
   const router = useRouter();
 
   return (
-    <nav className={`${styles.navbar} w-full`}>
-      <div className='flex flex-col'>
-        <div className={`${styles.sidebar__header} ${styles.sidebar__header__expanded}`}>
-          <h1 className={styles.sidebar__header__logo} onClick={() => router.push('/')}>
-            Rui <span className='text-gray-700 font-extrabold'>Lebre</span>
-          </h1>
-        </div>
+    <nav className={styles.navbar}>
+      <div className={styles.sidebar__header}>
+        <h1 className={styles.sidebar__header__logo} onClick={() => router.push('/')}>
+          Rui <span className='text-gray-700 font-extrabold'>Lebre</span>
+        </h1>
+
         <div className={styles.separator__wrapper}>
           <span className={styles.separator} />
         </div>
