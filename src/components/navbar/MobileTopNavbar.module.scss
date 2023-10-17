@@ -1,6 +1,7 @@
 .navbar {
   display: none;
-  position: sticky;
+  // position: sticky;
+  // bottom: 0;
   flex-direction: column;
   padding: 30px 0 0 15px;
 
@@ -16,7 +17,7 @@
   justify-content: space-between;
 
   &__logo {
-    font-size: 20px;
+    font-size: 40px;
     letter-spacing: 0.5px;
     @apply font-mono;
     @apply text-gray-600;

@@ -1,15 +1,14 @@
 import { faCamera, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { CategoryButton } from '../button/category-button';
-import Footer from '../footer';
-import styles from './sidebar.module.scss';
+import { CategoryButton } from '../buttons/CategoryButton';
+import styles from './Navbar.module.scss';
 
 const Sidebar = () => {
   const router = useRouter();
 
   return (
-    <div className='flex justify-between shadow-md items-center md:px-20'>
+    <div className='flex justify-between shadow-sm items-center md:px-20 bg-slate-100'>
       <div className={`${styles.sidebar} ${styles.sidebar__big}`}>
         <div className={`${styles.sidebar__header} ${styles.sidebar__header__expanded}`}>
           <h1 className={styles.sidebar__header__logo} onClick={() => router.push('/')}>
@@ -21,17 +20,22 @@ const Sidebar = () => {
           <span className={styles.sidebar__separator} />
         </div>
 
-        <div className='flex justify-center items-center gap-4 p-2 w-full lg:w-fit bg-gray-50 '>
+        <div className='flex justify-center items-center gap-4 p-2 w-full lg:w-fit'>
           <CategoryButton
             icon={faGraduationCap}
             title='Academic'
-            className='w-32'
             onClick={() => router.push('/academic')}
+            isExpandable={true}
           />
 
-          <CategoryButton icon={faCode} title='Professional' onClick={() => router.push('/professional')} />
+          <CategoryButton
+            icon={faCode}
+            title='Professional'
+            onClick={() => router.push('/professional')}
+            isExpandable={true}
+          />
 
-          <CategoryButton icon={faCamera} title='Hobbies' onClick={() => router.push('/hobbies')} />
+          <CategoryButton icon={faCamera} title='Hobbies' onClick={() => router.push('/hobbies')} isExpandable={true} />
         </div>
       </div>
     </div>

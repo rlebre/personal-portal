@@ -3,11 +3,11 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import React from 'react';
-import { SocialButton } from '../button/social-button';
+import { SocialButton } from './buttons/SocialButton';
 
 const Footer = () => {
   return (
-    <footer className='flex h-16 justify-center items-center gap-4 text-sm text-gray-500 flex-col pb-5'>
+    <footer className='flex h-16 justify-center items-center gap-4 text-sm text-gray-500 flex-col pb-5 mb-24 md:mb-0'>
       <div className='flex  justify-center items-center gap-2 text-sm text-gray-500'>
         <SocialButton icon={faTwitter} link='https://twitter.com/ralebre/' newPage name='Twitter' />
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import Navbar from '../navbar';
-import Sidebar from '../sidebar';
+import Navbar from '../navbar/MobileTopNavbar';
+import Sidebar from '../navbar/Navbar';
 import styles from './layout.module.scss';
+import Footer from '../Footer';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Navbar />
       <Sidebar />
       {children}
+      <Footer />
     </div>
   );
 };

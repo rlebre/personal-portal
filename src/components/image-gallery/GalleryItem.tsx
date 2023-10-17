@@ -4,6 +4,7 @@ import useSWR from 'swr';
 
 interface Props {
   imageUrl: string;
+  onClick?: () => void;
 }
 
 interface IProcessedImage {
@@ -28,11 +29,14 @@ const processImage = async (imageUrl: string) => {
   return await imagePromise;
 };
 
-const GalleryItem = ({ imageUrl }: Props) => {
+const GalleryItem = ({ imageUrl, onClick }: Props) => {
   const { data } = useSWR(imageUrl, processImage) as { data: IProcessedImage };
 
   return (
-    <div className='w-full rounded flex justify-center items-center shadow-md hover:shadow-lg hover:scale-105 hover:z-10 transition-all duration-200 bg-gray-100 mb-3 max-h-screen cursor-pointer'>
+    <div
+      className='w-full rounded flex justify-center items-center shadow-md hover:shadow-lg hover:scale-105 hover:z-10 transition-all duration-200 bg-gray-100 mb-3 max-h-screen cursor-pointer'
+      onClick={onClick}
+    >
       {data && (
         <NextImage
           src={data.src}

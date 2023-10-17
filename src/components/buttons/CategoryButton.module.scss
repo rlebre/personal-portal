@@ -1,0 +1,26 @@
+.btn {
+  @apply rounded-full bg-gray-400 text-white text-xs md:text-base font-mono;
+  @apply flex p-4 items-center justify-center;
+  @apply cursor-pointer;
+  @apply transition-all duration-500 ease-in-out transform;
+  @apply hover:bg-gray-300 hover:text-gray-500;
+  @apply active:bg-gray-500 active:text-gray-800;
+
+  &__icon {
+    @apply w-6;
+  }
+
+  &__expanded {
+    @apply transition-all duration-500 ease-in-out;
+    @apply max-w-0 opacity-0;
+  }
+
+  &:hover &__expanded {
+    @apply opacity-100 ml-2;
+    max-width: 200px;
+  }
+
+  &:hover {
+    @apply transition-none;
+  }
+}

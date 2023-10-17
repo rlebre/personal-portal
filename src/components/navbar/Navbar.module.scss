@@ -4,6 +4,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    min-height: 75px;
   }
 
   @media (max-width: 1024px) {
@@ -28,7 +29,7 @@
   &__big {
     align-items: center;
     @apply flex justify-between;
-    @apply bg-gray-50;
+    @apply bg-slate-100;
   }
 
   &__header {
@@ -41,9 +42,8 @@
     align-items: center;
 
     &__logo {
-      font-size: 20px;
       letter-spacing: 0.5px;
-      @apply font-mono;
+      @apply font-mono font-extrabold text-4xl tracking-widest;
       @apply text-gray-600;
       cursor: pointer;
     }

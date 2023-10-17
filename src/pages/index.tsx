@@ -1,9 +1,8 @@
 import { faCamera, faCode, faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import router from 'next/router';
 import { useCallback, useState } from 'react';
-import { CategoryButton } from '../components/button/category-button';
-import Footer from '../components/footer';
-import Navbar from '../components/navbar';
+import { CategoryButton } from '../components/buttons/CategoryButton';
+import Footer from '../components/Footer';
 
 export default function Home() {
   const [toggle, setToggle] = useState(false);
@@ -14,8 +13,6 @@ export default function Home() {
 
   return (
     <div className='h-screen w-screen flex flex-col'>
-      <Navbar />
-
       <main className='h-full w-full md:space-y-32 flex flex-col justify-center'>
         <h1 className='text-5xl md:text-7xl text-gray-600 text-center my-8 font-mono font-bold tracking-widest'>
           Rui <span className='text-gray-700 font-extrabold'>Lebre</span>
