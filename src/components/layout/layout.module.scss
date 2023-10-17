@@ -1,9 +1,0 @@
-.layout {
-  width: 100vw;
-
-  &__component {
-    width: 100%;
-    overflow: auto;
-    @apply flex flex-col gap-4 md:gap-10;
-  }
-}

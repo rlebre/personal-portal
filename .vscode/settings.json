@@ -1,3 +1,38 @@
 {
-  "css.customData": [".vscode/tailwind.json"]
+  "css.customData": [".vscode/tailwind.json"],
+  "prettier.singleQuote": true,
+
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/dist": true
+  },
+
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true
+  },
+
+  "files.exclude": {
+    "**/node_modules": false,
+    "**/*.css.d.ts": false,
+    "**/*.tsbuildinfo": false
+  },
+
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  },
+  
+  
+  "typescript.preferences.quoteStyle": "single",
+  "javascript.suggestionActions.enabled": false,
+
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+
 }
