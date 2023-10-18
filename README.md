@@ -1,36 +1,105 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Personal Website
+
+This is the repository for my personal website built using Next.js 13, app routing, pnpm, and Tailwind CSS. It serves as a platform to showcase my work, provide information about me, and share my interests and projects.
+
+## Table of Contents
+
+- [Demo](#demo)
+- [Features](#features)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Deployment](#deployment)
+- [Customization](#customization)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Demo
+
+You can see the live version of this website at [ruilebre.com](https://ruilebre.com).
+
+## Features
+
+- Modern and responsive design.
+- Fast and optimized performance.
+- App routing for smooth navigation.
+- Easy customization with Tailwind CSS.
+- Lightweight with pnpm package manager.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- Node.js: Make sure you have Node.js installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
+- pnpm: This project uses pnpm as the package manager. If you haven't installed it, you can do so using npm: `npm install -g pnpm`.
+
+### Installation
+
+1. Clone this repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/rlebre/personal-portal.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Change into the project directory:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd personal-portal
+````
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Install project dependencies using pnpm:
 
-## Learn More
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Configuration
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You may need to configure certain aspects of the website, such as contact information or project details. Update the configuration files in the config/ directory to tailor the website to your needs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Usage
 
-## Deploy on Vercel
+To start the development server, run the following command:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+pnpm dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This will start the development server and you can view your website at `http://localhost:3000`.
+
+### Deployment
+
+To build and deploy your website for production, you can run:
+
+```bash
+pnpm build
+pnpm start
+```
+
+Make sure to set up your production environment and hosting as per your needs.
+
+### Customization
+
+- Customize the website content in the `pages/` directory.
+- Modify the styles in the `styles/` directory using Tailwind CSS.
+- Add or remove components in the `components/` directory.
+- Extend the website's functionality by adding more pages or components as needed.
+
+### Contributing
+
+Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and commit them.
+4. Push your changes to your fork.
+5. Create a pull request to this repository.
+
+### License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
