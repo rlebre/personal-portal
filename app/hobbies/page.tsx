@@ -26,7 +26,7 @@ const getContent = async () => {
 const Hobbies = async () => {
   const { images, metadata, content } = await getContent();
   return (
-    <div className="container flex flex-col px-5 md:px-20 mb-20 gap-6 max-w-[1024px] m-auto">
+    <div className="container flex flex-col px-5 md:pt-28 md:px-20 mb-20 gap-6 max-w-[1024px] m-auto">
       <h2 className="text-4xl md:text-5xl text-gray-600 font-mono font-bold tracking-widest">
         {metadata.title}
       </h2>
