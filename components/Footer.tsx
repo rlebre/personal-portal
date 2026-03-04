@@ -15,7 +15,7 @@ import { SocialButton } from './buttons/SocialButton';
 const Footer = () => {
   return (
     <footer className="flex h-16 justify-center items-center gap-4 text-sm text-gray-500 flex-col pb-5">
-      <div className="flex justify-center items-center gap-2 text-sm text-gray-500">
+      <div className="flex justify-center items-center gap-2 text-sm text-gray-50">
         <SocialButton
           icon={faTwitter}
           link="https://twitter.com/ralebre/"
