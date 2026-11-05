@@ -1,0 +1,12 @@
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:99px;font-weight:700;text-decoration:none;border:1.5px solid var(--ink);color:var(--ink);background:transparent;cursor:pointer;font-family:var(--f-body);font-size:.95rem;transition:background var(--d-2),color var(--d-2),border-color var(--d-2),transform var(--d-2) var(--ease-out)}
+.btn:hover{background:var(--ink);color:var(--paper)}
+/* Press: a quick 1px dip (80ms in, eased back out at --d-2 on release). */
+.btn:active{transform:translateY(1px) scale(.98);transition-duration:80ms}
+.btn.primary{background:var(--trail);border-color:var(--trail);color:var(--on-trail)}
+.btn.primary:hover{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+/* On a dark (--ink) panel: outline in --paper, inverted on hover. */
+.btn.inverse{border-color:var(--paper);color:var(--paper)}
+.btn.inverse:hover{background:var(--paper);color:var(--ink)}
+.btn svg{width:18px;height:18px}
+.btn.sm{min-height:36px}
+.group{display:flex;gap:10px;flex-wrap:wrap}

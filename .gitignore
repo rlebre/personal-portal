@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated images (scripts/encode-images.mjs)
+/src/assets/
+
+# wrangler
+.wrangler/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/

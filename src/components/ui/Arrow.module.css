@@ -1,0 +1,2 @@
+.arrow{display:inline-block;transition:transform var(--d-2) var(--ease-out)}
+a:is(:hover,:focus-visible) .arrow{transform:translateX(3px)}

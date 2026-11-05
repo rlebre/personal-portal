@@ -1,0 +1,8 @@
+.progress{position:fixed;left:0;right:0;top:calc(64px + env(safe-area-inset-top,0px));height:4px;z-index:49;pointer-events:none}
+.progress i{display:block;height:100%;width:100%;background:repeating-linear-gradient(90deg,var(--trail) 0 10px,transparent 10px 15px);transform-origin:left;transform:scaleX(var(--p,0))}
+/* Scroll-driven where supported: the page's scroll position, no JS on scroll. Under reduced motion
+   the JS fallback keeps it working without creating an animation. */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:scroll()){
+  .progress i{animation:read linear both;animation-timeline:scroll(root block)}
+}}
+@keyframes read{from{transform:scaleX(0)}to{transform:scaleX(1)}}

@@ -1,0 +1,5 @@
+.email{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.email code{font-family:var(--f-mono);user-select:all;background:var(--surface-2);border-radius:4px}
+/* The link fills the code box: a ≥24px target. */
+.email code a{display:inline-block;padding:4px 8px;line-height:1.25;text-decoration:none;color:inherit}
+.email code a:hover{text-decoration:underline}

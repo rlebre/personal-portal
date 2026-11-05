@@ -1,0 +1,30 @@
+.cv{position:relative;display:grid;gap:0;padding-left:44px}
+.trailSvg{position:absolute;left:0;top:0;width:44px;height:100%;overflow:visible}
+/* The trail reveals with scroll: from 35% when the list's top reaches 3/4 down the viewport, to
+   complete when its bottom does. (CvTrail does the same in JS where view timelines are missing.) */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .cv{view-timeline:--cv block}
+  .trailSvg{animation:cvReveal linear both;animation-timeline:--cv;animation-range:cover 25vh exit 25vh}
+}}
+@keyframes cvReveal{from{clip-path:inset(0 0 65% 0)}to{clip-path:inset(0 0 0 0)}}
+.item{display:grid;grid-template-columns:150px minmax(0,1fr);gap:20px;padding-block:20px;position:relative}
+.item::before{content:"";position:absolute;left:-29px;top:28px;width:12px;height:12px;background:var(--surface);border:2px solid var(--trail);transform:rotate(45deg);
+  transition:transform var(--d-2) var(--ease-out),background-color var(--d-2)}
+/* Current role: filled, with a soft halo ring. */
+.item.current::before{background:var(--trail);box-shadow:0 0 0 5px color-mix(in srgb,var(--trail) 20%,transparent)}
+/* Hovering an entry (or focusing a link in it) marks its waypoint on the trail. */
+.item:is(:hover,:focus-within)::before{background:var(--trail);transform:rotate(45deg) scale(1.25)}
+.item .when{font-family:var(--f-mono);font-size:.85rem;color:var(--ink-2);padding-top:4px}
+.item h3{font-size:var(--s-1)}
+.item .org{font-weight:700;color:var(--trail)}
+.item p{color:var(--ink-2);margin-top:6px;max-width:62ch}
+.item .steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+/* Pills are nowrap by default; promotion steps may need to wrap in narrow PT layouts. */
+.item .steps > *{white-space:normal}
+.bullets{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px;max-width:68ch;color:var(--ink-2)}
+.bullets li{padding-left:18px;position:relative}
+.bullets li::before{content:"";position:absolute;left:2px;top:.62em;width:6px;height:6px;background:var(--trail);transform:rotate(45deg)}
+.bullets b{color:var(--ink)}
+.bullets b::after{content:" ·";color:var(--ink-2);font-weight:400}
+.org .muted{font-weight:400;color:var(--ink-2)}
+@media (max-width:640px){.item{grid-template-columns:1fr;gap:4px}}

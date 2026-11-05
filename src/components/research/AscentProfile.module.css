@@ -1,0 +1,33 @@
+.figure{margin:0;padding:18px 18px 8px}
+.scroll{overflow-x:auto}
+.figure svg{display:block;width:100%;min-width:640px;height:auto}
+.figure figcaption{font-size:.85rem;color:var(--ink-2);padding-block:8px}
+.axis{fill:var(--ink-2);font:500 10px var(--f-mono)}
+.waypoint{fill:var(--ink);font:700 13px var(--f-body)}
+
+/* Draw-on-enter, driven by one registered number, --ascent (0 → 1): the line draws over the first
+   88%, the area fills over the second half of the line, and each waypoint pops as the line reaches
+   it (--at): the diamond scales up, its label fades; the PhD summit overshoots to 1.15 and
+   settles. Scroll-driven (the card's view timeline; the svg sits in a horizontal scroller, so it
+   can't use its own view()) where supported, else a 1.6s draw on load. At rest, under reduced motion
+   and without @property, --ascent is 1: everything is simply drawn. */
+@property --ascent{syntax:"<number>";inherits:true;initial-value:1}
+@keyframes ascent{from{--ascent:0}to{--ascent:1}}
+/* Diamonds: squares turned 45° about their own centre (in CSS, so the pop-in scale shares the origin). */
+.wp rect{transform-box:fill-box;transform-origin:center;transform:rotate(45deg)}
+@media (prefers-reduced-motion:no-preference){
+  .figure svg{--line:min(1,calc(var(--ascent) / .88))}
+  .line{stroke-dasharray:1;stroke-dashoffset:calc(1 - var(--line))}
+  .area{opacity:clamp(0,calc((var(--line) - .5) * 2),1)}
+  .wp{--t:clamp(0,calc((var(--ascent) - var(--at)) * 8.3),1)}
+  .wp rect{scale:var(--t)}
+  .wp text{opacity:var(--t)}
+  .summit rect{scale:min(calc(var(--t) * 1.92),calc(1.15 - max(0,var(--t) - .6) * .375))}
+  @supports (animation-timeline:view()){
+    .figure{view-timeline:--ascent-card block}
+    .figure svg{animation:ascent linear both;animation-timeline:--ascent-card;animation-range:entry 0% entry 100%}
+  }
+  @supports not (animation-timeline:view()){
+    .figure svg{animation:ascent 1.6s var(--ease-io) .3s both}
+  }
+}

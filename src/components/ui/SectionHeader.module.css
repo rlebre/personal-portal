@@ -1,0 +1,2 @@
+.head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.head h2{font-size:var(--s-2)}

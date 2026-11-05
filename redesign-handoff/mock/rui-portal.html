@@ -383,7 +383,8 @@ dialog.lightbox :focus-visible{outline-color:#F2C46D}
 .foot-grid ul svg{width:18px;height:18px;flex:none}
 .email{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
 .email code{font-family:var(--f-mono);user-select:all;background:var(--surface-2);padding:4px 8px;border-radius:4px}
-.foot-base{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-block:18px 28px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--ink-2)}
+.lang-switch{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.foot-base{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding-block:18px 28px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--ink-2)}
 @media (max-width:760px){.foot-grid{grid-template-columns:1fr}}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:99px;font-size:.92rem;z-index:80;box-shadow:var(--shadow);max-width:calc(100vw - 32px)}
 
@@ -418,7 +419,6 @@ dialog.lightbox :focus-visible{outline-color:#F2C46D}
       </ul>
     </nav>
     <div class="tools">
-      <button class="icon-btn" id="lang-btn" type="button"><span aria-hidden="true">PT</span></button>
       <button class="icon-btn" id="theme-btn" type="button" aria-pressed="false" aria-label="Dark mode">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false" id="theme-ico"></svg>
       </button>
@@ -727,7 +727,7 @@ dialog.lightbox :focus-visible{outline-color:#F2C46D}
       <li><a href="https://scholar.google.com/citations?user=WtJeCMMAAAAJ"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 9l10-6 10 6-10 6z"/><path d="M6 11.5V16c3 2.5 9 2.5 12 0v-4.5"/></svg>Google Scholar</a></li>
     </ul></div>
   </div>
-  <div class="wrap foot-base"><span class="mono">40°38′N 8°39′W · Aveiro · Coffee-free coding</span><span data-i18n="foot.made">Designed and built by Rui Lebre · Mock v1</span></div>
+  <div class="wrap foot-base"><span class="mono">40°38′N 8°39′W · Aveiro · Coffee-free coding</span><div class="lang-switch" role="group" aria-labelledby="lang-l"><span id="lang-l" class="label" data-i18n="foot.lang">Language</span><button type="button" class="chip" data-setlang="en" lang="en" aria-pressed="true">English</button><button type="button" class="chip" data-setlang="pt" lang="pt-PT" aria-pressed="false">Português</button></div><span data-i18n="foot.made">Designed and built by Rui Lebre · Mock v1</span></div>
 </footer>
 
 <dialog class="lightbox" id="lightbox" aria-labelledby="lb-count">
@@ -783,7 +783,7 @@ const S={en:{
  "blog.eyebrow":"Field notes","blog.lede":"Short notes on code, research and the trail. Some in English, some in Portuguese.","blog.notice":"No posts yet. These three are placeholders to show the layout.","filter.topic":"Topic","filter.lang":"Language",
  author:"Software engineer at Plex. PhD in ICT. Usually somewhere on a trail.",toc:"On this page",
  "lost.h":"Off the map","lost.p":"This trail isn't on any of my maps. Let's head back to the trailhead.","lost.btn":"Back to Home",
- "foot.h":"Say hello","foot.p":"Questions about research, Dicoogle, a trail, or anything else. Email works best.","foot.copy":"Copy","foot.copied":"Email copied","foot.elsewhere":"Elsewhere","foot.academic":"Academic","foot.made":"Designed and built by Rui Lebre · Mock v1",
+ "foot.h":"Say hello","foot.p":"Questions about research, Dicoogle, a trail, or anything else. Email works best.","foot.copy":"Copy","foot.lang":"Language","foot.copied":"Email copied","foot.elsewhere":"Elsewhere","foot.academic":"Academic","foot.made":"Designed and built by Rui Lebre · Mock v1",
  "toast.cv":"Mock: the CV PDF isn't attached yet.","toast.thesis":"Mock: link the thesis PDF or the university repository here.",
  "trail.dist":"Distance","trail.gain":"Gain","trail.max":"High point","trail.views":"views","trail.open":"View on Wikiloc","trail.profile":"Elevation profile","trail.map":"Route map","trail.start":"Start","read":"min read",
  "diff.Easy":"Easy","diff.Moderate":"Moderate","diff.Difficult":"Difficult","type.loop":"Loop","type.oneway":"One way","type.outback":"Out and back","act.hike":"Hiking","act.bike":"Bike touring",
@@ -817,7 +817,7 @@ const S={en:{
  "blog.eyebrow":"Notas de campo","blog.lede":"Notas curtas sobre código, investigação e trilhos. Algumas em inglês, outras em português.","blog.notice":"Ainda sem artigos. Estes três são exemplos para mostrar o layout.","filter.topic":"Tema","filter.lang":"Língua",
  author:"Engenheiro de software na Plex. Doutorado em TIC. Normalmente algures num trilho.",toc:"Nesta página",
  "lost.h":"Fora do mapa","lost.p":"Este trilho não está em nenhum dos meus mapas. Vamos voltar ao ponto de partida.","lost.btn":"Voltar ao início",
- "foot.h":"Diz olá","foot.p":"Perguntas sobre investigação, o Dicoogle, um trilho ou outra coisa qualquer. O email é a melhor via.","foot.copy":"Copiar","foot.copied":"Email copiado","foot.elsewhere":"Noutros sítios","foot.academic":"Académico","foot.made":"Desenhado e construído por Rui Lebre · Maquete v1",
+ "foot.h":"Diz olá","foot.p":"Perguntas sobre investigação, o Dicoogle, um trilho ou outra coisa qualquer. O email é a melhor via.","foot.copy":"Copiar","foot.lang":"Língua","foot.copied":"Email copiado","foot.elsewhere":"Noutros sítios","foot.academic":"Académico","foot.made":"Desenhado e construído por Rui Lebre · Maquete v1",
  "toast.cv":"Maquete: o PDF do CV ainda não está anexado.","toast.thesis":"Maquete: ligar aqui o PDF da tese ou o repositório da universidade.",
  "trail.dist":"Distância","trail.gain":"Subida","trail.max":"Ponto alto","trail.views":"visualizações","trail.open":"Ver no Wikiloc","trail.profile":"Perfil de altitude","trail.map":"Mapa do percurso","trail.start":"Partida","read":"min de leitura",
  "diff.Easy":"Fácil","diff.Moderate":"Moderado","diff.Difficult":"Difícil","type.loop":"Circular","type.oneway":"Só ida","type.outback":"Ida e volta","act.hike":"Caminhada","act.bike":"Cicloturismo",
@@ -828,7 +828,7 @@ const t=(k,v)=>{let s=(S[lang][k]??S.en[k]??k);if(v)for(const x in v)s=s.replace
 function applyLang(){
   root.lang=lang==='pt'?'pt-PT':'en';
   $$('[data-i18n]').forEach(el=>{const k=el.dataset.i18n;if(S[lang][k]!=null||S.en[k]!=null)el.textContent=t(k)});
-  const lb=$('#lang-btn');lb.setAttribute('aria-label',t('langLabel'));lb.setAttribute('lang',lang==='pt'?'en':'pt-PT');lb.firstElementChild.textContent=lang==='pt'?'EN':'PT';
+  $$('[data-setlang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.setlang===lang)));
   $('#theme-btn').setAttribute('aria-label',t('themeLabel'));$('#menu-btn').setAttribute('aria-label',t('menu'));
   renderAll();updateTitle();topo.syncPauseLabel();
 }
@@ -847,7 +847,7 @@ $('#theme-btn').addEventListener('click',e=>{
   const r=e.currentTarget.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2,R=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
   document.startViewTransition(apply).ready.then(()=>{document.documentElement.animate({clipPath:[`circle(0px at ${x}px ${y}px)`,`circle(${R}px at ${x}px ${y}px)`]},{duration:600,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'})}).catch(()=>{});
 });
-$('#lang-btn').addEventListener('click',()=>{lang=lang==='en'?'pt':'en';store.set('rl-lang',lang);applyLang();announce(t('announce.lang'))});
+$$('[data-setlang]').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.setlang===lang)return;lang=b.dataset.setlang;store.set('rl-lang',lang);applyLang();announce(t('announce.lang'))}));
 
 /* ---------------- utils ---------------- */
 function announce(m){const r=$('#sr-status');r.textContent='';requestAnimationFrame(()=>r.textContent=m)}

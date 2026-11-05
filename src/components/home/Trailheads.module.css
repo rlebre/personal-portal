@@ -1,0 +1,24 @@
+.grid{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.connector{position:absolute;left:0;right:0;top:50%;height:60px;transform:translateY(-50%);z-index:0;pointer-events:none;color:var(--trail)}
+/* The connector's dashes march a few steps forward as the cards scroll into view (scroll-driven;
+   a still dashed line elsewhere). */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .connector path{animation:march linear both;animation-timeline:view();animation-range:entry 0% cover 50%}
+}}
+@keyframes march{from{stroke-dashoffset:48}to{stroke-dashoffset:0}}
+.th{position:relative;z-index:1;display:flex;flex-direction:column;gap:12px;padding:22px;text-decoration:none;overflow:hidden}
+.th:hover{color:inherit}
+.th .top{display:flex;justify-content:space-between;align-items:center}
+.th .sym{font-size:1.4rem;color:var(--trail);line-height:1}
+.th h3{font-size:var(--s-2)}
+.th p{color:var(--ink-2)}
+.th .points{list-style:none;margin:-2px 0 0;padding:0;display:grid;gap:6px;font-size:.92rem}
+.th .points li{position:relative;padding-left:18px}
+.th .points li::before{content:"";position:absolute;left:2px;top:.6em;width:6px;height:6px;background:var(--trail);transform:rotate(45deg)}
+.th .go{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px;font-weight:700}
+.th .go svg{width:22px;height:22px;transition:transform var(--d-2) var(--ease-out)}
+.th .ripple{position:absolute;left:0;right:0;bottom:0;width:100%;height:40px;color:var(--contour-index);opacity:.55;z-index:-1;transition:transform .45s var(--ease-out),opacity var(--d-3)}
+/* Same lit state as Card's interactive hover, focus included. */
+.th:is(:hover,:focus-visible) .go svg{transform:translateX(4px)}
+.th:is(:hover,:focus-visible) .ripple{transform:translateY(-4px);opacity:.9}
+@media (max-width:860px){.grid{grid-template-columns:1fr}.connector{display:none}}

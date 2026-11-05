@@ -1,0 +1,229 @@
+[
+ {
+  "y": 2022,
+  "type": "journal",
+  "a": [
+   "Lebre R",
+   "Bastião Silva L",
+   "Costa C"
+  ],
+  "ti": "Dicoogle Open Source: the establishment of a new paradigm in medical imaging",
+  "v": "Journal of Medical Systems"
+ },
+ {
+  "y": 2021,
+  "type": "journal",
+  "a": [
+   "Pedrosa M",
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "A performant protocol for distributed health records databases",
+  "v": "IEEE Access"
+ },
+ {
+  "y": 2021,
+  "type": "chapter",
+  "a": [
+   "Lebre R",
+   "Jesus R",
+   "Nunes P",
+   "Costa C"
+  ],
+  "ti": "Pathobox: The Collaborative Tele-pathology Platform with Access Management",
+  "v": "Communications in Computer and Information Science"
+ },
+ {
+  "y": 2021,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "An efficient and reliable architecture for distributing medical imaging data",
+  "v": "IEEE EHB 2021"
+ },
+ {
+  "y": 2021,
+  "type": "conference",
+  "a": [
+   "Pedrosa M",
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "Holder-of-key threshold access token for anonymous data resources",
+  "v": "IEEE ISCC 2021"
+ },
+ {
+  "y": 2021,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Bastião Silva L",
+   "Costa C"
+  ],
+  "ti": "Decentralizing the storage of a DICOM compliant PACS",
+  "v": "IEEE BIBM 2021"
+ },
+ {
+  "y": 2021,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "A non-relational approach for distributed medical imaging databases",
+  "v": "IEEE BHI-BSN 2021"
+ },
+ {
+  "y": 2020,
+  "type": "journal",
+  "a": [
+   "Lebre R",
+   "Bastião L",
+   "Costa C"
+  ],
+  "ti": "A Cloud-ready Architecture for Shared Medical Imaging Repository",
+  "v": "Journal of Digital Imaging"
+ },
+ {
+  "y": 2020,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Pedrosa M",
+   "Gestal M",
+   "Costa C"
+  ],
+  "ti": "A safe architecture for authorisation grant in healthcare ecosystems",
+  "v": "IEEE ICHI 2020"
+ },
+ {
+  "y": 2020,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Pinho E",
+   "Silva J",
+   "Costa C"
+  ],
+  "ti": "Dicoogle Framework for Medical Imaging Teaching and Research",
+  "v": "IEEE ICTS4eHealth 2020"
+ },
+ {
+  "y": 2020,
+  "type": "conference",
+  "a": [
+   "Almeida A",
+   "Oliveira T",
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "NoSQL distributed database for DICOM objects",
+  "v": "IEEE ICHI 2020"
+ },
+ {
+  "y": 2020,
+  "type": "conference",
+  "a": [
+   "Jesus R",
+   "Nunes P",
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "Role-based architecture for secure management of telepathology sessions",
+  "v": "MIE 2020"
+ },
+ {
+  "y": 2020,
+  "type": "conference",
+  "a": [
+   "Nunes P",
+   "Jesus R",
+   "Lebre R",
+   "Costa C"
+  ],
+  "ti": "Data and sessions management in a telepathology platform",
+  "v": "HEALTHINF 2020"
+ },
+ {
+  "y": 2019,
+  "type": "journal",
+  "a": [
+   "Godinho T",
+   "Lebre R",
+   "Almeida J",
+   "Costa C"
+  ],
+  "ti": "ETL Framework for Real-Time Business Intelligence over Medical Imaging Repositories",
+  "v": "Journal of Digital Imaging"
+ },
+ {
+  "y": 2019,
+  "type": "conference",
+  "a": [
+   "Solange F",
+   "Lebre R"
+  ],
+  "ti": "Automated pattern recognition of cerebral amyloid angiopathy patients",
+  "v": "RecPad 2019"
+ },
+ {
+  "y": 2019,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Jesus R",
+   "Nunes P",
+   "Costa C"
+  ],
+  "ti": "Collaborative Framework for a Whole-Slide Image Viewer",
+  "v": "IEEE CBMS 2019"
+ },
+ {
+  "y": 2019,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Bastião L",
+   "Costa C"
+  ],
+  "ti": "An Accounting Mechanism for Standard Medical Imaging Services",
+  "v": "IEEE EMBS 2019"
+ },
+ {
+  "y": 2018,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Godinho T",
+   "Costa C",
+   "Silva A"
+  ],
+  "ti": "A performant and fully DICOM compliant Web PACS for Digital Pathology",
+  "v": "CARS 2018"
+ },
+ {
+  "y": 2018,
+  "type": "conference",
+  "a": [
+   "Lebre R",
+   "Bastião Silva L",
+   "Costa C"
+  ],
+  "ti": "Shared Medical Imaging Repositories",
+  "v": "MIE 2018"
+ },
+ {
+  "y": 2017,
+  "type": "journal",
+  "a": [
+   "Godinho T",
+   "Lebre R",
+   "Bastião Silva L",
+   "Costa C"
+  ],
+  "ti": "An efficient architecture to support digital pathology in standard medical imaging repositories",
+  "v": "Journal of Biomedical Informatics"
+ }
+]

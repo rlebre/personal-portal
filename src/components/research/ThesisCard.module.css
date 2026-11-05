@@ -1,0 +1,9 @@
+.thesis{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;padding:clamp(20px,4vw,36px);background:var(--ink);color:var(--paper);border-radius:var(--radius);position:relative;overflow:hidden;isolation:isolate}
+.thesis svg.bg{position:absolute;inset:0;width:100%;height:100%;z-index:-1;color:color-mix(in srgb,var(--paper) 14%,transparent)}
+.thesis .eyebrow{color:color-mix(in srgb,var(--paper) 75%,transparent)}
+.thesis h2{font-size:var(--s-2);margin-top:6px;max-width:26ch}
+.thesis p{color:color-mix(in srgb,var(--paper) 80%,transparent);margin-top:8px}
+.thesis .seal{width:72px;height:72px;color:var(--mark)}
+@media (max-width:760px){.thesis{grid-template-columns:1fr}}
+/* The global focus colour is dark in the light theme: invisible on this --ink panel. */
+.thesis :focus-visible{outline-color:var(--paper)}

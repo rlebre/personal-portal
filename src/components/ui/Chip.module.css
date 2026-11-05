@@ -1,0 +1,22 @@
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.list{list-style:none;margin:0;padding:0}
+.chip{display:inline-flex;align-items:center;min-height:36px;padding:0 14px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:.9rem;cursor:default}
+button.chip,a.chip{cursor:pointer;transition:background var(--d-2),border-color var(--d-2),color var(--d-2),transform var(--d-2) var(--ease-out)}
+button.chip{min-height:40px}
+/* Link chips (e.g. the language switch) and their current option: full 44px targets. */
+a.chip,.chip[aria-current="true"]{min-height:44px}
+a.chip{text-decoration:none}
+button.chip:hover,a.chip:hover{border-color:var(--ink-2);color:var(--ink)}
+button.chip:active,a.chip:active{transform:translateY(1px) scale(.98);transition-duration:80ms}
+button.chip[aria-pressed="true"],.chip[aria-current="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+/* The check slides in: an empty, zero-width box on every toggle chip that widens and fades in when
+   pressed. The glyph only exists while pressed, with empty alt text, so it never changes the
+   accessible name. */
+button.chip::before,.chip[aria-current="true"]::before{content:"";display:inline-block;width:0;margin-right:0;overflow:hidden;opacity:0;transform:translateX(-4px);font-size:.8em;
+  transition:width var(--d-2) var(--ease-out),margin var(--d-2) var(--ease-out),opacity var(--d-2),transform var(--d-2) var(--ease-out)}
+button.chip[aria-pressed="true"]::before,.chip[aria-current="true"]::before{content:"✓";content:"✓" / "";width:1em;margin-right:5px;opacity:1;transform:none}
+/* Forced colors drop backgrounds: keep the selected state visible with system colours. */
+@media (forced-colors:active){
+  button.chip[aria-pressed="true"],.chip[aria-current="true"]{forced-color-adjust:none;background:Highlight;color:HighlightText;border:2px solid Highlight}
+}
+.groupLabel{align-self:center}

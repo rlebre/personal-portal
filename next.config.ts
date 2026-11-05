@@ -1,10 +1,11 @@
 import type { NextConfig } from "next";
-import withMDX from "@next/mdx";
 
-const nextConfig: NextConfig = withMDX({
-  extension: /\.mdx?$/,
-})({
-  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
-});
+const nextConfig: NextConfig = {
+  output: "export",
+  images: { unoptimized: true },
+  experimental: {
+    globalNotFound: true,
+  },
+};
 
 export default nextConfig;

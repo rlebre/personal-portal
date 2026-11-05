@@ -1,0 +1,8 @@
+.list{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.list li{display:grid;gap:6px;align-content:start;padding-top:14px;border-top:2px solid var(--line);position:relative}
+.list li::before{content:"";position:absolute;top:-7px;left:0;width:12px;height:12px;background:var(--trail);transform:rotate(45deg);border:2px solid var(--paper)}
+.list li.summit::before{background:var(--mark);width:14px;height:14px;top:-8px}
+.list h3{font-size:1.05rem}
+.list p{font-size:.9rem;color:var(--ink-2)}
+@media (max-width:980px){.list{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.list{grid-template-columns:1fr}}

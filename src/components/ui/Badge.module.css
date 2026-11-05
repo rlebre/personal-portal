@@ -1,0 +1,8 @@
+/* outline: a tiny bordered code, e.g. a post's language (EN / PT). Inherits the font. */
+.outline{border:1px solid currentColor;border-radius:3px;padding:0 5px;font-size:.7rem;letter-spacing:.08em}
+/* dashed: a status marker, e.g. "Sample". */
+.dashed{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;border:1px dashed var(--ink-2);color:var(--ink-2);padding:2px 8px;border-radius:99px;white-space:nowrap}
+/* label: an uppercase category tag; the tone colours border and text. */
+.label{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;border-radius:3px;border:1px solid var(--line);color:var(--ink-2)}
+.label.forest{border-color:var(--forest);color:var(--forest)}
+.label.trail{border-color:var(--trail);color:var(--trail)}

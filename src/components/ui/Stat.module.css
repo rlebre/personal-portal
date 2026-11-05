@@ -1,0 +1,2 @@
+.stats{display:flex;flex-wrap:wrap;gap:10px 28px;font-family:var(--f-mono);font-size:.9rem;color:var(--ink-2)}
+.stats b{font-family:var(--f-display);font-size:1.6rem;color:var(--ink);font-weight:700}

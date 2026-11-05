@@ -1,0 +1,11 @@
+.foot{border-top:1px solid var(--line);background:var(--surface);position:relative;overflow:hidden}
+.grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:32px;padding-block:48px 28px}
+.grid h2{font-size:1rem;margin-bottom:12px}
+.grid ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.grid ul a{display:inline-flex;align-items:center;gap:10px;min-height:32px;text-decoration:none}
+.grid ul a:hover{text-decoration:underline}
+.grid ul svg{width:18px;height:18px;flex:none}
+.grid .intro{color:var(--ink-2);max-width:40ch}
+/* Inside the Container, so the dashed rule spans the content width, not the gutters. */
+.base{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding-block:18px 28px;border-top:1px dashed var(--line);font-size:.85rem;color:var(--ink-2)}
+@media (max-width:760px){.grid{grid-template-columns:1fr}}

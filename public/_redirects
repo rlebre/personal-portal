@@ -1,0 +1,4 @@
+# Old site URLs
+/academic      /research      301
+/portfolio     /professional  301
+/blog/posts/*  /blog          301

@@ -37,7 +37,8 @@ app/
   pt/                     # PT: /pt, /pt/investigacao, /pt/profissional, /pt/passatempos, /pt/blog, /pt/blog/[slug]
     layout.tsx            # html lang="pt-PT"
     page.tsx  investigacao/page.tsx  profissional/page.tsx  passatempos/page.tsx  blog/page.tsx  blog/[slug]/page.tsx
-  not-found.tsx           # "Off the map" (exported as 404.html)
+  global-not-found.tsx    # "Off the map" → exported 404.html (two root layouts: no app/layout.tsx;
+                          #  enable experimental.globalNotFound, Next ≥15.4)
 views/                    # shared page components: HomePage, ResearchPage, … taking { locale }
   globals.css             # tokens + base
   sitemap.ts  robots.ts  feed.xml/route.ts
@@ -62,7 +63,7 @@ public/images/…
 | Blog post | `/blog/[slug]` | `/pt/blog/[slug]` | — |
 | 404 | "Off the map" / "Fora do mapa" | | |
 
-- EN is default (no prefix). The header EN/PT toggle links to the equivalent page in the other locale. Use `<html lang="en">` / `lang="pt-PT"`, plus `hreflang` alternates.
+- EN is default (no prefix). The footer language switch links to the equivalent page in the other locale. Use `<html lang="en">` / `lang="pt-PT"`, plus `hreflang` alternates.
 - Route segments are localized in PT (e.g. `/pt/investigacao`) via real folders (see §1); keep a slug map in `lib/i18n.ts` so the EN/PT toggle and hreflang can find the counterpart page.
 - All UI strings are in `data/i18n.json` (`en` / `pt` objects, same keys as the mock's `data-i18n` attributes). Publication titles stay English (mark with `lang="en"` on PT pages).
 - Remove from old sites: Twitter/X link (Rui doesn't use it), the `ruilebre@ua.pt` email (use **ruiclebre@gmail.com**).
@@ -106,7 +107,7 @@ Theme: tokens on `:root`; dark under `@media (prefers-color-scheme: dark) { :roo
 
 ## 4. Pages (match the mock section-for-section)
 
-**Header:** monogram + "Rui **Lebre**" wordmark · nav (aria-current on active, dashed animated underline) · EN/PT button · theme button · mobile menu button (<860px, disclosure pattern).
+**Header:** monogram + "Rui **Lebre**" wordmark · nav (aria-current on active, dashed animated underline) · theme button · mobile menu button (<860px, disclosure pattern). No language control in the header.
 
 **Home**
 1. Hero: coordinates label `40°38′N 8°39′W · Aveiro, Portugal`; name; role line "Senior Software Engineer at Plex · PhD in ICT"; intro paragraph; CTAs "See my work" (primary) / "Read the blog". Background `<canvas>` of animated contour lines (marching squares over Perlin noise + gaussian hills, 16 levels, every 4th thicker, ~11 fps redraw), a dashed accent trail to a ▲ summit labelled "1527 m". Map legend box (Research 2015–2022 / Professional 2016–now / Hobbies 101 trails, scale bar). **Pause animation** button (WCAG 2.2.2), remembered in localStorage; animation pauses offscreen/hidden tab and is static under reduced motion.
@@ -142,7 +143,7 @@ Theme: tokens on `:root`; dark under `@media (prefers-color-scheme: dark) { :roo
 - Post: breadcrumb, title, meta, 680px prose column, sticky TOC (desktop), dashed reading-progress bar under the header, author card (avatar = cartoon `personal-website-ai/public/avatar.png`).
 - **The 3 posts in `posts.json` are samples** — replace with real MDX. Frontmatter: `title, date, updated?, lang ('en'|'pt'), tags[], summary, cover?, draft`. Compute reading time. Add RSS (route handler) and sitemap.
 
-**Footer:** "Say hello" + email `ruiclebre@gmail.com` as selectable text with Copy button (mailto as convenience) · Elsewhere: GitHub (rlebre), LinkedIn (rui-lebre-435279101), Wikiloc, Instagram (ruilebre) · Academic: ORCID, Google Scholar (WtJeCMMAAAAJ) · base line with coordinates and "Coffee-free coding".
+**Footer:** "Say hello" + email `ruiclebre@gmail.com` as selectable text with Copy button (mailto as convenience) · Elsewhere: GitHub (rlebre), LinkedIn (rui-lebre-435279101), Wikiloc, Instagram (ruilebre) · Academic: ORCID, Google Scholar (WtJeCMMAAAAJ) · base line with coordinates and "Coffee-free coding", and the **language switch**: a labelled group "Language / Língua" with two links styled as chips, "English" and "Português" (each with its own `lang`, current one `aria-current="true"`), linking to the counterpart page in the other locale.
 
 ## 5. Assets
 
