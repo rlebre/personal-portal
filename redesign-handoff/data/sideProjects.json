@@ -1,0 +1,48 @@
+[
+ {
+  "n": "+Pinhal",
+  "stack": [
+   "Astro",
+   "Sanity"
+  ],
+  "badge": "Live",
+  "d": "Website for Associação +Pinhal, a non-profit defending the dune pine forest of Ovar. Bilingual, with news and a petition against clear-cutting.",
+  "d_pt": "Site da Associação +Pinhal, uma associação sem fins lucrativos que defende o Pinhal das Dunas de Ovar. Bilingue, com notícias e uma petição contra o corte raso.",
+  "u": "https://maispinhal.pt",
+  "shot": "assets/maispinhal-screenshot.webp"
+ },
+ {
+  "n": "Lost Heritage",
+  "stack": [
+   "Vue",
+   "Node"
+  ],
+  "badge": "In the media",
+  "d": "A community forum to track lost or abandoned public buildings around Portugal.",
+  "d_pt": "Um fórum comunitário para registar edifícios públicos perdidos ou abandonados em Portugal.",
+  "u": "https://github.com/rlebre/lost-heritage",
+  "shot": "personal-website-ai/public/images/portfolio/lost-heritage.png"
+ },
+ {
+  "n": "LightLex",
+  "stack": [
+   "LightningJS",
+   "TV"
+  ],
+  "d": "A Plex-style TV app written with LightningJS, to explore 10-foot UI and remote navigation.",
+  "d_pt": "Uma app de TV ao estilo da Plex, escrita em LightningJS, para explorar interfaces de sala e navegação por comando.",
+  "u": "https://github.com/rlebre/",
+  "shot": null,
+  "note": "Existing screenshot shows real actors on posters; capture a face-free screen or keep the drawn TV-grid placeholder."
+ },
+ {
+  "n": "LightningJS TicTacToe",
+  "stack": [
+   "LightningJS"
+  ],
+  "d": "A small game to learn the LightningJS TV framework, before building anything bigger with it.",
+  "d_pt": "Um pequeno jogo para aprender a framework de TV LightningJS, antes de construir algo maior.",
+  "u": "https://github.com/rlebre/",
+  "shot": "personal-website-ai/public/images/portfolio/lightningjs-tictactoe.png"
+ }
+]
