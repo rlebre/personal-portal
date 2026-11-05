@@ -2,46 +2,23 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Github, Linkedin, Instagram, Globe, Sun, Moon } from "lucide-react";
-
-function useDarkMode() {
-  const [isDark, setIsDark] = useState(false);
-  useEffect(() => {
-    // On mount, check localStorage or system preference
-    const saved = localStorage.getItem("theme");
-    if (
-      saved === "dark" ||
-      (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      document.documentElement.classList.add("dark");
-      setIsDark(true);
-    } else {
-      document.documentElement.classList.remove("dark");
-      setIsDark(false);
-    }
-  }, []);
-  const toggle = () => {
-    setIsDark((d) => {
-      const newDark = !d;
-      if (newDark) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-      return newDark;
-    });
-  };
-  return [isDark, toggle] as const;
-}
+import { Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
+import { navLinks, socialLinks } from "@/data/navigation";
 
 export default function Sidebar() {
   const [open, setOpen] = useState(false);
-  const [isDark, toggleDark] = useDarkMode();
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, setTheme } = useTheme();
+
+  useEffect(() => setMounted(true), []);
 
   const handleNavClick = () => {
     if (window.innerWidth < 768) setOpen(false);
+  };
+
+  const toggleDark = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
   };
 
   return (
@@ -92,95 +69,51 @@ export default function Sidebar() {
             Rui Lebre
           </div>
         </div>
-        <Link href="/" className="mb-2">
-          <button
-            className="w-full py-2 px-4 rounded text-left hover:bg-muted font-medium cursor-pointer"
-            onClick={handleNavClick}
-          >
-            Home
-          </button>
-        </Link>
-        {/* <Link href="/blog" className="mb-2">
-          <button
-            className="w-full py-2 px-4 rounded text-left hover:bg-muted font-medium cursor-pointer"
-            onClick={handleNavClick}
-          >
-            Blog
-          </button>
-        </Link> */}
-        <Link href="/portfolio" className="mb-2">
-          <button
-            className="w-full py-2 px-4 rounded text-left hover:bg-muted font-medium cursor-pointer"
-            onClick={handleNavClick}
-          >
-            Portfolio
-          </button>
-        </Link>
-        <Link href="/hobbies" className="mb-2">
-          <button
-            className="w-full py-2 px-4 rounded text-left hover:bg-muted font-medium cursor-pointer"
-            onClick={handleNavClick}
-          >
-            Hobbies
-          </button>
-        </Link>
-        <Link href="/academic" className="mb-2">
-          <button
-            className="w-full py-2 px-4 rounded text-left hover:bg-muted font-medium cursor-pointer"
-            onClick={handleNavClick}
-          >
-            Academic
-          </button>
-        </Link>
+        {navLinks.map((link) => (
+          <Link key={link.href} href={link.href} className="mb-2">
+            <button
+              className="w-full py-2 px-4 rounded text-left hover:bg-muted font-medium cursor-pointer"
+              onClick={handleNavClick}
+            >
+              {link.label}
+            </button>
+          </Link>
+        ))}
         <div className="flex-1" />
         <div className="absolute left-0 bottom-0 w-full pb-6">
           <div className="w-full border-t border-border mb-4" />
           <div className="flex flex-row items-center justify-center gap-4">
-            <Link
-              href="https://github.com/rlebre"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-            >
-              <Github className="w-6 h-6 hover:text-primary cursor-pointer" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/ruilebre"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="w-6 h-6 hover:text-primary cursor-pointer" />
-            </Link>
-            <Link
-              href="https://instagram.com/ruilebre"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <Instagram className="w-6 h-6 hover:text-primary cursor-pointer" />
-            </Link>
-            <Link
-              href="https://orcid.org/0000-0002-3230-0732"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="ORCID"
-            >
-              <Globe className="w-6 h-6 hover:text-primary cursor-pointer" />
-            </Link>
-            <button
-              onClick={toggleDark}
-              aria-label={
-                isDark ? "Switch to light mode" : "Switch to dark mode"
-              }
-              className="p-2 rounded-full hover:bg-muted transition-colors cursor-pointer ml-2"
-            >
-              {isDark ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
-            </button>
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
+              return (
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                >
+                  <Icon className="w-6 h-6 hover:text-primary cursor-pointer" />
+                </Link>
+              );
+            })}
+            {mounted && (
+              <button
+                onClick={toggleDark}
+                aria-label={
+                  resolvedTheme === "dark"
+                    ? "Switch to light mode"
+                    : "Switch to dark mode"
+                }
+                className="p-2 rounded-full hover:bg-muted transition-colors cursor-pointer ml-2"
+              >
+                {resolvedTheme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                )}
+              </button>
+            )}
           </div>
         </div>
       </aside>

@@ -1,4 +1,11 @@
 import Image from "next/image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rui Lebre - Software Engineer",
+  description:
+    "Personal website of Rui Lebre, a software engineer currently working at Plex. Based in Portugal.",
+};
 
 export default function Home() {
   return (

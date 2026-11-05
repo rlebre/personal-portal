@@ -1,30 +1,11 @@
-import fs from "fs/promises";
-import path from "path";
-import matter from "gray-matter";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { getPosts } from "@/lib/blog";
 
-const postsDirectory = path.join(process.cwd(), "public/blog/posts");
-
-async function getPosts() {
-  const files = await fs.readdir(postsDirectory);
-  const posts = await Promise.all(
-    files
-      .filter((f) => f.endsWith(".mdx"))
-      .map(async (file) => {
-        const filePath = path.join(postsDirectory, file);
-        const source = await fs.readFile(filePath, "utf8");
-        const { data } = matter(source);
-        return {
-          slug: file.replace(/\.mdx?$/, ""),
-          title: data.title,
-          date: data.date,
-          summary: data.summary,
-        };
-      })
-  );
-  // Sort by date descending
-  return posts.sort((a, b) => (a.date < b.date ? 1 : -1));
-}
+export const metadata: Metadata = {
+  title: "Blog",
+  description: "Blog posts by Rui Lebre.",
+};
 
 export default async function BlogPage() {
   const posts = await getPosts();
