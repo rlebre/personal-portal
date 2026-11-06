@@ -23,7 +23,8 @@ export const routes: Record<PageKey, Record<Locale, string>> = {
   blog: { en: "/blog", pt: "/pt/blog" },
 };
 
-export const navOrder: PageKey[] = ["home", "research", "professional", "hobbies", "blog"];
+// Same order as the home page trailhead cards (Professional → Research → Hobbies).
+export const navOrder: PageKey[] = ["home", "professional", "research", "hobbies", "blog"];
 
 export function href(page: PageKey, locale: Locale): string {
   return routes[page][locale];

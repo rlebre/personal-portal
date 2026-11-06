@@ -62,7 +62,7 @@ export function Footer({ locale }: { locale: Locale }) {
       <Container>
         <div className={s.base}>
           <span className="mono">
-            {site.coords} · Aveiro · {t(locale, "foot.coffee")}
+            {site.coords} · Aveiro
           </span>
           <LangSwitch locale={locale} label={t(locale, "foot.lang")} currentLabel={t(locale, "foot.current")} />
           <span>{t(locale, "foot.made")}</span>

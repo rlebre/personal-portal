@@ -197,7 +197,6 @@
     "research.path.chart": "Academic path chart, scrolls sideways",
     "foot.lang": "Language",
     "foot.current": "(current)",
-    "foot.coffee": "Coffee-free coding",
     "foot.copyfail": "Press {key} to copy the email",
     "a11y.homeSuffix": ", home"
   },
@@ -399,7 +398,6 @@
     "research.path.chart": "Gráfico do percurso académico, desliza na horizontal",
     "foot.lang": "Língua",
     "foot.current": "(atual)",
-    "foot.coffee": "Programação sem café",
     "foot.copyfail": "Prima {key} para copiar o email",
     "a11y.homeSuffix": ", início"
   }
