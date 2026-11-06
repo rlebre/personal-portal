@@ -6,5 +6,11 @@
     "directory": "./out",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page"
-  }
+  },
+  // Serves the site on the apex and www. Cloudflare creates the DNS records and certificates.
+  // Any existing A/AAAA/CNAME record on these hostnames must be removed first (or overridden when wrangler asks).
+  "routes": [
+    { "pattern": "ruilebre.com", "custom_domain": true },
+    { "pattern": "www.ruilebre.com", "custom_domain": true }
+  ]
 }
