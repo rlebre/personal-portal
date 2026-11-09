@@ -15,7 +15,7 @@ pnpm install
 pnpm dev          # encodes images, then next dev
 pnpm build        # static export to out/
 pnpm preview      # serve out/ with wrangler (same asset handling as production)
-pnpm deploy       # build + wrangler deploy
+pnpm run deploy   # build + wrangler deploy (`pnpm deploy` is a pnpm built-in)
 ```
 
 Checks:
