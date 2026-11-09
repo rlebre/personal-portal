@@ -7,3 +7,9 @@
 .pause:hover{color:var(--ink);border-color:var(--ink-2)}
 .pause:active{transform:translateY(1px) scale(.98);transition-duration:80ms}
 @media (max-width:860px){.tools{position:static;padding:0 max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}}
+/* On the home hero (which names the --hero view timeline) the pause button fades out early in the
+   scroll, before the receding copy reaches it. */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .tools{animation:toolsAway linear both;animation-timeline:--hero;animation-range:exit 0% exit 25%}
+}}
+@keyframes toolsAway{to{opacity:0;visibility:hidden}}
