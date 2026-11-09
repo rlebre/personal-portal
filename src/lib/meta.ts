@@ -1,6 +1,6 @@
 import type { Metadata, MetadataRoute } from "next";
 import { blogVisible, isBlogVisible, type Post } from "./content";
-import { htmlLang, locales, navOrder, postHref, routes, t, type Locale, type PageKey, type StringKey } from "./i18n";
+import { htmlLang, locales, pageOrder, postHref, routes, t, type Locale, type PageKey, type StringKey } from "./i18n";
 import { site } from "./site";
 
 const titleKey: Record<PageKey, StringKey> = {
@@ -8,6 +8,7 @@ const titleKey: Record<PageKey, StringKey> = {
   research: "title.research",
   professional: "title.professional",
   hobbies: "title.hobbies",
+  trails: "title.alltrails",
   blog: "title.blog",
 };
 const descKey: Record<PageKey, StringKey> = {
@@ -15,6 +16,7 @@ const descKey: Record<PageKey, StringKey> = {
   research: "research.lede",
   professional: "work.lede",
   hobbies: "out.lede",
+  trails: "at.lede",
   blog: "blog.lede",
 };
 
@@ -26,7 +28,7 @@ export function pageTitle(page: PageKey, locale: Locale) {
 
 /** Pages that are indexed and listed in the sitemap: the blog only once it has a post. */
 export function indexablePages(blog: boolean): PageKey[] {
-  return navOrder.filter((p) => p !== "blog" || blog);
+  return pageOrder.filter((p) => p !== "blog" || blog);
 }
 
 /** hreflang map of a page: both locales plus x-default (English). */

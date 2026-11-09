@@ -1,7 +1,7 @@
 .wrap{display:contents}
 .trigger{anchor-name:--contact}
 .chev{transition:rotate var(--d-2) var(--ease-out)}
-.trigger:has(+ .panel:popover-open) .chev{rotate:180deg}
+.trigger[aria-expanded="true"] .chev{rotate:180deg}
 
 /* UA popover styles centre it in the viewport: the fallback where anchor positioning is missing. */
 .panel{min-width:240px;padding:6px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}

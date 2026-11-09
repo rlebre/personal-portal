@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/ui/Container";
 import { IconButton } from "@/components/ui/IconButton";
 import { Close, MenuIcon } from "@/components/ui/icons";
-import { href, routes, type Locale, type PageKey } from "@/lib/locale";
+import { href, navParent, routes, type Locale, type PageKey } from "@/lib/locale";
 import { Monogram } from "./Monogram";
 import { ThemeToggle } from "./ThemeToggle";
 import s from "./Header.module.css";
@@ -23,10 +23,16 @@ export type HeaderLabels = {
 
 const MOBILE = "(max-width:860px)";
 
-function activePage(pathname: string, locale: Locale, pages: PageKey[]): PageKey | null {
+/** The nav item for this path: the page itself ("page"), or the parent of a sub-page or post ("true"). */
+function activePage(pathname: string, locale: Locale, pages: PageKey[]): { page: PageKey; current: "page" | "true" } | null {
   const clean = pathname.replace(/\/$/, "") || "/";
-  if (clean.startsWith(routes.blog[locale])) return "blog";
-  return pages.find((p) => routes[p][locale] === clean) ?? null;
+  const own = pages.find((p) => routes[p][locale] === clean);
+  if (own) return { page: own, current: "page" };
+  if (clean.startsWith(routes.blog[locale] + "/")) return { page: "blog", current: "true" };
+  for (const [sub, parent] of Object.entries(navParent) as [PageKey, PageKey][]) {
+    if (routes[sub][locale] === clean && pages.includes(parent)) return { page: parent, current: "true" };
+  }
+  return null;
 }
 
 /**
@@ -109,7 +115,7 @@ export function Header({ locale, labels, pages }: { locale: Locale; labels: Head
             <ul>
               {pages.map((p) => (
                 <li key={p}>
-                  <Link href={href(p, locale)} aria-current={active === p ? "page" : undefined}>
+                  <Link href={href(p, locale)} aria-current={active?.page === p ? active.current : undefined}>
                     {labels.pages[p]}
                   </Link>
                 </li>

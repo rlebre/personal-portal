@@ -23,8 +23,11 @@ export type TrailListLabels = {
   count: string;
 };
 
-/** Activity chips over the trail cards (three-up grid). Cards are rendered on the server; filtering re-flows them with a view transition. */
-export function TrailList({ items, labels }: { items: TrailListItem[]; labels: TrailListLabels }) {
+/**
+ * Activity chips over the trail cards (three-up grid). Cards are rendered on the server; filtering
+ * re-flows them with a view transition. `after` is a last cell that is never filtered out.
+ */
+export function TrailList({ items, labels, after }: { items: TrailListItem[]; labels: TrailListLabels; after?: ReactNode }) {
   const [filter, setFilter] = useState<"all" | Activity>("all");
   const list = items.filter((x) => filter === "all" || x.act === filter);
   const onChange = (v: typeof filter) => filterTransition(() => setFilter(v));
@@ -42,6 +45,11 @@ export function TrailList({ items, labels }: { items: TrailListItem[]; labels: T
             {x.card}
           </div>
         ))}
+        {after && (
+          <div className={s.cell} {...vtItem("trail", items.length)}>
+            {after}
+          </div>
+        )}
       </div>
     </>
   );

@@ -12,7 +12,7 @@ export const dateLocale: Record<Locale, string> = { en: "en-GB", pt: "pt-PT" };
 /** Each language's own name (endonym), for the language switch. */
 export const languageName: Record<Locale, string> = { en: "English", pt: "Português" };
 
-export type PageKey = "home" | "research" | "professional" | "hobbies" | "blog";
+export type PageKey = "home" | "research" | "professional" | "hobbies" | "trails" | "blog";
 
 /** Localized path segments: the EN/PT toggle and hreflang use this map to find the counterpart page. */
 export const routes: Record<PageKey, Record<Locale, string>> = {
@@ -20,11 +20,16 @@ export const routes: Record<PageKey, Record<Locale, string>> = {
   research: { en: "/research", pt: "/pt/investigacao" },
   professional: { en: "/professional", pt: "/pt/profissional" },
   hobbies: { en: "/hobbies", pt: "/pt/passatempos" },
+  trails: { en: "/hobbies/trails", pt: "/pt/passatempos/trilhos" },
   blog: { en: "/blog", pt: "/pt/blog" },
 };
 
 // Same order as the home page trailhead cards (Professional → Research → Hobbies).
 export const navOrder: PageKey[] = ["home", "professional", "research", "hobbies", "blog"];
+/** Every page, in nav order, with sub-pages after their parent (sitemap, language switch). */
+export const pageOrder: PageKey[] = ["home", "professional", "research", "hobbies", "trails", "blog"];
+/** Sub-pages and the nav item they sit under. */
+export const navParent: Partial<Record<PageKey, PageKey>> = { trails: "hobbies" };
 
 export function href(page: PageKey, locale: Locale): string {
   return routes[page][locale];
@@ -42,7 +47,7 @@ export function otherLocale(l: Locale): Locale {
 export function counterpart(pathname: string, locale: Locale): string {
   const clean = pathname.replace(/\/$/, "") || "/";
   const target = otherLocale(locale);
-  for (const page of navOrder) {
+  for (const page of pageOrder) {
     if (routes[page][locale] === clean) return routes[page][target];
   }
   const blogPrefix = routes.blog[locale] + "/";

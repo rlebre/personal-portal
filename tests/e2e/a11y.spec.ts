@@ -2,8 +2,8 @@ import { expect, test } from "@playwright/test";
 import { axe } from "./helpers";
 
 const pages = [
-  "/", "/research", "/professional", "/hobbies", "/blog",
-  "/pt", "/pt/investigacao", "/pt/profissional", "/pt/passatempos", "/pt/blog",
+  "/", "/research", "/professional", "/hobbies", "/hobbies/trails", "/blog",
+  "/pt", "/pt/investigacao", "/pt/profissional", "/pt/passatempos", "/pt/passatempos/trilhos", "/pt/blog",
   "/this-page-does-not-exist", "/pt/esta-pagina-nao-existe",
 ];
 

@@ -28,7 +28,14 @@ import t12 from "@/assets/photos/thumb/12.webp";
 import avatarImg from "@/assets/avatar.webp";
 import maispinhal from "@/assets/shots/maispinhal.webp";
 import lostHeritage from "@/assets/shots/lost-heritage.webp";
+import lightlex from "@/assets/shots/lightlex.webp";
 import tictactoe from "@/assets/shots/tictactoe.webp";
+import map55748813 from "@/assets/maps/55748813.webp";
+import map54357309 from "@/assets/maps/54357309.webp";
+import map116186689 from "@/assets/maps/116186689.webp";
+import map75050133 from "@/assets/maps/75050133.webp";
+import map75232106 from "@/assets/maps/75232106.webp";
+import map54134407 from "@/assets/maps/54134407.webp";
 
 /** Gallery photos in the same order as data/photoAlt.json. */
 export const photos = [p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12];
@@ -40,4 +47,13 @@ export function thumbOf(photo: StaticImageData): StaticImageData {
 }
 export const avatar = avatarImg;
 /** Side-project screenshots, keyed by `shot` in data/sideProjects.json. */
-export const shots: Record<ShotKey, StaticImageData> = { maispinhal, lostHeritage, tictactoe };
+export const shots: Record<ShotKey, StaticImageData> = { maispinhal, lostHeritage, lightlex, tictactoe };
+/** OpenTopoMap backgrounds for the route maps, keyed by Wikiloc id (same projection as data/routes.json). */
+export const trailMaps: Record<string, StaticImageData> = {
+  "55748813": map55748813,
+  "54357309": map54357309,
+  "116186689": map116186689,
+  "75050133": map75050133,
+  "75232106": map75232106,
+  "54134407": map54134407,
+};

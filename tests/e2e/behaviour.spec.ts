@@ -21,11 +21,21 @@ test("'Get in touch' opens a menu to email or copy the address", async ({ page, 
   if (browserName === "chromium") await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto("/");
   const trigger = page.getByRole("button", { name: "Get in touch" });
-  const mail = page.getByRole("link", { name: "Write an email" });
+  const mail = page.getByRole("link", { name: "Send an email" });
+  const copy = page.getByRole("button", { name: "Copy email address" });
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
   await expect(mail).toBeHidden();
   await trigger.click();
-  await expect(mail).toBeVisible();
+  await expect(trigger).toHaveAttribute("aria-expanded", "true");
   await expect(mail).toHaveAttribute("href", "mailto:ruiclebre@gmail.com");
+  // Focus moves to the first item; ↓/↑ move between items (wrapping).
+  await expect(mail).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(copy).toBeFocused();
+  await page.keyboard.press("ArrowDown");
+  await expect(mail).toBeFocused();
+  await page.keyboard.press("ArrowUp");
+  await expect(copy).toBeFocused();
   // Anchored to the button (below it, or above when there's no room), never covering it.
   const [t, m] = [(await trigger.boundingBox())!, (await page.locator("[popover]").boundingBox())!];
   expect(m.y >= t.y + t.height || m.y + m.height <= t.y).toBe(true);
@@ -34,9 +44,16 @@ test("'Get in touch' opens a menu to email or copy the address", async ({ page, 
   await page.keyboard.press("Escape");
   await expect(mail).toBeHidden();
   await expect(trigger).toBeFocused();
-  // Enter reopens it from the focused button.
+  await expect(trigger).toHaveAttribute("aria-expanded", "false");
+  // Focus leaving the panel closes it.
   await page.keyboard.press("Enter");
-  await page.getByRole("button", { name: "Copy address" }).click();
+  await expect(mail).toBeFocused();
+  await page.keyboard.press("Tab");
+  await page.keyboard.press("Tab");
+  await expect(mail).toBeHidden();
+  // Copy: toast, closes.
+  await trigger.click();
+  await copy.click();
   await expect(page.locator("[data-toast-status]")).toHaveText("Email copied");
   await expect(mail).toBeHidden();
   if (browserName === "chromium") expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("ruiclebre@gmail.com");
@@ -126,8 +143,39 @@ test("publication filters update the live count", async ({ page }) => {
 test("trail filter updates the count", async ({ page }) => {
   await page.goto("/hobbies");
   await page.getByRole("button", { name: "Cycling" }).click();
-  await expect(page.locator("main").getByRole("status")).toHaveText("Showing 1 of 6 trails");
+  await expect(page.locator("main").getByRole("status")).toHaveText("Showing 1 of 5 trails");
   await expect(page.locator("main article")).toHaveCount(1);
+  // The "See all trails" card is never filtered out.
+  await expect(page.getByRole("link", { name: /See all 101 trails/ })).toHaveAttribute("href", "/hobbies/trails");
+});
+
+test("all trails: stats, filters, accent-insensitive search, sort and the Hobbies nav item", async ({ page }) => {
+  await page.goto("/hobbies/trails");
+  await expect(page.getByRole("navigation", { name: "Main" }).getByRole("link", { name: "Hobbies" })).toHaveAttribute("aria-current", "true");
+  await expect(page.locator("main")).toContainText("1,255 km recorded");
+  const count = page.locator("main").getByRole("status");
+  const rows = page.locator("main ol > li");
+  await expect(count).toHaveText("Showing 101 of 101 trails");
+  await expect(rows).toHaveCount(101);
+  await page.getByRole("button", { name: "Cycling" }).click();
+  await expect(count).toHaveText("Showing 13 of 101 trails");
+  await page.getByRole("button", { name: "All", exact: true }).click();
+  await page.getByLabel("Country").selectOption("GR");
+  await expect(rows).toHaveCount(1);
+  await page.getByLabel("Country").selectOption("all");
+  // "azores" finds Açores, "espanha" (PT name) finds Spain.
+  await page.getByRole("searchbox", { name: "Search trails" }).fill("azores");
+  const azores = await rows.count();
+  expect(azores).toBeGreaterThan(0);
+  await expect(rows.first()).toContainText("Açores");
+  await page.getByRole("searchbox", { name: "Search trails" }).fill("espanha");
+  await expect(count).toHaveText("Showing 10 of 101 trails");
+  await page.getByRole("searchbox", { name: "Search trails" }).fill("zzzz");
+  await expect(count).toHaveText("Nothing matches these filters.");
+  await page.getByRole("searchbox", { name: "Search trails" }).fill("");
+  // Longest first.
+  await page.getByLabel("Sort").selectOption("long");
+  await expect(rows.first()).toContainText("87.5 km");
 });
 
 test("lightbox: keyboard navigation and focus return", async ({ page }) => {
@@ -285,7 +333,7 @@ test("English parts of /pt/profissional are marked lang=en", async ({ page }) =>
   expect(await langOf("Software Engineer")).toBe("en");
   expect(await langOf("Senior")).toBe("en");
   // Screenshots have Portuguese alt text on PT pages.
-  await expect(page.locator("main img[alt^='Captura de ecrã']")).toHaveCount(3);
+  await expect(page.locator("main img[alt^='Captura de ecrã']")).toHaveCount(4);
 });
 
 test("unknown URLs under /pt get the Portuguese 404", async ({ page }) => {

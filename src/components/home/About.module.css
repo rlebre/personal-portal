@@ -1,0 +1,12 @@
+.about{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.story{display:grid;gap:14px}
+.story h2{font-size:var(--s-2)}
+.p{max-width:62ch;color:var(--ink-2);font-size:1.02rem;line-height:1.7}
+.facts{position:relative;padding:20px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;isolation:isolate}
+/* Faint contour rings off the top-right corner. */
+.facts::after{content:"";position:absolute;right:-60px;top:-60px;width:180px;height:180px;border-radius:50%;z-index:-1;background:repeating-radial-gradient(circle,transparent 0 13px,var(--contour) 13px 14px)}
+.facts dl{margin:12px 0 0;display:grid}
+.facts dl div{display:grid;grid-template-columns:120px minmax(0,1fr);gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+.facts dt{font:500 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding-top:3px}
+.facts dd{margin:0;font-size:.95rem}
+@media (max-width:860px){.about{grid-template-columns:1fr}}

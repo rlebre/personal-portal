@@ -25,8 +25,8 @@ const pastRoles: { from: string; to: string; role: StringKey; org: string; d: St
 ];
 
 const skills = {
-  domains: ["Medical imaging", "DICOM", "PACS", "Streaming apps", "Social features", "Server-driven UI", "Access control", "Distributed systems"],
-  tech: ["TypeScript", "React", "Next.js", "React Native", "LightningJS", "GraphQL", "Cloudflare Workers", "Node.js", "Vitest", "Playwright", "Statsig", "Java", "Python", "SQL"],
+  domains: ["Medical imaging", "DICOM", "PACS", "Social features", "Server-driven UI", "Access control"],
+  tech: ["TypeScript", "React", "Next.js", "React Native", "LightningJS", "GraphQL", "Cloudflare Workers", "Node.js", "Vitest", "Statsig", "Java", "Python", "SQL"],
   lang: ["lang.pt", "lang.en", "lang.de"] as StringKey[],
 };
 

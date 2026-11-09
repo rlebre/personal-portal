@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PostCard, PostCardGrid } from "@/components/blog/PostCard";
+import { About } from "@/components/home/About";
 import { Hero } from "@/components/home/Hero";
 import { NowStrip } from "@/components/home/NowStrip";
 import { Trailheads } from "@/components/home/Trailheads";
@@ -7,7 +8,7 @@ import { Arrow } from "@/components/ui/Arrow";
 import { Section } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { getPosts, isBlogVisible } from "@/lib/content";
-import { pubStats } from "@/lib/data";
+import { pubStats, trails } from "@/lib/data";
 import { href, t, type Locale, type StringKey } from "@/lib/i18n";
 
 type Trailhead = { page: "research" | "professional" | "hobbies"; sym: string; title: StringKey; body: StringKey; points?: StringKey[]; go: StringKey; ripple: string };
@@ -46,6 +47,21 @@ export function HomePage({ locale }: { locale: Locale }) {
           }))}
         />
       </Section>
+
+      <About
+        eyebrow={t(locale, "about.eyebrow")}
+        title={t(locale, "about.h")}
+        paragraphs={[t(locale, "about.p1"), t(locale, "about.p2")]}
+        factsTitle={t(locale, "about.facts")}
+        facts={[
+          { term: t(locale, "fact.base"), value: "Aveiro, Portugal" },
+          { term: t(locale, "fact.top2"), value: t(locale, "fact.top2.v") },
+          { term: t(locale, "fact.learn"), value: t(locale, "fact.learn.v") },
+          { term: t(locale, "fact.shoot"), value: t(locale, "fact.shoot.v") },
+          { term: t(locale, "fact.trails"), value: t(locale, "fact.trails.v") },
+          { term: t(locale, "fact.top"), value: <Link href={href("hobbies", locale)}>{trails[0].n}</Link> },
+        ]}
+      />
 
       <Section flush="top">
         <h2 className="sr-only">{t(locale, "home.now")}</h2>

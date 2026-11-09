@@ -41,6 +41,26 @@ export const trail = z.object({
 });
 export type Trail = z.infer<typeof trail>;
 
+/** One entry of the full Wikiloc log (data/allTrails.json, all trails, scraped Nov 2026). */
+export const loggedTrail = z.object({
+  id: z.string(),
+  name: z.string(),
+  activity: z.enum(["hiking", "bike-touring", "gravel-bike", "mountain-biking"]),
+  distanceKm: z.number(),
+  gainM: z.number(),
+  maxElevationM: z.number(),
+  type: z.enum(["loop", "out-and-back", "one-way"]),
+  difficulty: z.enum(["easy", "moderate", "difficult", "very-difficult"]),
+  /** "YYYY-MM" */
+  recorded: z.string().regex(/^\d{4}-\d{2}$/),
+  views: z.number(),
+  place: z.string(),
+  /** ISO 3166-1 alpha-2 */
+  country: z.string().length(2),
+  url: z.url(),
+});
+export type LoggedTrail = z.infer<typeof loggedTrail>;
+
 export const route = z.object({
   id: z.string(),
   d: z.string(),
@@ -61,7 +81,7 @@ export const project = z.object({
 export type Project = z.infer<typeof project>;
 
 /** Keys of `shots` in lib/images.ts (typed there as Record<ShotKey, …>, so the two stay in sync). */
-export const shotKey = z.enum(["maispinhal", "lostHeritage", "tictactoe"]);
+export const shotKey = z.enum(["maispinhal", "lostHeritage", "lightlex", "tictactoe"]);
 export type ShotKey = z.infer<typeof shotKey>;
 
 export const sideProject = z

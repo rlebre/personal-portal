@@ -9,10 +9,6 @@ export function ArticleLayout({ children }: { children: ReactNode }) {
   return <Container className={s.layout}>{children}</Container>;
 }
 
-/** Mono breadcrumb line above the post title. */
-export function ArticleCrumbs({ children }: { children: ReactNode }) {
-  return <p className={s.crumbs}>{children}</p>;
-}
 
 /** The post body: typographic styles for MDX output (headings, figures, quotes). */
 export function Article({ id, lang, children }: { id: string; lang: string; children: ReactNode }) {

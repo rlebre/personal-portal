@@ -24,8 +24,8 @@
     "d_pt": "Um fórum comunitário para registar edifícios públicos perdidos ou abandonados em Portugal.",
     "u": "https://github.com/rlebre/lost-heritage",
     "shot": "lostHeritage",
-    "shotAlt": "Screenshot of Lost Heritage showing a listed abandoned railway station",
-    "shotAlt_pt": "Captura de ecrã do Lost Heritage com uma estação ferroviária abandonada registada"
+    "shotAlt": "Screenshot of Lost Heritage (Património Esquecido): a list of buildings with filters, the first a former primary school in Valpaços, now a Loja do Cidadão",
+    "shotAlt_pt": "Captura de ecrã do Património Esquecido: uma lista de edifícios com filtros, o primeiro uma antiga escola primária em Valpaços, hoje Loja do Cidadão"
   },
   {
     "n": "LightLex",
@@ -36,8 +36,9 @@
     "d": "A Plex-style TV app written with LightningJS, to explore 10-foot UI and remote navigation.",
     "d_pt": "Uma app de TV ao estilo da Plex, escrita em LightningJS, para explorar interfaces de sala e navegação por comando.",
     "u": "https://github.com/rlebre/lightlex",
-    "shot": null,
-    "note": "Existing screenshot shows real actors on posters; capture a face-free screen or keep the drawn TV-grid placeholder."
+    "shot": "lightlex",
+    "shotAlt": "Screenshot of LightLex: a featured title above a “Most popular” row of posters, with the icon menu on the left",
+    "shotAlt_pt": "Captura de ecrã do LightLex: um título em destaque sobre uma fila “Most popular” de cartazes, com o menu de ícones à esquerda"
   },
   {
     "n": "LightningJS TicTacToe",

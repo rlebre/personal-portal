@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Article, ArticleAuthor, ArticleCrumbs, ArticleLayout } from "@/components/blog/Article";
+import { Article, ArticleAuthor, ArticleLayout } from "@/components/blog/Article";
+import { Crumbs } from "@/components/ui/Crumbs";
 import { Mdx } from "@/components/blog/Mdx";
 import { PostMeta } from "@/components/blog/PostMeta";
 import { ReadingProgress } from "@/components/blog/ReadingProgress";
@@ -18,9 +19,9 @@ export function PostPage({ post, locale }: { post: Post; locale: Locale }) {
       <PageHeader
         spacing="tight"
         eyebrow={
-          <ArticleCrumbs>
+          <Crumbs>
             <Link href={href("blog", locale)}>Blog</Link> / <span lang="en">{post.tags.join(", ")}</span>
-          </ArticleCrumbs>
+          </Crumbs>
         }
         title={post.title}
         titleLang={lang}

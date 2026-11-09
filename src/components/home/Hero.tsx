@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { ButtonGroup, ButtonLink } from "@/components/ui/Button";
@@ -6,7 +5,6 @@ import { Container } from "@/components/ui/Container";
 import { Download } from "@/components/ui/icons";
 import { Label } from "@/components/ui/Label";
 import { ToastButton } from "@/components/ui/Toast";
-import { avatar } from "@/lib/images";
 import { t, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { ContactMenu } from "./ContactMenu";
@@ -15,7 +13,7 @@ import s from "./Hero.module.css";
 
 export type LegendItem = { sym: string; href: string; label: string; value: ReactNode };
 
-/** Home hero over the animated contour map: name, avatar + role, intro, CTAs and the map legend. */
+/** Home hero over the animated contour map: name, role, intro, CTAs and the map legend. */
 export function Hero({ locale, legend }: { locale: Locale; legend: LegendItem[] }) {
   const cv = (
     <>
@@ -37,9 +35,6 @@ export function Hero({ locale, legend }: { locale: Locale; legend: LegendItem[] 
               <span className={s.last}>Lebre</span>
             </h1>
             <div className={s.who}>
-              {/* Decorative: the name is the h1 right above. Eager (not lazy) but not preloaded,
-                  so the text stays the LCP candidate. */}
-              <Image className={s.avatar} src={avatar} alt="" width={64} height={64} loading="eager" />
               <p className={s.role}>
                 <span>{t(locale, "hero.role1")}</span>
                 <span className={s.sep} aria-hidden="true">

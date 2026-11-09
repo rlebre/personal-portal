@@ -19,5 +19,6 @@ export const navLabel: Record<PageKey, StringKey> = {
   research: "nav.research",
   professional: "nav.work",
   hobbies: "nav.outdoors",
+  trails: "at.h1",
   blog: "nav.blog",
 };

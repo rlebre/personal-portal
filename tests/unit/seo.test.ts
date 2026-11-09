@@ -72,7 +72,7 @@ describe("sitemap", () => {
 
   it("leaves the blog out while there are no posts", () => {
     const urls = sitemapEntries([]).map((e) => e.url.replace(site.url, ""));
-    expect(urls).toEqual(["/", "/pt", "/professional", "/pt/profissional", "/research", "/pt/investigacao", "/hobbies", "/pt/passatempos"]);
+    expect(urls).toEqual(["/", "/pt", "/professional", "/pt/profissional", "/research", "/pt/investigacao", "/hobbies", "/pt/passatempos", "/hobbies/trails", "/pt/passatempos/trilhos"]);
   });
 
   it("page entries carry absolute hreflang alternates including x-default", () => {

@@ -30,7 +30,10 @@ test.describe("hobbies images", () => {
     expect(full).toBeTruthy();
     await scrollThrough(page);
     expect(images).not.toContain(full);
-    expect(await page.locator('link[rel="preload"][as="image"]').count()).toBe(0);
+    // The only image preload is the first trail's map (the mobile LCP image), never a photo.
+    const preloads = await page.locator('link[rel="preload"][as="image"]').evaluateAll((els) => els.map((el) => new URL((el as HTMLLinkElement).href).pathname));
+    expect(preloads).not.toContain(full);
+    expect(preloads.every((p) => p.includes("/media/55748813."))).toBe(true);
 
     const thumbs = page.locator("main").getByRole("button").filter({ has: page.locator("img") });
     const req = page.waitForRequest((r) => new URL(r.url()).pathname === full);
@@ -100,11 +103,11 @@ test.describe("hero canvas", () => {
 test("trail filter updates the count; PT dates are localised", async ({ page }) => {
   await page.goto("/pt/passatempos");
   const count = page.locator("main").getByRole("status");
-  await expect(count).toHaveText("A mostrar 6 de 6 trilhos");
+  await expect(count).toHaveText("A mostrar 5 de 5 trilhos");
   await expect(page.locator("main article").first()).toContainText("ago 2020");
   await expect(page.locator("main article", { hasText: "Aug 2020" })).toHaveCount(0);
   await page.getByRole("button", { name: "Bicicleta" }).click();
-  await expect(count).toHaveText("A mostrar 1 de 6 trilhos");
+  await expect(count).toHaveText("A mostrar 1 de 5 trilhos");
   await expect(page.getByRole("button", { name: "Bicicleta" })).toHaveAttribute("aria-pressed", "true");
 });
 

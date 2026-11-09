@@ -1,4 +1,9 @@
 .container{max-width:var(--wrap);margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 @media (min-width:720px){.container{padding-left:max(32px,env(safe-area-inset-left,0px));padding-right:max(32px,env(safe-area-inset-right,0px))}}
-.section{padding-block:clamp(28px,5vw,56px)}
+.section{padding-block:clamp(48px,7vw,88px)}
+/* A dashed contour rule between consecutive sections, inside the side gutter. Not above the first
+   section after a page header or the hero (not a .section), nor above a flush-top one. */
+.section + .section:not(.flushTop){position:relative}
+.section + .section:not(.flushTop)::before{content:"";position:absolute;top:0;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));height:1px;background:repeating-linear-gradient(90deg,var(--contour-index) 0 6px,transparent 6px 12px);opacity:.7}
+@media (min-width:720px){.section + .section:not(.flushTop)::before{left:max(32px,env(safe-area-inset-left,0px));right:max(32px,env(safe-area-inset-right,0px))}}
 .flushTop{padding-top:0}

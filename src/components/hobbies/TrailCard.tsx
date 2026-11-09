@@ -1,7 +1,9 @@
+import Image from "next/image";
 import { Arrow } from "@/components/ui/Arrow";
 import { Card } from "@/components/ui/Card";
 import { cx } from "@/components/ui/cx";
 import { formatDecimal, formatMonth, formatNumber, t, type Locale } from "@/lib/i18n";
+import { trailMaps } from "@/lib/images";
 import type { Route, Trail } from "@/lib/schemas";
 import s from "./TrailCard.module.css";
 
@@ -26,11 +28,26 @@ export function RouteMap({ route, trail, rank, locale }: { route: Route; trail: 
   for (let x = 30; x < 300; x += 30) grid += `M${x} 0V188`;
   for (let y = 30; y < 188; y += 30) grid += `M0 ${y}H300`;
   const id = `mp${rank}`;
+  // OpenTopoMap background pre-rendered for this route's bounds (assets/maps); a grid without one.
+  const bg = trailMaps[route.id];
   return (
     <div className={s.map}>
+      {bg && (
+        // An <img> under the SVG rather than an SVG <image>: it can be lazy-loaded. The first card's
+        // map is the mobile LCP element, so it loads eagerly and first (it's in the HTML, so the
+        // preload scanner finds it as early as a <link rel=preload> would).
+        <Image
+          className={s.mapBg}
+          src={bg}
+          alt=""
+          sizes="(max-width: 620px) 100vw, (max-width: 980px) 50vw, 380px"
+          loading={rank === 1 ? "eager" : "lazy"}
+          fetchPriority={rank === 1 ? "high" : "auto"}
+        />
+      )}
       <svg viewBox="0 0 300 188" role="img" aria-labelledby={id}>
         <title id={id}>{`${t(locale, "trail.map")}: ${trail.n}`}</title>
-        <path className={s.mapGrid} d={grid} />
+        {!bg && <path className={s.mapGrid} d={grid} />}
         <path className={s.halo} d={route.d} />
         <path className={s.route} d={route.d} pathLength={1} />
         <path className={s.routeTrace} d={route.d} pathLength={1} aria-hidden="true" />
@@ -44,6 +61,12 @@ export function RouteMap({ route, trail, rank, locale }: { route: Route; trail: 
         <text className={s.north} x="288" y="20" textAnchor="end">N ↑</text>
       </svg>
       <span className={s.badge} aria-hidden="true">#{rank}</span>
+      {bg && (
+        // Required by the tiles' CC BY-SA licence.
+        <span className={s.attr}>
+          © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · <a href="https://opentopomap.org">OpenTopoMap</a>
+        </span>
+      )}
     </div>
   );
 }
@@ -77,19 +100,21 @@ export function ElevationProfile({ route, trail, rank, locale }: { route: Route;
   );
 }
 
-const DIFF = {
-  Easy: { level: 1, tone: s.easy },
-  Moderate: { level: 2, tone: s.moderate },
-  Difficult: { level: 3, tone: s.hard },
-} as const;
+export type DifficultyLevel = 1 | 2 | 3 | 4;
+const TONE: Record<DifficultyLevel, string> = { 1: s.easy, 2: s.moderate, 3: s.hard, 4: s.hard };
+/** trails.json difficulty → level. */
+export const DIFF_LEVEL: Record<Trail["diff"], DifficultyLevel> = { Easy: 1, Moderate: 2, Difficult: 3 };
 
-/** Difficulty as one to three filled peaks plus the localized word, coloured by level. */
-export function Difficulty({ diff, label }: { diff: Trail["diff"]; label: string }) {
-  const { level, tone } = DIFF[diff];
+/**
+ * Difficulty as filled peaks plus the localized word (never colour alone), coloured by level.
+ * Three peaks, or four for "Very difficult".
+ */
+export function Difficulty({ level, label }: { level: DifficultyLevel; label: string }) {
+  const peaks = level > 3 ? 4 : 3;
   return (
-    <span className={cx(s.diff, tone)}>
-      <svg viewBox="0 0 36 13" aria-hidden="true">
-        {[0, 1, 2].map((i) => (
+    <span className={cx(s.diff, TONE[level])}>
+      <svg viewBox={`0 0 ${peaks * 12} 13`} aria-hidden="true">
+        {Array.from({ length: peaks }, (_, i) => (
           <path key={i} d={`M${i * 12} 12 L${i * 12 + 5} 2 L${i * 12 + 10} 12z`} fill={i < level ? "currentColor" : "none"} stroke="currentColor" strokeWidth="1.2" />
         ))}
       </svg>
@@ -118,7 +143,7 @@ export function TrailCard({ trail, route, rank, locale }: { trail: Trail; route?
       </dl>
       {route && <ElevationProfile route={route} trail={trail} rank={rank} locale={locale} />}
       <div className={s.foot}>
-        <Difficulty diff={trail.diff} label={t(locale, `diff.${trail.diff}`)} />
+        <Difficulty level={DIFF_LEVEL[trail.diff]} label={t(locale, `diff.${trail.diff}`)} />
         <span className={cx("mono", s.date)}>{trailDate(trail.date, locale)}</span>
         <a href={trail.u}>
           {t(locale, "trail.open")}

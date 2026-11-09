@@ -33,7 +33,7 @@ package, because typescript-eslint does not support TS 7 yet.
 
 ```
 src/app/(en)/…            EN routes at the root
-src/app/(pt)/pt/…         PT routes with localized segments (investigacao, profissional, passatempos)
+src/app/(pt)/pt/…         PT routes with localized segments (investigacao, profissional, passatempos, passatempos/trilhos)
 src/app/global-not-found  "Off the map" 404 (two root layouts, so experimental.globalNotFound)
 src/app/(pt)/pt/404       PT 404, exported as pt/404.html: Cloudflare serves the nearest 404.html, so /pt/* misses get it
 src/views/                page components shared by both locales, taking { locale }: they only compose
@@ -41,11 +41,15 @@ src/components/ui/        presentational primitives (Button, Card, ChipGroup, Pa
 src/components/layout/    Shell (<html>), header + mobile menu, footer (contact, language switch), theme toggle, skip link, route focus
 src/components/<area>/    feature components per page area: home, research, professional, hobbies, blog
 src/styles/               tokens.css (+ typed tokens.ts mirror) and base.css (reset, utilities, transitions)
-src/data/*.json           UI strings (i18n.json), publications, trails, GPS routes, projects
+src/data/*.json           UI strings (i18n.json), publications, featured trails + GPS routes, the full Wikiloc
+                          log (allTrails.json, drives /hobbies/trails and the trail stats), projects
 src/lib/                  locale.ts (routes, formatters; client-safe), i18n.ts (t(), server only),
                           content loader, zod schemas, metadata, RSS
 content/blog/*.mdx        blog posts
-assets/                   source images; scripts/encode-images.mjs writes WebP to src/assets (gitignored)
+assets/                   source images (photos, side-project shots, OpenTopoMap route backgrounds);
+                          scripts/encode-images.mjs writes WebP to src/assets (gitignored)
+public/trails/            pre-rendered map thumbnails and elevation sparklines for all trails (light-theme
+                          rasters; dark mode inverts them through the --thumb/--prof tokens)
 public/_headers, _redirects  Cloudflare caching/security headers and old-URL redirects
 ```
 
@@ -91,5 +95,8 @@ only, and RSS GUIDs are the canonical URL in both feeds.
 ## Open items
 
 Tracked in `src/lib/site.ts` and the handoff §8: thesis URL, CV PDF, publication DOIs (`doi` field in
-`publications.json`), real blog posts, a face-free LightLex screenshot, and the ruilebre.com custom domain
-on Cloudflare (plus a 301 from ruilebre.vercel.app).
+`publications.json`), real blog posts, and a 301 from ruilebre.vercel.app.
+
+The LightLex screenshot is the real app with its TMDB poster art swapped for abstract tiles while
+capturing (the live posters show actors' faces). The trail thumbnails are rasters from the handoff; the
+spec prefers SVG generated from each trail's GPS track, which needs the tracks exported from Wikiloc.

@@ -17,6 +17,9 @@ const jobs = [
   // Gallery grid / blog srcset thumbnails: grid cells are at most 380 CSS px wide, so 760 = 2x.
   { dir: "photos", out: "photos/thumb", width: 760, quality: 74 },
   { dir: "shots", width: 1280, quality: 80 },
+  // OpenTopoMap backgrounds for the trail cards' route maps. 480 px, not the 600 px source: they
+  // are drawn faded and desaturated, and the first one is the mobile LCP image (24 KB vs 60 KB).
+  { dir: "maps", width: 480, quality: 70 },
   // Post author avatar: rendered at 56 CSS px, 112 = 2x.
   { dir: ".", width: 112, quality: 85, only: ["avatar.png"] },
 ];
