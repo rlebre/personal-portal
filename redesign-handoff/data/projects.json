@@ -1,0 +1,43 @@
+[
+ {
+  "n": "Dicoogle",
+  "d": "Open-source PACS built around a document-indexing engine. I maintained it at IEETA and wrote the paper on its open-source journey.",
+  "tags": [
+   "Java",
+   "DICOM",
+   "PACS"
+  ],
+  "u": "https://github.com/rlebre/dicoogle",
+  "g": "lens"
+ },
+ {
+  "n": "dicoogle-ipfs-storage",
+  "d": "A Dicoogle plugin that stores medical images over IPFS, from my PhD work on decentralized storage.",
+  "tags": [
+   "Java",
+   "IPFS"
+  ],
+  "u": "https://github.com/rlebre/dicoogle-ipfs-storage",
+  "g": "nodes"
+ },
+ {
+  "n": "WSI DICOM viewer",
+  "d": "A desktop viewer for DICOM whole-slide pathology images, built for multi-gigapixel files.",
+  "tags": [
+   "Java",
+   "Digital pathology"
+  ],
+  "u": "https://github.com/rlebre/WSI-DICOM-desktop-viewer",
+  "g": "grid"
+ },
+ {
+  "n": "Dicoogle website",
+  "d": "The project website at dicoogle.com, with docs and downloads for the Dicoogle community.",
+  "tags": [
+   "TypeScript",
+   "Web"
+  ],
+  "u": "https://github.com/rlebre/dicoogle-website",
+  "g": "globe"
+ }
+]

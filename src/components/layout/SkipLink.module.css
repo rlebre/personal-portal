@@ -1,0 +1,2 @@
+.skip{position:fixed;left:max(12px,env(safe-area-inset-left,0px));top:calc(env(safe-area-inset-top,0px) + 8px);z-index:100;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:var(--radius);transform:translateY(-200%);transition:transform var(--d-2) var(--ease-out)}
+.skip:focus{transform:none}

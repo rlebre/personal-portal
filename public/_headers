@@ -1,0 +1,29 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+
+/pt/feed.xml
+  Content-Type: application/rss+xml; charset=utf-8
+
+# Static-export OG images have no extension (opengraph-image-<hash>), so they'd be served as
+# application/octet-stream. One rule per depth: Workers allows a single splat per rule.
+/opengraph-image-:h
+  Content-Type: image/png
+
+/:a/opengraph-image-:h
+  Content-Type: image/png
+
+/:a/:b/opengraph-image-:h
+  Content-Type: image/png
+
+/:a/:b/:c/opengraph-image-:h
+  Content-Type: image/png

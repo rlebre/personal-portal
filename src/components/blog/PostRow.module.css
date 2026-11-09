@@ -1,0 +1,10 @@
+.list{list-style:none;margin:0;padding:0;max-width:780px}
+.row{display:grid;grid-template-columns:120px minmax(0,1fr);gap:20px;padding-block:24px;border-top:1px solid var(--line)}
+.row h2{font-size:var(--s-1)}
+.row h2 a{text-decoration:none}
+.row h2 a:hover{text-decoration:underline}
+.row p{color:var(--ink-2);margin-top:6px}
+.row .tags{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+/* Also restyles the badges in the row (mono .74rem, muted), as in the mock. */
+.row .tags span{font-family:var(--f-mono);font-size:.74rem;color:var(--ink-2)}
+@media (max-width:620px){.row{grid-template-columns:1fr;gap:6px}}

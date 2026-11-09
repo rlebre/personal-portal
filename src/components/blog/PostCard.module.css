@@ -1,0 +1,7 @@
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px clamp(32px,4vw,56px)}
+.card{display:grid;gap:10px;align-content:start;padding:20px 0;border-top:2px solid var(--ink);text-decoration:none;transition:border-color var(--d-2)}
+.card h3{font-size:var(--s-1);transition:color var(--d-2)}
+.card:is(:hover,:focus-visible){border-top-color:var(--trail)}
+.card:is(:hover,:focus-visible) h3{color:var(--trail)}
+.card p{color:var(--ink-2)}
+@media (max-width:860px){.grid{grid-template-columns:1fr}}

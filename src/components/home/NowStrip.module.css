@@ -1,0 +1,7 @@
+.now{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-block:1px solid var(--line);margin:0}
+.now > div{padding:18px 18px 18px 0;display:grid;gap:4px;align-content:start}
+.now > div + div{padding-left:18px;border-left:1px dashed var(--line)}
+.now dd{margin:0}
+.now .value{font-family:var(--f-display);font-size:1.05rem;font-weight:700}
+.now .detail{color:var(--ink-2);font-size:.95rem}
+@media (max-width:760px){.now{grid-template-columns:1fr}.now > div + div{border-left:0;padding-left:0;border-top:1px dashed var(--line)}}

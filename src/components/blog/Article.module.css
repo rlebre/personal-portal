@@ -1,0 +1,14 @@
+.layout{display:grid;grid-template-columns:minmax(0,680px) 220px;gap:56px;justify-content:start}
+@media (max-width:980px){.layout{grid-template-columns:1fr}}
+/* Long-form MDX content: styles raw elements, so it stays a descendant-selector block. */
+.prose{font-size:1.02rem;line-height:1.7;min-width:0}
+.prose > * + *{margin-top:1.1em}
+.prose h2{font-size:var(--s-2);margin-top:1.8em}
+.prose blockquote{margin-inline:0;padding-left:18px;border-left:3px solid var(--trail);font-family:var(--f-display);font-size:1.3rem;line-height:1.35}
+.prose figure{margin-inline:0}
+.prose figure img{border-radius:4px;max-width:100%;height:auto;display:block;width:100%}
+.prose figcaption{font-size:.85rem;color:var(--ink-2);margin-top:6px}
+/* After .prose > * + * in this file on purpose: the author card sits inside the prose block. */
+.author{display:flex;gap:14px;align-items:center;padding:18px;margin-top:40px}
+.author img{width:56px;height:56px;border-radius:50%;background:var(--surface-2)}
+.author p{color:var(--ink-2);font-size:.92rem;margin:0}

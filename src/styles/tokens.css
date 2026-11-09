@@ -1,0 +1,45 @@
+:root{
+  --paper:#FAFBF9; --surface:#FFFFFF; --surface-2:#EDF0EC;
+  --ink:#1D271F; --ink-2:#4E5A50; --line:#D9DDD5;
+  --contour:#D8DDD4; --contour-index:#B5BEB0;
+  --trail:#14503A; --on-trail:#FFFFFF; --mark:#D9A400; --forest:#3F5F7A;
+  --focus:#0B1F33; --shadow:0 1px 0 rgba(29,39,31,.06),0 8px 24px -12px rgba(29,39,31,.25);
+  --grid:rgba(29,39,31,.05);
+  /* Raster treatments: OpenTopoMap backgrounds and pre-rendered trail thumbnails are light-theme
+     images; in dark mode they are inverted and hue-rotated back, so they sit on the slate paper. */
+  --map-opacity:.7; --map-filter:saturate(.55) contrast(.95);
+  --thumb-filter:none; --prof-filter:none; --prof-blend:multiply;
+  --f-display:var(--font-bricolage),"Avenir Next","Segoe UI",system-ui,sans-serif;
+  --f-body:var(--font-atkinson),"Segoe UI",system-ui,-apple-system,sans-serif;
+  --f-name:var(--font-archivo),"Helvetica Neue",Arial,sans-serif;
+  --f-mono:var(--font-plex-mono),ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  --s--1:clamp(.8rem,.77rem + .12vw,.86rem);
+  --s-0:clamp(.94rem,.91rem + .15vw,1rem);
+  --s-1:clamp(1.1rem,1.02rem + .4vw,1.3rem);
+  --s-2:clamp(1.4rem,1.2rem + .9vw,1.85rem);
+  --s-3:clamp(1.9rem,1.5rem + 2vw,2.9rem);
+  --s-hero:clamp(3rem,1.8rem + 6vw,6.6rem);
+  --ease-out:cubic-bezier(.22,1,.36,1); --ease-io:cubic-bezier(.65,0,.35,1);
+  --d-1:120ms; --d-2:200ms; --d-3:320ms;
+  --radius:6px; --wrap:1180px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#1C232D; --surface:#232C38; --surface-2:#2C3644;
+  --ink:#E8ECF1; --ink-2:#AEB8C4; --line:#38434F;
+  --contour:#303B48; --contour-index:#465565;
+  --trail:#4CAF80; --on-trail:#1C232D; --mark:#E8C14A; --forest:#9DB8D3;
+  --focus:#F2C46D; --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.7);
+  --grid:rgba(230,234,221,.035);
+  --map-opacity:.55; --map-filter:invert(.9) hue-rotate(180deg) saturate(.5) brightness(.9);
+  --thumb-filter:invert(.88) hue-rotate(180deg) saturate(.7); --prof-filter:invert(.9) hue-rotate(180deg); --prof-blend:screen;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#1C232D; --surface:#232C38; --surface-2:#2C3644;
+  --ink:#E8ECF1; --ink-2:#AEB8C4; --line:#38434F;
+  --contour:#303B48; --contour-index:#465565;
+  --trail:#4CAF80; --on-trail:#1C232D; --mark:#E8C14A; --forest:#9DB8D3;
+  --focus:#F2C46D; --shadow:0 1px 0 rgba(0,0,0,.3),0 10px 28px -14px rgba(0,0,0,.7);
+  --grid:rgba(230,234,221,.035);
+  --map-opacity:.55; --map-filter:invert(.9) hue-rotate(180deg) saturate(.5) brightness(.9);
+  --thumb-filter:invert(.88) hue-rotate(180deg) saturate(.7); --prof-filter:invert(.9) hue-rotate(180deg); --prof-blend:screen;
+  color-scheme:dark}

@@ -1,0 +1,12 @@
+.year{display:grid;grid-template-columns:90px minmax(0,1fr);gap:16px;padding-block:18px;border-top:1px solid var(--line)}
+.year h3{font-family:var(--f-mono);font-weight:500;font-size:1.1rem;color:var(--trail);letter-spacing:0}
+.year ol{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.pub{display:grid;gap:4px}
+.pub h4{font-family:var(--f-body);font-weight:700;font-size:1.02rem;line-height:1.35;letter-spacing:0}
+.pub .authors{font-size:.92rem;color:var(--ink-2)}
+.pub .authors strong{color:var(--ink);font-weight:700}
+.pub .venue{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.9rem}
+.pub cite{font-style:italic}
+.pub time{color:var(--ink-2)}
+.pub .doi{font-family:var(--f-mono);font-size:.8rem}
+@media (max-width:560px){.year{grid-template-columns:1fr;gap:8px}}

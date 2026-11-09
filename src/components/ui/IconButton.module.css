@@ -1,0 +1,4 @@
+.iconBtn{display:inline-grid;place-items:center;min-width:44px;height:44px;padding:0 10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:99px;cursor:pointer;font:700 .8rem var(--f-mono);letter-spacing:.08em;transition:border-color var(--d-2),background var(--d-2),transform var(--d-2) var(--ease-out)}
+.iconBtn:hover{border-color:var(--ink-2)}
+.iconBtn:active{transform:translateY(1px) scale(.98);transition-duration:80ms}
+.iconBtn svg{width:20px;height:20px}

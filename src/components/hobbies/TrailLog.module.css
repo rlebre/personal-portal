@@ -1,0 +1,38 @@
+.filters{gap:10px 16px}
+.field{display:inline-flex;align-items:center;gap:8px}
+.search{display:inline-flex;align-items:center;gap:8px;min-height:40px;border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:0 14px;color:var(--ink-2);flex:1 1 220px;max-width:340px}
+.search svg{width:16px;height:16px;flex:none}
+.search input{border:0;background:transparent;font:inherit;font-size:.9rem;color:var(--ink);width:100%;min-width:0;outline:none}
+.search:focus-within{outline:3px solid var(--focus);outline-offset:2px}
+
+/* Table-like rows: thumbnail · trail · elevation · distance · gain · difficulty · recorded · views. */
+.head,.row{display:grid;grid-template-columns:104px minmax(0,1fr) 128px 72px 72px 118px 76px 64px;gap:14px;align-items:center}
+.head{font:500 .68rem var(--f-mono);letter-spacing:.1em;text-transform:uppercase;color:var(--ink-2);padding:0 0 8px;border-bottom:2px solid var(--ink)}
+.list{list-style:none;margin:0;padding:0}
+.row{padding:14px 0;border-bottom:1px solid var(--line);transition:background var(--d-2)}
+.row:hover{background:color-mix(in srgb,var(--surface-2) 50%,transparent)}
+
+.thumb{display:block;width:104px;height:69px;border-radius:4px;object-fit:cover;background:var(--surface-2);border:1px solid var(--line);filter:var(--thumb-filter)}
+.prof{display:block;width:128px;height:31px;border-radius:3px;mix-blend-mode:var(--prof-blend);filter:var(--prof-filter)}
+.main{min-width:0}
+.main h2{font-size:1rem;font-family:var(--f-body);font-weight:700;letter-spacing:0;line-height:1.35}
+.main h2 a{text-decoration:none}
+.main h2 a:hover{text-decoration:underline;color:var(--trail)}
+.where{font-size:.85rem;color:var(--ink-2)}
+.act{font-size:.78rem;color:var(--ink-2);font-family:var(--f-mono);margin-top:2px}
+.num{font-family:var(--f-mono);font-size:.85rem;font-variant-numeric:tabular-nums}
+.muted{color:var(--ink-2)}
+.views{display:inline-flex;align-items:center;gap:5px}
+.views svg{width:14px;height:14px}
+.note{margin-top:20px;font-size:.92rem}
+
+/* Narrow: no headings; thumbnail beside name/place, then the sparkline and stats wrap below. */
+@media (max-width:900px){
+  .head{display:none}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+  .thumb{width:88px;height:59px}
+  .main{flex:1 1 calc(100% - 102px)}
+  .prof{flex:0 0 auto;margin-left:102px}
+  .row > span{white-space:nowrap}
+}
+@media (max-width:420px){.prof{margin-left:0}}

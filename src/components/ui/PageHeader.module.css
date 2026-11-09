@@ -1,0 +1,5 @@
+.head{padding-block:clamp(40px,7vw,88px) clamp(24px,4vw,40px);display:grid;gap:18px;position:relative}
+.head h1{font-size:var(--s-3);font-weight:800}
+.lede{font-size:var(--s-1);max-width:46ch;color:var(--ink-2);line-height:1.45}
+.head.tight{padding-bottom:12px}
+.fill{min-height:50vh;align-content:center}

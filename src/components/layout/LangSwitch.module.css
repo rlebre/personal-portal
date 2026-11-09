@@ -1,0 +1,3 @@
+.lang{display:flex;flex-wrap:wrap;align-items:center;gap:8px;border-radius:var(--radius)}
+/* Focused by script after a switch: beats base.css's [tabindex="-1"]:focus{outline:none}. */
+.lang.lang:focus-visible{outline:3px solid var(--focus);outline-offset:4px}

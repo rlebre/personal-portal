@@ -1,0 +1,3 @@
+.crumbs{font-family:var(--f-mono);font-size:.8rem;color:var(--ink-2)}
+/* ≥24px targets (WCAG 2.5.8). */
+.crumbs a{display:inline-flex;align-items:center;min-height:24px}

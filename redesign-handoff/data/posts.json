@@ -1,0 +1,36 @@
+[
+ {
+  "slug": "post-vale-glaciar",
+  "lang": "EN",
+  "date": "2026-10-20",
+  "ti": "A long day in the Vale Glaciar",
+  "ex": "Notes from my most-viewed trail: a 26 km loop up the glacial valley above Manteigas, and what I would do differently.",
+  "tags": [
+   "Outdoors"
+  ],
+  "min": 5
+ },
+ {
+  "slug": "",
+  "lang": "PT",
+  "date": "2026-09-12",
+  "ti": "Do PACS ao streaming: o que a imagem médica me ensinou",
+  "ex": "Sistemas distribuídos, ficheiros enormes e utilizadores impacientes. Há mais em comum entre hospitais e salas de estar do que parece.",
+  "tags": [
+   "Engineering",
+   "Research"
+  ],
+  "min": 7
+ },
+ {
+  "slug": "",
+  "lang": "EN",
+  "date": "2026-08-02",
+  "ti": "Building a TV app with LightningJS",
+  "ex": "What I learned about focus management and remote-control navigation while building LightLex, a Plex-style side project.",
+  "tags": [
+   "Engineering"
+  ],
+  "min": 8
+ }
+]

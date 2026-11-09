@@ -1,0 +1,20 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "ruilebre",
+  "compatibility_date": "2026-10-01",
+  // Only the proxied paths run the script (worker/index.ts); everything else is served from assets directly.
+  "main": "worker/index.ts",
+  "assets": {
+    "directory": "./out",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page",
+    "run_worker_first": ["/lightlex", "/lightlex/*"]
+  },
+  // Serves the site on the apex and www. Cloudflare creates the DNS records and certificates.
+  // Any existing A/AAAA/CNAME record on these hostnames must be removed first (or overridden when wrangler asks).
+  "routes": [
+    { "pattern": "ruilebre.com", "custom_domain": true },
+    { "pattern": "www.ruilebre.com", "custom_domain": true }
+  ]
+}

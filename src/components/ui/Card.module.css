@@ -1,0 +1,5 @@
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius)}
+/* Lit state: hover, keyboard focus on the card itself (a link card) or on a link inside it
+   (an article card). Consumers repeat this selector list for their own hover details. */
+.interactive{transition:transform var(--d-2) var(--ease-out),border-color var(--d-2),box-shadow var(--d-2)}
+.interactive:is(:hover,:focus-visible,:has(:focus-visible)){transform:translateY(-2px);border-color:var(--trail);box-shadow:var(--shadow)}

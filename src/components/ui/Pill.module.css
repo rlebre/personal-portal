@@ -1,0 +1,1 @@
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:.78rem;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--ink);white-space:nowrap}

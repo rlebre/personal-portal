@@ -1,105 +1,102 @@
-# Personal Website
+# ruilebre.com
 
-This is the repository for my personal website built using Next.js 13, app routing, pnpm, and Tailwind CSS. It serves as a platform to showcase my work, provide information about me, and share my interests and projects.
+Rui Lebre's personal site: research, professional work, hobbies and a blog, in English (`/`) and Portuguese (`/pt`).
+Fully static Next.js export served by Cloudflare Workers static assets.
 
-## Table of Contents
+The approved design and spec live in [`redesign-handoff/`](redesign-handoff/HANDOFF.md) (open `mock/rui-portal.html` in a browser).
+The previous implementation is preserved at the `legacy-v1` tag.
 
-- [Demo](#demo)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [Deployment](#deployment)
-- [Customization](#customization)
-- [Contributing](#contributing)
-- [License](#license)
+## Develop
 
-## Demo
+Uses [mise](https://mise.jdx.dev) for tooling: `mise install` gives Node 26 (latest LTS) and pnpm 10.
 
-You can see the live version of this website at [ruilebre.com](https://ruilebre.com).
-
-## Features
-
-- Modern and responsive design.
-- Fast and optimized performance.
-- App routing for smooth navigation.
-- Easy customization with Tailwind CSS.
-- Lightweight with pnpm package manager.
-
-## Getting Started
-
-### Prerequisites
-
-Before you begin, ensure you have met the following requirements:
-
-- Node.js: Make sure you have Node.js installed on your system. You can download it from [nodejs.org](https://nodejs.org/).
-- pnpm: This project uses pnpm as the package manager. If you haven't installed it, you can do so using npm: `npm install -g pnpm`.
-
-### Installation
-
-1. Clone this repository:
-
-```bash
-git clone https://github.com/rlebre/personal-portal.git
-```
-
-2. Change into the project directory:
-
-```bash
-cd personal-portal
-````
-
-3. Install project dependencies using pnpm:
-
-```bash
+```sh
 pnpm install
+pnpm dev          # encodes images, then next dev
+pnpm build        # static export to out/
+pnpm preview      # serve out/ with wrangler (same asset handling as production)
+pnpm deploy       # build + wrangler deploy
 ```
 
-### Configuration
+Checks:
 
-You may need to configure certain aspects of the website, such as contact information or project details. Update the configuration files in the config/ directory to tailor the website to your needs.
-
-### Usage
-
-To start the development server, run the following command:
-
-```bash
-pnpm dev
+```sh
+pnpm lint && pnpm typecheck
+pnpm test         # vitest: i18n, content, data, tokens, client-bundle boundary, ui primitives
+pnpm test:e2e     # playwright + axe against the built site (run pnpm build first)
 ```
 
-This will start the development server and you can view your website at `http://localhost:3000`.
+TypeScript: `tsc` is TypeScript 7 (`@typescript/native` alias); `typescript` is the TS 6 compatibility
+package, because typescript-eslint does not support TS 7 yet.
 
-### Deployment
+## Layout
 
-To build and deploy your website for production, you can run:
-
-```bash
-pnpm build
-pnpm start
+```
+src/app/(en)/…            EN routes at the root
+src/app/(pt)/pt/…         PT routes with localized segments (investigacao, profissional, passatempos, passatempos/trilhos)
+src/app/global-not-found  "Off the map" 404 (two root layouts, so experimental.globalNotFound)
+src/app/(pt)/pt/404       PT 404, exported as pt/404.html: Cloudflare serves the nearest 404.html, so /pt/* misses get it
+src/views/                page components shared by both locales, taking { locale }: they only compose
+src/components/ui/        presentational primitives (Button, Card, ChipGroup, PageHeader, …), see its README
+src/components/layout/    Shell (<html>), header + mobile menu, footer (contact, language switch), theme toggle, skip link, route focus
+src/components/<area>/    feature components per page area: home, research, professional, hobbies, blog
+src/styles/               tokens.css (+ typed tokens.ts mirror) and base.css (reset, utilities, transitions)
+src/data/*.json           UI strings (i18n.json), publications, featured trails + GPS routes, the full Wikiloc
+                          log (allTrails.json, drives /hobbies/trails and the trail stats), projects
+src/lib/                  locale.ts (routes, formatters; client-safe), i18n.ts (t(), server only),
+                          content loader, zod schemas, metadata, RSS
+content/blog/*.mdx        blog posts
+assets/                   source images (photos, side-project shots, OpenTopoMap route backgrounds);
+                          scripts/encode-images.mjs writes WebP to src/assets (gitignored)
+public/trails/            pre-rendered map thumbnails and elevation sparklines for all trails (light-theme
+                          rasters; dark mode inverts them through the --thumb/--prof tokens)
+public/_headers, _redirects  Cloudflare caching/security headers and old-URL redirects
 ```
 
-Make sure to set up your production environment and hosting as per your needs.
+Styling: each component has a colocated CSS Module; global CSS is only `src/styles/`. Client components
+receive resolved strings (and server-rendered items) as props and import `@/lib/locale`, never
+`@/lib/i18n`, so the string table stays out of the browser bundle (a unit test enforces this).
 
-### Customization
+## Writing a post
 
-- Customize the website content in the `pages/` directory.
-- Modify the styles in the `styles/` directory using Tailwind CSS.
-- Add or remove components in the `components/` directory.
-- Extend the website's functionality by adding more pages or components as needed.
+Add `content/blog/<slug>.mdx`:
 
-### Contributing
+```mdx
+---
+title: "Post title"
+date: "2026-11-05"
+lang: en            # en | pt
+tags: [Engineering]
+summary: "One or two sentences for cards, RSS and meta description."
+draft: false
+---
 
-Contributions are welcome! If you'd like to contribute to this project, please follow these steps:
+## A heading (goes into the table of contents)
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them.
-4. Push your changes to your fork.
-5. Create a pull request to this repository.
+<Photo n="10" caption="Optional caption" />
+```
 
-### License
+Reading time, the TOC, RSS (`/feed.xml`, `/pt/feed.xml`), sitemap and OG images are generated at build.
+The three current posts are samples (`sample: true`, `draft: true`): delete them once real posts exist.
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+### Blog visibility
 
+Drafts are listed in `pnpm dev` and left out of production builds. While no published post exists, the
+blog hides itself: no "Blog" nav item, no "Latest posts" on the home page, `/blog` and `/pt/blog` say the
+first posts are coming (`noindex`, not in the sitemap), and both feeds are valid but empty. Static export
+needs at least one param per dynamic route, so the post routes then emit a single `/blog/_` placeholder
+that renders the 404 page (`noindex`). Publishing the first non-draft post brings everything back on the
+next build (`isBlogVisible` in `src/lib/content.ts`, covered by `tests/unit/seo.test.ts`).
+
+SEO: a post is canonical at its own-language URL, which is also its only hreflang target (plus
+`x-default`); the other locale's copy only points its canonical there. The sitemap lists canonical URLs
+only, and RSS GUIDs are the canonical URL in both feeds.
+
+## Open items
+
+Tracked in `src/lib/site.ts` and the handoff §8: thesis URL, CV PDF, publication DOIs (`doi` field in
+`publications.json`), real blog posts, and a 301 from ruilebre.vercel.app.
+
+The LightLex screenshot is the real app with its TMDB poster art swapped for abstract tiles while
+capturing (the live posters show actors' faces). The trail thumbnails are rasters from the handoff; the
+spec prefers SVG generated from each trail's GPS track, which needs the tracks exported from Wikiloc.
