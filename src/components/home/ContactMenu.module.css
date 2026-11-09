@@ -1,0 +1,22 @@
+.wrap{display:contents}
+.trigger{anchor-name:--contact}
+.chev{transition:rotate var(--d-2) var(--ease-out)}
+.trigger:has(+ .panel:popover-open) .chev{rotate:180deg}
+
+/* UA popover styles centre it in the viewport: the fallback where anchor positioning is missing. */
+.panel{min-width:240px;padding:6px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+@supports (anchor-name:--a){
+  .panel{position-anchor:--contact;inset:auto;margin:8px 0;position-area:bottom span-right;position-try-fallbacks:flip-block,flip-inline}
+}
+
+.addr{display:block;padding:8px 10px 10px;margin-bottom:4px;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:.85rem;color:var(--ink-2);user-select:all}
+.item{display:flex;align-items:center;gap:10px;width:100%;min-height:44px;padding:0 10px;border:0;border-radius:6px;background:none;color:inherit;font:inherit;font-weight:600;font-size:.95rem;text-align:left;text-decoration:none;cursor:pointer}
+.item:hover{background:var(--surface-2)}
+.item svg{width:18px;height:18px;flex:none;color:var(--trail)}
+
+/* In: drops 4px and fades; out: fades. */
+@media (prefers-reduced-motion:no-preference){
+  .panel{transition:opacity var(--d-2) var(--ease-out),translate var(--d-2) var(--ease-out),display var(--d-2) allow-discrete,overlay var(--d-2) allow-discrete;opacity:0;translate:0 -4px}
+  .panel:popover-open{opacity:1;translate:0 0}
+  @starting-style{.panel:popover-open{opacity:0;translate:0 -4px}}
+}

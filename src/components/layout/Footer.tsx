@@ -9,7 +9,7 @@ import s from "./Footer.module.css";
 
 type FooterLink = { href: string; label: string; Icon: ComponentType<IconProps> };
 
-/** Target of the hero's "Get in touch" link. */
+/** The contact section: link here with `#contact`. */
 export const CONTACT_ID = "contact";
 
 const elsewhere: FooterLink[] = [
@@ -43,7 +43,7 @@ export function Footer({ locale }: { locale: Locale }) {
     <footer className={s.foot}>
       <Container className={s.grid}>
         <div>
-          {/* tabIndex -1: "Get in touch" (#contact) moves focus here, not just the scroll position. */}
+          {/* tabIndex -1: a #contact link moves focus here, not just the scroll position. */}
           <h2 id={CONTACT_ID} tabIndex={-1}>
             {t(locale, "foot.h")}
           </h2>

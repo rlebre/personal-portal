@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { CONTACT_ID } from "@/components/layout/Footer";
 import { ButtonGroup, ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Download } from "@/components/ui/icons";
@@ -10,6 +9,7 @@ import { ToastButton } from "@/components/ui/Toast";
 import { avatar } from "@/lib/images";
 import { t, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
+import { ContactMenu } from "./ContactMenu";
 import { TopoCanvas } from "./TopoCanvas";
 import s from "./Hero.module.css";
 
@@ -60,7 +60,14 @@ export function Hero({ locale, legend }: { locale: Locale; legend: LegendItem[] 
                   {cv}
                 </ToastButton>
               )}
-              <ButtonLink href={`#${CONTACT_ID}`}>{t(locale, "hero.cta2")}</ButtonLink>
+              <ContactMenu
+                email={site.email}
+                label={t(locale, "hero.cta2")}
+                mailLabel={t(locale, "hero.mail")}
+                copyLabel={t(locale, "hero.copy")}
+                copied={t(locale, "foot.copied")}
+                failed={t(locale, "foot.copyfail")}
+              />
             </ButtonGroup>
           </div>
           <aside className={s.legend} aria-labelledby="legend-h">

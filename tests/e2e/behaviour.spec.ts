@@ -17,11 +17,29 @@ test("client-side navigation focuses the h1 and is announced once (by Next's rou
   expect(statusTexts.filter((s) => /Research/.test(s))).toEqual([]);
 });
 
-test("'Get in touch' moves focus to the contact section", async ({ page }) => {
+test("'Get in touch' opens a menu to email or copy the address", async ({ page, context, browserName }) => {
+  if (browserName === "chromium") await context.grantPermissions(["clipboard-read", "clipboard-write"]);
   await page.goto("/");
-  await page.getByRole("link", { name: "Get in touch" }).click();
-  await expect(page.locator("#contact")).toBeFocused();
-  await expect(page.locator("#contact")).toBeInViewport();
+  const trigger = page.getByRole("button", { name: "Get in touch" });
+  const mail = page.getByRole("link", { name: "Write an email" });
+  await expect(mail).toBeHidden();
+  await trigger.click();
+  await expect(mail).toBeVisible();
+  await expect(mail).toHaveAttribute("href", "mailto:ruiclebre@gmail.com");
+  // Anchored to the button (below it, or above when there's no room), never covering it.
+  const [t, m] = [(await trigger.boundingBox())!, (await page.locator("[popover]").boundingBox())!];
+  expect(m.y >= t.y + t.height || m.y + m.height <= t.y).toBe(true);
+  expect(Math.abs(m.x - t.x)).toBeLessThan(1);
+  // Escape closes it and focus goes back to the button.
+  await page.keyboard.press("Escape");
+  await expect(mail).toBeHidden();
+  await expect(trigger).toBeFocused();
+  // Enter reopens it from the focused button.
+  await page.keyboard.press("Enter");
+  await page.getByRole("button", { name: "Copy address" }).click();
+  await expect(page.locator("[data-toast-status]")).toHaveText("Email copied");
+  await expect(mail).toBeHidden();
+  if (browserName === "chromium") expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("ruiclebre@gmail.com");
 });
 
 /* ---------------- footer language switch ---------------- */

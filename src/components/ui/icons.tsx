@@ -80,3 +80,20 @@ export const Scholar = (p: P) => (
   </svg>
 );
 
+export const Mail = (p: P) => (
+  <svg {...base} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinejoin="round" {...p}>
+    <rect x="3" y="5" width="18" height="14" rx="2" />
+    <path d="M3.5 6.5l8.5 6.5 8.5-6.5" />
+  </svg>
+);
+export const CopyIcon = (p: P) => (
+  <svg {...base} fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinejoin="round" {...p}>
+    <rect x="8.5" y="8.5" width="12" height="12" rx="2" />
+    <path d="M15.5 8.5V5.5a2 2 0 0 0-2-2h-8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h3" />
+  </svg>
+);
+export const ChevronDown = (p: P) => (
+  <svg {...base} fill="none" stroke="currentColor" strokeWidth={2} {...p}>
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+);
