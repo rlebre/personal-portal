@@ -112,9 +112,9 @@ test.describe("motion allowed", () => {
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveCSS("opacity", "1");
-    await expect(dialog).toHaveAccessibleName("Photo 3 of 12");
+    await expect(dialog).toHaveAccessibleName("Photo 3 of 18");
     await page.keyboard.press("ArrowRight");
-    await expect(dialog).toHaveAccessibleName("Photo 4 of 12");
+    await expect(dialog).toHaveAccessibleName("Photo 4 of 18");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
     await expect(thumbs.nth(3)).toBeFocused();

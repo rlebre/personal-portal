@@ -15,9 +15,9 @@ test.describe("hobbies images", () => {
     await page.goto("/hobbies");
     await scrollThrough(page);
     const imgs = page.locator("main").getByRole("button").filter({ has: page.locator("img") }).locator("img");
-    await expect(imgs).toHaveCount(12);
+    await expect(imgs).toHaveCount(18);
     const widths = await imgs.evaluateAll((els) => els.map((el) => (el as HTMLImageElement).naturalWidth));
-    expect(widths).toEqual(Array(12).fill(760));
+    expect(widths).toEqual(Array(18).fill(760));
   });
 
   test("the closed lightbox loads nothing; opening it loads the full photo", async ({ page }) => {
@@ -52,9 +52,9 @@ test.describe("hobbies images", () => {
     });
     await page.goto("/hobbies");
     await scrollThrough(page);
-    // All 12 thumbnails are ~0.85 MB; the full-size photos were ~1.9 MB.
+    // All 18 thumbnails are ~1.2 MB; the full-size photos are ~4.4 MB.
     expect(bytes).toBeGreaterThan(0);
-    expect(bytes).toBeLessThan(1_000_000);
+    expect(bytes).toBeLessThan(1_500_000);
   });
 });
 
