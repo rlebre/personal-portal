@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -33,5 +34,12 @@ describe("static perf config", () => {
 
   it("ships the wordmark font as a tiny subset", () => {
     expect(statSync(path.join(ROOT, "src/fonts/archivo-name.woff2")).size).toBeLessThan(4096);
+  });
+});
+
+describe("CV viewer image", () => {
+  it("was rendered from the current PDF (run `pnpm cv` after replacing it)", () => {
+    const pdf = createHash("sha256").update(readFileSync(path.join(ROOT, "public/rui-lebre-cv.pdf"))).digest("hex");
+    expect(readFileSync(path.join(ROOT, "assets/cv/source.sha256"), "utf8").split(/\s+/)[0]).toBe(pdf);
   });
 });

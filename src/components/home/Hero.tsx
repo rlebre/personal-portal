@@ -1,10 +1,9 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ButtonGroup, ButtonLink } from "@/components/ui/Button";
+import { CvButton } from "@/components/cv/CvButton";
+import { ButtonGroup } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { Download } from "@/components/ui/icons";
 import { Label } from "@/components/ui/Label";
-import { ToastButton } from "@/components/ui/Toast";
 import { t, type Locale } from "@/lib/i18n";
 import { site } from "@/lib/site";
 import { ContactMenu } from "./ContactMenu";
@@ -15,12 +14,6 @@ export type LegendItem = { sym: string; href: string; label: string; value: Reac
 
 /** Home hero over the animated contour map: name, role, intro, CTAs and the map legend. */
 export function Hero({ locale, legend }: { locale: Locale; legend: LegendItem[] }) {
-  const cv = (
-    <>
-      <Download />
-      <span>{t(locale, "hero.cta1")}</span>
-    </>
-  );
   return (
     // Runs its own entrance (Hero.module.css) instead of the page-enter rise: the name paints at once.
     <div className={s.hero} data-enter="self">
@@ -46,15 +39,7 @@ export function Hero({ locale, legend }: { locale: Locale; legend: LegendItem[] 
             </div>
             <p className={s.intro}>{t(locale, "hero.intro")}</p>
             <ButtonGroup className={s.ctas}>
-              {site.cvUrl ? (
-                <ButtonLink variant="primary" href={site.cvUrl} download>
-                  {cv}
-                </ButtonLink>
-              ) : (
-                <ToastButton variant="primary" message={t(locale, "toast.cv")}>
-                  {cv}
-                </ToastButton>
-              )}
+              <CvButton locale={locale} />
               <ContactMenu
                 email={site.email}
                 label={t(locale, "hero.cta2")}
