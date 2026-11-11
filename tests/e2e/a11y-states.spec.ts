@@ -24,9 +24,10 @@ for (const width of [390, 1280]) {
       });
 
       test("axe: toast visible", async ({ page }) => {
+        await page.addInitScript(() => Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.resolve() } }));
         await page.goto("/professional");
-        await page.getByRole("button", { name: "Download CV (PDF)" }).click();
-        await expect(page.locator("[data-toast-status]")).toHaveText("The CV PDF is coming soon.");
+        await page.getByRole("button", { name: "Copy" }).click();
+        await expect(page.locator("[data-toast-status]")).toHaveText("Email copied");
         expect(await axe(page)).toEqual([]);
       });
     });
