@@ -130,13 +130,16 @@ test("CV viewer: Share sends the PDF as a file when files can be shared", async 
     });
   });
   await page.goto("/pt/profissional");
-  // The viewer fetches the PDF on open; listen before clicking so a fast response isn't missed.
-  const pdf = page.waitForResponse((r) => r.url().endsWith("/rui-lebre-cv.pdf"));
   await page.getByRole("link", { name: "Ver CV" }).click();
-  const dialog = page.getByRole("dialog", { name: "Rui Lebre · CV" });
-  await pdf;
-  await dialog.getByRole("button", { name: "Partilhar" }).click();
-  await expect.poll(() => page.evaluate(() => (window as unknown as { shared: unknown[] }).shared)).toEqual([["rui-lebre-cv.pdf:application/pdf:true"]]);
+  const share = page.getByRole("dialog", { name: "Rui Lebre · CV" }).getByRole("button", { name: "Partilhar" });
+  const shared = () => page.evaluate(() => (window as unknown as { shared: unknown[] }).shared);
+  // The viewer fetches the PDF when it opens. Once it's in, Share attaches the file; a tap before
+  // then shares the link instead (by design), so retry until the file goes out.
+  await expect(async () => {
+    await share.click();
+    expect((await shared()).at(-1)).toEqual(["rui-lebre-cv.pdf:application/pdf:true"]);
+  }).toPass();
+  expect((await shared()).slice(0, -1).every((s) => s === "https://ruilebre.com/rui-lebre-cv.pdf")).toBe(true);
 });
 
 /* ---------------- footer language switch ---------------- */
