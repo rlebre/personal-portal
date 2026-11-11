@@ -421,7 +421,7 @@ test("English parts of /pt/profissional are marked lang=en", async ({ page }) =>
   expect(await langOf("Software Engineer")).toBe("en");
   expect(await langOf("Senior")).toBe("en");
   // Screenshots have Portuguese alt text on PT pages.
-  await expect(page.locator("main img[alt^='Captura de ecrã']")).toHaveCount(4);
+  await expect(page.locator("main img[alt^='Captura de ecrã']")).toHaveCount(6);
 });
 
 test("unknown URLs under /pt get the Portuguese 404", async ({ page }) => {

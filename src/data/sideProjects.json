@@ -1,5 +1,33 @@
 [
   {
+    "n": "Hunt",
+    "stack": [
+      "Next.js",
+      "Cloudflare"
+    ],
+    "badge": "Live",
+    "d": "A private job-hunting dashboard for a small circle of friends. It watches the job boards of saved companies, ranks every opening by fit and keeps a dated record of each application. Open demo account.",
+    "d_pt": "Um painel privado de procura de emprego para um pequeno grupo de amigos. Acompanha as ofertas das empresas guardadas, ordena cada vaga por adequação e regista cada candidatura com datas. Tem uma conta de demonstração aberta.",
+    "u": "https://hunt.ruilebre.com",
+    "shot": "hunt",
+    "shotAlt": "Screenshot of Hunt's home page in the demo account: new openings ranked by fit, each marked as open to candidates in Portugal, some with a salary range",
+    "shotAlt_pt": "Captura de ecrã da página inicial do Hunt na conta de demonstração: vagas novas ordenadas por adequação, cada uma marcada como aberta a candidatos em Portugal, algumas com intervalo salarial"
+  },
+  {
+    "n": "Trilhos de Portugal",
+    "stack": [
+      "Next.js",
+      "Leaflet"
+    ],
+    "badge": "Live",
+    "d": "A map and catalogue of Portugal's walking trails, built from a public trail directory: filters by district, difficulty and distance, ratings, lists and offline use as a PWA. Demo with fictional trails.",
+    "d_pt": "Um mapa e catálogo dos percursos pedestres de Portugal, construído a partir de um diretório público de trilhos: filtros por distrito, dificuldade e distância, avaliações, listas e uso offline como PWA. Demonstração com trilhos fictícios.",
+    "u": "https://trilhos.ruilebre.com",
+    "shot": "trilhos",
+    "shotAlt": "Screenshot of the Trilhos de Portugal map in the demo: trail markers across Portugal coloured by difficulty, with filters above and a list of trails beside it",
+    "shotAlt_pt": "Captura de ecrã do mapa do Trilhos de Portugal na demonstração: marcadores de trilhos por todo o país coloridos por dificuldade, com filtros por cima e uma lista de trilhos ao lado"
+  },
+  {
     "n": "+Pinhal",
     "stack": [
       "Astro",
