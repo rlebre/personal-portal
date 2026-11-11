@@ -130,9 +130,11 @@ test("CV viewer: Share sends the PDF as a file when files can be shared", async 
     });
   });
   await page.goto("/pt/profissional");
+  // The viewer fetches the PDF on open; listen before clicking so a fast response isn't missed.
+  const pdf = page.waitForResponse((r) => r.url().endsWith("/rui-lebre-cv.pdf"));
   await page.getByRole("link", { name: "Ver CV" }).click();
   const dialog = page.getByRole("dialog", { name: "Rui Lebre · CV" });
-  await page.waitForResponse((r) => r.url().endsWith("/rui-lebre-cv.pdf"));
+  await pdf;
   await dialog.getByRole("button", { name: "Partilhar" }).click();
   await expect.poll(() => page.evaluate(() => (window as unknown as { shared: unknown[] }).shared)).toEqual([["rui-lebre-cv.pdf:application/pdf:true"]]);
 });
@@ -378,6 +380,13 @@ test("copy email: a refused clipboard selects the text and never says 'copied'",
   expect(await page.evaluate(() => getSelection()?.toString())).toBe("ruiclebre@gmail.com");
 });
 
+test("'Read the thesis' links to the university repository", async ({ page }) => {
+  await page.goto("/research");
+  await expect(page.getByRole("link", { name: "Read the thesis" })).toHaveAttribute("href", "https://ruc.udc.es/entities/publication/98ca7882-3b19-4299-95eb-4c0881b203b0");
+  await page.goto("/pt/investigacao");
+  await expect(page.getByRole("link", { name: "Ler a tese" })).toHaveAttribute("href", /^https:\/\/ruc\.udc\.es\//);
+});
+
 /* ---------------- blog visibility ---------------- */
 
 test("blog is hidden while every post is a draft", async ({ page, request }) => {
@@ -495,7 +504,7 @@ test("header controls are ≥44px; other targets ≥24px", async ({ page }) => {
   expect(await small("header a, header button", 44)).toEqual([]);
 });
 
-test("thesis button focus ring contrasts ≥3:1 with the dark panel in both themes", async ({ page }) => {
+test("thesis link focus ring contrasts ≥3:1 with the dark panel in both themes", async ({ page }) => {
   const lum = (rgb: string) => {
     const [r, g, b] = rgb.match(/[\d.]+/g)!.slice(0, 3).map(Number).map((v) => {
       const c = v / 255;
@@ -510,7 +519,7 @@ test("thesis button focus ring contrasts ≥3:1 with the dark panel in both them
   for (const theme of ["light", "dark"] as const) {
     await page.emulateMedia({ colorScheme: theme });
     await page.goto("/research");
-    const btn = page.getByRole("button", { name: "Read the thesis" });
+    const btn = page.getByRole("link", { name: "Read the thesis" });
     await btn.focus();
     await page.keyboard.press("Shift+Tab");
     await page.keyboard.press("Tab");

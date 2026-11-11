@@ -94,7 +94,7 @@ only, and RSS GUIDs are the canonical URL in both feeds.
 
 ## Open items
 
-Tracked in `src/lib/site.ts` and the handoff §8: thesis URL, publication DOIs (`doi` field in
+Tracked in `src/lib/site.ts` and the handoff §8: publication DOIs (`doi` field in
 `publications.json`), real blog posts, and a 301 from ruilebre.vercel.app.
 
 The LightLex screenshot is the real app with its TMDB poster art swapped for abstract tiles while
