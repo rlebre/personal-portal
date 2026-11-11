@@ -3,8 +3,8 @@ export const site = {
   name: "Rui Lebre",
   email: "ruiclebre@gmail.com",
   coords: "40°38′N 8°39′W",
-  /** TODO(rui): link the thesis PDF or the university repository. */
-  thesisUrl: null as string | null,
+  /** The PhD thesis in RUC, the University of A Coruña's repository. */
+  thesisUrl: "https://ruc.udc.es/entities/publication/98ca7882-3b19-4299-95eb-4c0881b203b0" as string | null,
   /** The CV PDF in /public (replace the file to update it). */
   cvUrl: "/rui-lebre-cv.pdf" as string | null,
   links: {
