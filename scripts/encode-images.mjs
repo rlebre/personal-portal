@@ -20,6 +20,9 @@ const jobs = [
   // OpenTopoMap backgrounds for the trail cards' route maps. 480 px, not the 600 px source: they
   // are drawn faded and desaturated, and the first one is the mobile LCP image (24 KB vs 60 KB).
   { dir: "maps", width: 480, quality: 70 },
+  // The CV page for the in-page viewer (rendered from the PDF by render-cv.mjs). Full 1752 px (A4
+  // at 150 dpi), so it stays sharp when pinch-zoomed; it only loads when the viewer opens.
+  { dir: "cv", width: 1752, quality: 80 },
   // Post author avatar: rendered at 56 CSS px, 112 = 2x.
   { dir: ".", width: 112, quality: 85, only: ["avatar.png"] },
 ];

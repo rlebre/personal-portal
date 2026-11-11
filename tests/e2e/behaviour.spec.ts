@@ -59,6 +59,84 @@ test("'Get in touch' opens a menu to email or copy the address", async ({ page, 
   if (browserName === "chromium") expect(await page.evaluate(() => navigator.clipboard.readText())).toBe("ruiclebre@gmail.com");
 });
 
+/* ---------------- CV viewer ---------------- */
+
+test("'View CV' opens the viewer; Back, Escape and the browser's back all close it", async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.resolve() } }));
+  const images: string[] = [];
+  page.on("request", (r) => {
+    if (r.resourceType() === "image") images.push(new URL(r.url()).pathname);
+  });
+  await page.goto("/professional");
+  const view = page.getByRole("link", { name: "View CV" });
+  await expect(view).toHaveAttribute("href", "/rui-lebre-cv.pdf");
+  await expect(view).toHaveAttribute("aria-haspopup", "dialog");
+  // Closed: the page image isn't fetched.
+  expect(images.some((p) => /\/cv\.[\w-]+\.webp$/.test(p))).toBe(false);
+
+  await view.click();
+  const dialog = page.getByRole("dialog", { name: "Rui Lebre · CV" });
+  await expect(dialog).toBeVisible();
+  await expect(page).toHaveURL(/\/professional$/);
+  await expect(dialog.getByRole("button", { name: "Back" })).toBeFocused();
+  const img = dialog.getByRole("img", { name: /^Rui Lebre's CV, one page/ });
+  await expect.poll(() => img.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBe(1752);
+  await expect(dialog.getByRole("link", { name: "Download" })).toHaveAttribute("download", "");
+  await expect(dialog.getByRole("link", { name: "Download" })).toHaveAttribute("href", "/rui-lebre-cv.pdf");
+  await expect(dialog.getByRole("link", { name: "Open the PDF" })).toHaveAttribute("target", "_blank");
+
+  // Copy link: the result is shown and announced inside the dialog (the page toast is inert behind it).
+  await dialog.getByRole("button", { name: "Copy link" }).click();
+  await expect(dialog.getByRole("status")).toHaveText("Link copied");
+  await expect(dialog.getByRole("button", { name: "Link copied" })).toBeVisible();
+
+  await dialog.getByRole("button", { name: "Back" }).click();
+  await expect(dialog).toBeHidden();
+  await expect(view).toBeFocused();
+
+  await view.click();
+  await expect(dialog).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(dialog).toBeHidden();
+  await expect(view).toBeFocused();
+
+  // The browser's back closes it and stays on the page.
+  await view.click();
+  await expect(dialog).toBeVisible();
+  await page.goBack();
+  await expect(dialog).toBeHidden();
+  await expect(page).toHaveURL(/\/professional$/);
+  await expect(page.locator("h1")).toHaveText("Professional");
+});
+
+test("CV viewer: a refused clipboard shows the link instead; Share appears only where supported", async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.reject(new Error("denied")) } }));
+  await page.goto("/");
+  await page.getByRole("link", { name: "View CV" }).click();
+  const dialog = page.getByRole("dialog");
+  await expect(dialog.getByRole("button", { name: "Share" })).toHaveCount(0);
+  await dialog.getByRole("button", { name: "Copy link" }).click();
+  await expect(dialog.getByRole("status")).toHaveText("Couldn't copy. The link is https://ruilebre.com/rui-lebre-cv.pdf");
+  await expect(dialog.getByRole("button", { name: "Link copied" })).toHaveCount(0);
+});
+
+test("CV viewer: Share sends the PDF as a file when files can be shared", async ({ page }) => {
+  await page.addInitScript(() => {
+    const w = window as unknown as { shared: unknown[] };
+    w.shared = [];
+    Object.assign(navigator, {
+      share: (d: { files?: File[]; url?: string }) => (w.shared.push(d.files ? d.files.map((f) => `${f.name}:${f.type}:${f.size > 0}`) : d.url), Promise.resolve()),
+      canShare: (d: { files?: File[] }) => !!d.files,
+    });
+  });
+  await page.goto("/pt/profissional");
+  await page.getByRole("link", { name: "Ver CV" }).click();
+  const dialog = page.getByRole("dialog", { name: "Rui Lebre · CV" });
+  await page.waitForResponse((r) => r.url().endsWith("/rui-lebre-cv.pdf"));
+  await dialog.getByRole("button", { name: "Partilhar" }).click();
+  await expect.poll(() => page.evaluate(() => (window as unknown as { shared: unknown[] }).shared)).toEqual([["rui-lebre-cv.pdf:application/pdf:true"]]);
+});
+
 /* ---------------- footer language switch ---------------- */
 
 test("language links: chips with lang/hreflang, names contain the visible text, current one marked", async ({ page }) => {

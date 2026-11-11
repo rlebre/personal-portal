@@ -1,0 +1,48 @@
+/* A large sheet over the page on wide screens; the whole screen on phones. The toolbar stays put
+   and the page scrolls under it. */
+dialog.viewer{border:0;padding:0;margin:auto;width:min(980px,94vw);height:min(94dvh,1500px);max-width:none;max-height:none;border-radius:var(--radius);background:var(--surface-2);color:var(--ink);overflow:hidden;box-shadow:var(--shadow)}
+dialog.viewer[open]{display:grid;grid-template-rows:auto auto minmax(0,1fr)}
+dialog.viewer::backdrop{background:rgba(8,11,9,.72)}
+
+.bar{display:flex;align-items:center;gap:10px;padding:10px max(12px,env(safe-area-inset-right,0px)) 10px max(12px,env(safe-area-inset-left,0px));background:var(--surface);border-bottom:1px solid var(--line)}
+.back{border-color:transparent;padding-inline:12px 16px}
+.title{flex:1;min-width:0;font:600 .95rem var(--f-body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.actions{display:flex;gap:8px}
+.act{padding-inline:16px}
+.notice{margin:0;padding:8px 16px;font-size:.9rem;background:var(--surface);border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+
+.body{overflow:auto;overscroll-behavior:contain;padding:clamp(12px,3vw,32px) clamp(10px,3vw,32px) 24px}
+/* Paper stays white in both themes, like a PDF viewer; a little dimmer in dark mode. */
+.page{display:block;width:100%;max-width:860px;height:auto;margin:0 auto;background:#fff;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.12),0 8px 28px rgba(0,0,0,.10)}
+@media (prefers-color-scheme:dark){:global(:root:not([data-theme="light"])) .page{filter:brightness(.88)}}
+:global(:root[data-theme="dark"]) .page{filter:brightness(.88)}
+.foot{max-width:860px;margin:16px auto 0;font-size:.9rem;color:var(--ink-2);text-align:center}
+
+/* Phones: full screen; Share and Copy link become icon buttons (their names stay for assistive
+   tech), the title goes (it's still the dialog's accessible name). */
+@media (max-width:720px){
+  dialog.viewer{width:100%;height:100%;border-radius:0;box-shadow:none}
+  .act{padding-inline:12px}
+  .title{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .actions{margin-left:auto}
+}
+@media (max-width:480px){
+  .lbl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+}
+
+/* In: fades and rises 8px (full screen: rises 24px); out: fades. Same timing as the lightbox. */
+@media (prefers-reduced-motion:no-preference){
+  dialog.viewer{transition:opacity 240ms var(--ease-out),translate var(--d-3) var(--ease-out),display var(--d-3) allow-discrete,overlay var(--d-3) allow-discrete}
+  dialog.viewer:not([open]){opacity:0;translate:0 8px;transition-duration:var(--d-2)}
+  dialog.viewer::backdrop{transition:opacity var(--d-2) ease,display var(--d-2) allow-discrete,overlay var(--d-2) allow-discrete}
+  dialog.viewer:not([open])::backdrop{opacity:0}
+  @starting-style{
+    dialog.viewer[open]{opacity:0;translate:0 8px}
+    dialog.viewer[open]::backdrop{opacity:0}
+  }
+}
+@media (prefers-reduced-motion:no-preference) and (max-width:720px){
+  dialog.viewer:not([open]){translate:0 24px}
+  @starting-style{dialog.viewer[open]{translate:0 24px}}
+}
+@media (forced-colors:active){dialog.viewer{border:1px solid CanvasText}}

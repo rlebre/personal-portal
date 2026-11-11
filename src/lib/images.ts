@@ -38,6 +38,7 @@ import t16 from "@/assets/photos/thumb/16.webp";
 import t17 from "@/assets/photos/thumb/17.webp";
 import t18 from "@/assets/photos/thumb/18.webp";
 import avatarImg from "@/assets/avatar.webp";
+import cvImg from "@/assets/cv/cv.webp";
 import maispinhal from "@/assets/shots/maispinhal.webp";
 import lostHeritage from "@/assets/shots/lost-heritage.webp";
 import lightlex from "@/assets/shots/lightlex.webp";
@@ -58,6 +59,8 @@ export function thumbOf(photo: StaticImageData): StaticImageData {
   return thumbs[photos.indexOf(photo)] ?? photo;
 }
 export const avatar = avatarImg;
+/** The CV PDF's page as an image, for the in-page viewer (scripts/render-cv.mjs). */
+export const cvPage = cvImg;
 /** Side-project screenshots, keyed by `shot` in data/sideProjects.json. */
 export const shots: Record<ShotKey, StaticImageData> = { maispinhal, lostHeritage, lightlex, tictactoe };
 /** OpenTopoMap backgrounds for the route maps, keyed by Wikiloc id (same projection as data/routes.json). */

@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import { axe } from "./helpers";
 
-// axe in interactive states, not just on first paint: open menu, empty filter results, visible toast.
+// axe in interactive states, not just on first paint: open menu, empty filter results, CV viewer, visible toast.
 for (const width of [390, 1280]) {
   for (const theme of ["light", "dark"] as const) {
     test.describe(`${width}px ${theme}`, () => {
@@ -20,6 +20,13 @@ for (const width of [390, 1280]) {
         await page.getByRole("button", { name: "Book chapter" }).click();
         await page.getByLabel("Year").selectOption("2020");
         await expect(page.locator("main").getByRole("status")).toHaveText("Nothing matches these filters.");
+        expect(await axe(page)).toEqual([]);
+      });
+
+      test("axe: CV viewer open", async ({ page }) => {
+        await page.goto("/professional");
+        await page.getByRole("link", { name: "View CV" }).click();
+        await expect(page.getByRole("dialog")).toBeVisible();
         expect(await axe(page)).toEqual([]);
       });
 

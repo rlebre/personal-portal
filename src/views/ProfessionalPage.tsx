@@ -1,15 +1,14 @@
+import { CvButton } from "@/components/cv/CvButton";
 import { CvBullets, CvItem, CvSteps } from "@/components/professional/CvItem";
 import { CvTrail } from "@/components/professional/CvTrail";
 import { ProjectCard, ProjectGrid, SideProjectCard, SideProjectGrid } from "@/components/professional/ProjectCard";
 import { SkillGroups } from "@/components/professional/SkillGroups";
 import { ButtonGroup, ButtonLink } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Container";
-import { Download } from "@/components/ui/icons";
 import { Eyebrow, Label } from "@/components/ui/Label";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Pill } from "@/components/ui/Pill";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { ToastButton } from "@/components/ui/Toast";
 import { projects, sideProjects } from "@/lib/data";
 import { formatMonth, t, type Locale, type StringKey } from "@/lib/i18n";
 import type { SideProject } from "@/lib/schemas";
@@ -33,25 +32,11 @@ const skills = {
 const BADGE: Record<NonNullable<SideProject["badge"]>, StringKey> = { Live: "live", "In the media": "media" };
 
 export function ProfessionalPage({ locale }: { locale: Locale }) {
-  const cvLabel = (
-    <>
-      <Download />
-      <span>{t(locale, "work.cv")}</span>
-    </>
-  );
   return (
     <div className="view">
       <PageHeader eyebrow={<Eyebrow symbol="◆">{t(locale, "work.eyebrow")}</Eyebrow>} title={t(locale, "nav.work")} lede={t(locale, "work.lede")}>
         <ButtonGroup>
-          {site.cvUrl ? (
-            <ButtonLink variant="primary" href={site.cvUrl} download>
-              {cvLabel}
-            </ButtonLink>
-          ) : (
-            <ToastButton variant="primary" message={t(locale, "toast.cv")}>
-              {cvLabel}
-            </ToastButton>
-          )}
+          <CvButton locale={locale} />
           <ButtonLink href={site.links.linkedin}>LinkedIn</ButtonLink>
         </ButtonGroup>
       </PageHeader>
