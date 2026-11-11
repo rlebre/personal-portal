@@ -3,3 +3,14 @@
 .lede{font-size:var(--s-1);max-width:46ch;color:var(--ink-2);line-height:1.45}
 .head.tight{padding-bottom:12px}
 .fill{min-height:50vh;align-content:center}
+/* Depth while scrolling away, a quieter take on the home hero: the header's rows drift down and fade
+   as it leaves (under the 64px sticky header), so they move slower than the content passing them.
+   The title drifts most, the last row least. Not on articles (tight) or the 404 (fill). */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .head:not(.tight,.fill){view-timeline:--head block;view-timeline-inset:64px 0}
+  .head:not(.tight,.fill)>*{--drift:28px;animation:headAway linear both;animation-timeline:--head;animation-range:exit 0% exit 100%}
+  .head:not(.tight,.fill)>h1{--drift:56px}
+  .head:not(.tight,.fill)>:first-child{--drift:64px}
+  .head:not(.tight,.fill)>.lede{--drift:40px}
+}}
+@keyframes headAway{55%{opacity:.25}to{translate:0 var(--drift);opacity:0}}
