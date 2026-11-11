@@ -81,7 +81,7 @@ export const project = z.object({
 export type Project = z.infer<typeof project>;
 
 /** Keys of `shots` in lib/images.ts (typed there as Record<ShotKey, …>, so the two stay in sync). */
-export const shotKey = z.enum(["maispinhal", "lostHeritage", "lightlex", "tictactoe"]);
+export const shotKey = z.enum(["hunt", "trilhos", "maispinhal", "lostHeritage", "lightlex", "tictactoe"]);
 export type ShotKey = z.infer<typeof shotKey>;
 
 export const sideProject = z

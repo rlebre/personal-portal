@@ -39,6 +39,8 @@ import t17 from "@/assets/photos/thumb/17.webp";
 import t18 from "@/assets/photos/thumb/18.webp";
 import avatarImg from "@/assets/avatar.webp";
 import cvImg from "@/assets/cv/cv.webp";
+import hunt from "@/assets/shots/hunt.webp";
+import trilhos from "@/assets/shots/trilhos.webp";
 import maispinhal from "@/assets/shots/maispinhal.webp";
 import lostHeritage from "@/assets/shots/lost-heritage.webp";
 import lightlex from "@/assets/shots/lightlex.webp";
@@ -62,7 +64,7 @@ export const avatar = avatarImg;
 /** The CV PDF's page as an image, for the in-page viewer (scripts/render-cv.mjs). */
 export const cvPage = cvImg;
 /** Side-project screenshots, keyed by `shot` in data/sideProjects.json. */
-export const shots: Record<ShotKey, StaticImageData> = { maispinhal, lostHeritage, lightlex, tictactoe };
+export const shots: Record<ShotKey, StaticImageData> = { hunt, trilhos, maispinhal, lostHeritage, lightlex, tictactoe };
 /** OpenTopoMap backgrounds for the route maps, keyed by Wikiloc id (same projection as data/routes.json). */
 export const trailMaps: Record<string, StaticImageData> = {
   "55748813": map55748813,
