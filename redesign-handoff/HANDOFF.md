@@ -53,12 +53,15 @@ public/images/…
 
 ## 2. Information architecture & routes
 
+Nav order: Home · Professional · Research · Hobbies · Blog (same order for the home cards and the hero legend).
+
 | Page | EN path | PT path | Nav label EN / PT |
 |---|---|---|---|
 | Home | `/` | `/pt/` | Home / Início |
-| Research | `/research` | `/pt/investigacao` | Research / Investigação |
 | Professional | `/professional` | `/pt/profissional` | Professional / Profissional |
+| Research | `/research` | `/pt/investigacao` | Research / Investigação |
 | Hobbies | `/hobbies` | `/pt/passatempos` | Hobbies / Passatempos |
+| All trails | `/hobbies/trails` | `/pt/passatempos/trilhos` | (under Hobbies; nav highlights Hobbies) |
 | Blog index | `/blog` | `/pt/blog` | Blog |
 | Blog post | `/blog/[slug]` | `/pt/blog/[slug]` | — |
 | 404 | "Off the map" / "Fora do mapa" | | |
@@ -93,37 +96,39 @@ Theme: tokens on `:root`; dark under `@media (prefers-color-scheme: dark) { :roo
 
 ### Typography (Google Fonts, loaded with `next/font/google`)
 
-- **Name / wordmark:** Archivo, `font-stretch:125%` (expanded), weights 300 ("Rui") + 800 ("Lebre"), `letter-spacing:.05em`. Hero size `clamp(2.6rem, 1.4rem + 5.4vw, 5.8rem)`. Header wordmark same face, 1.1rem.
+- **Name / wordmark:** Archivo, `font-stretch:125%` (expanded), weights 300 ("Rui") + 800 ("Lebre"), `letter-spacing:.05em`. Hero size `clamp(2.4rem, 1.3rem + 4.6vw, 5rem)`. Header wordmark same face, 1.1rem.
 - **Display / headings:** Bricolage Grotesque 500/700/800.
 - **Body:** Atkinson Hyperlegible 400/700.
 - **Mono (coordinates, km, dates, labels):** IBM Plex Mono 400/500, `tabular-nums`. Uppercase labels: `.74rem`, `letter-spacing:.12em`.
-- Scale tokens `--s--1 … --s-3` as in the mock.
+- **Type scale (as shipped on ruilebre.com):** fluid tokens `--s--1: clamp(.8rem,.77rem + .12vw,.86rem)`, `--s-0: clamp(.94rem,.91rem + .15vw,1rem)` (body, hero intro), `--s-1: clamp(1.1rem,1.02rem + .4vw,1.3rem)` (page ledes, hero role, role titles, post titles), `--s-2: clamp(1.4rem,1.2rem + .9vw,1.85rem)` (section h2, home card titles, thesis title), `--s-3: clamp(1.9rem,1.5rem + 2vw,2.9rem)` (page h1). Hero name `clamp(2.4rem,1.3rem + 4.6vw,5rem)`. Small UI text uses fixed rem sizes per component (labels .74rem, pills .78rem, chips/selects .9rem, buttons and nav .95rem, card titles 1.05–1.25rem); the mock is the reference for each.
 
 ### Layout & components
 
 - Max width 1180px, side gutter `max(16px, env(safe-area-inset-*))` (32px ≥720px). Sticky translucent header (64px).
+- Section rhythm: vertical padding `clamp(48px, 7vw, 88px)` per section, and a dashed 1px divider (6px dash / 6px gap, `--contour-index` at 70%) at the top of each section that follows another, aligned to the content gutter. No divider above the Now strip (it has its own rules) or above the first section after a page header.
 - Radius 6px on cards only; pills fully rounded. Card hover: lift 2–3px, border → `--trail`, soft shadow.
 - Monogram: "R" inside two thin contour rings with one accent arc (inline SVG; also the favicon).
 
 ## 4. Pages (match the mock section-for-section)
 
-**Header:** monogram + "Rui **Lebre**" wordmark · nav (aria-current on active, dashed animated underline) · theme button · mobile menu button (<860px, disclosure pattern). No language control in the header.
+**Header:** monogram + "Rui **Lebre**" wordmark · nav (aria-current on active; solid 2px accent underline that grows on hover/focus) · theme button · mobile menu button (<860px, disclosure pattern). No language control in the header.
 
 **Home**
-1. Hero: coordinates label `40°38′N 8°39′W · Aveiro, Portugal`; name; role line "Senior Software Engineer at Plex · PhD in ICT"; intro paragraph; CTAs "See my work" (primary) / "Read the blog". Background `<canvas>` of animated contour lines (marching squares over Perlin noise + gaussian hills, 16 levels, every 4th thicker, ~11 fps redraw), a dashed accent trail to a ▲ summit labelled "1527 m". Map legend box (Research 2015–2022 / Professional 2016–now / Hobbies 101 trails, scale bar). **Pause animation** button (WCAG 2.2.2), remembered in localStorage; animation pauses offscreen/hidden tab and is static under reduced motion.
-2. Three section cards (no visible section title — keep an sr-only `<h2>`): symbol (△ ◆ ▲), stat pill, title, one line, "Follow the path →" etc. A single thin contour line along each card bottom; dashed connector between cards on desktop.
-3. "Now" strip, 3 columns: Working · Moving · Weekends (no "Learning").
-4. Latest posts: 3 columns, generous column gap `clamp(32px,4vw,56px)`.
+1. Hero: coordinates label `40°38′N 8°39′W · Aveiro, Portugal`; name; role line "Senior Software Engineer at Plex · PhD in ICT" (no avatar in the hero); intro paragraph; CTAs "Download CV" (primary, download icon) / "Get in touch" (scrolls to the footer `#contact`). Background `<canvas>` of animated contour lines (marching squares over Perlin noise + gaussian hills, 16 levels, every 4th thicker, ~11 fps redraw), a dashed accent trail to a ▲ summit labelled "1527 m". Map legend box (Professional 2016–now / Research 2015–2022 / Hobbies 101 trails, scale bar). **Pause animation** button (WCAG 2.2.2), remembered in localStorage; animation pauses offscreen/hidden tab and is static under reduced motion.
+2. Three section cards in the order Professional, Research, Hobbies (no visible section title — keep an sr-only `<h2>`): symbol (◆ △ ▲), stat pill, title, one line, "Follow the path →" etc. The Professional card reads "Senior Software Engineer at Plex since 2022. Lately:" followed by three diamond bullets (`th.work.1–3`). A single thin contour line along each card bottom; dashed connector between cards on desktop.
+3. **About me** (between the section cards and the Now strip; no photo): 2-column block. Left: label "About me", h2 "The person behind the map", two first-person paragraphs (`about.p1`, `about.p2` — Rui to review the wording). Right: "Field notes" card with a faint contour-ring corner motif and a dashed-rule definition list: Based in · Highest summit (Pico, 2,350 m: the top of Portugal) · Learning (German) · Photographs (Landscapes, birds and night skies) · Trails logged (101 since 2017, in 7 countries) · Most-viewed trail (link to Hobbies). Stacks to one column under 860px.
+4. "Now" strip, 3 columns: Working · Moving · Weekends (no "Learning").
+5. Latest posts: 3 columns, generous column gap `clamp(32px,4vw,56px)`.
 
 **Research**
 1. Header + stats line (20 publications · 5 journal · 14 conference · 1 thesis).
 2. "The ascent": SVG elevation-style profile, x = years 2011–2022, waypoints BSc, MSc, IEETA, Dicoogle, PhD (summit, `--mark`). Below it a 5-column milestone list (real `<ol>`; the SVG is decorative). Dates: BSc 2011–2015 · MSc 2015–2017 · Junior Researcher IEETA 2016–2017 · **Researcher IEETA 2017–2022** (alongside the PhD from 2018) · PhD 2018–2022 Universidade da Coruña.
 3. Thesis card (dark ink panel): "Profile-based sharing of medical imaging data", PhD in ICT, Universidade da Coruña, 2022. Button "Read the thesis" → **needs URL from Rui**.
-4. Themes chips. 5. Publications from `data/publications.json`: filter chips by type (`aria-pressed`) + year select, live result count (`role="status"`), grouped by year (`<h3>` year, `<ol>`), Rui's name bold, type badge, venue `<cite>`. **Add DOI links** (not in the data yet — fetch from ORCID 0000-0002-3230-0732 or ask Rui).
+4. Themes chips. 5. Publications from `data/publications.json`: filter chips by type ("All types", Journal, Conference, Book chapter; `aria-pressed`) + year select, live result count (`role="status"`), grouped by year (`<h3>` year, `<ol>`), Rui's name bold, type badge, venue `<cite>`. **Add DOI links** (not in the data yet — fetch from ORCID 0000-0002-3230-0732 or ask Rui).
 
 **Professional**
 1. Header, "Download CV (PDF)" (**needs the PDF**) + LinkedIn.
-2. Experience timeline: vertical dashed trail line that draws with scroll progress; diamond waypoints (filled = current). Entries:
+2. Experience timeline: vertical dashed trail line revealed with scroll (clip-path / scroll-driven animation); diamond waypoints, the current one filled with a soft 5px halo. Entries:
    - **Plex — Senior Software Engineer**, Jun 2022 – now, Remote. Step pills "Jun 2022 · Software Engineer", "Aug 2025 · Senior". Six bullets with bold leads (Website, Smart TV & consoles, Mobile & TV, BFF, Shipping, Team) — text in `i18n.json` keys `cv.plex.1h…6`.
    - IEETA, Universidade de Aveiro — Researcher, **Sep 2017 – May 2022** (Dicoogle; alongside PhD from 2018).
    - BMD Software — **Intern / Student**, Oct 2016 – Jul 2017.
@@ -134,16 +139,21 @@ Theme: tokens on `:root`; dark under `@media (prefers-color-scheme: dark) { :roo
 5. Skills: Domains / Technologies / Languages chips (values in the mock).
 
 **Hobbies**
-1. Header + stats (101 trails on Wikiloc · recording since 2017).
-2. Most-viewed trails (3 columns): each card has a **route map** on top — real GPS route path (`data/routes.json`, pre-projected into a 300×188 viewBox) on a light grid, start dot, end square for one-way routes, scale bar (`k` = km per 100 px), "N ↑", rank badge; route stroke draws on page enter. Then activity · type, views, title, region, Distance/Gain/High point, **real elevation profile** (`routes.json` `prof`, 61 samples in metres) with peak marker, difficulty badge (text + 1–3 peak icons, never colour alone), date, "View on Wikiloc". Activity filter (All / Hiking / Cycling). Wikiloc profile: https://www.wikiloc.com/wikiloc/user.do?id=3581003
+1. Header + stats line computed from `data/allTrails.json`: 101 trails · 1,255 km recorded · 46,570 m climbed · 7 countries (same line as on /hobbies/trails).
+2. Most-viewed trails (3 columns): the **top 5** trails by views as cards, and a **6th "View more" card** linking to `/hobbies/trails` (dashed border, faint map grid with a dashed sample route, "+96" badge, kicker "Trail log", title "See all 101 trails", total km line, "View all trails →"; the whole card is one link). Each trail card has a **route map** on top — real GPS route path (`data/routes.json`, pre-projected into a 300×188 viewBox) drawn over a **real topographic map background** (OpenTopoMap tiles, softened: ~70% opacity and desaturated in light mode; inverted/hue-rotated at ~55% in dark mode) with a white halo under the route; a small attribution "© OpenStreetMap · OpenTopoMap" (CC-BY-SA, required) in the bottom-right corner. Pre-rendered backgrounds that line up exactly with the route coordinates are in `assets/maps/<wikiloc-id>.webp` (600×376); for production either use them or render static maps at build time (e.g. a script stitching OpenTopoMap/MapTiler tiles for each route's bounds, or MapLibre static rendering) — no client-side map library needed. Fallback without a background: light grid, start dot, end square for one-way routes, scale bar (`k` = km per 100 px), "N ↑", rank badge; route stroke draws on page enter. Then activity · type, views, title, region, Distance/Gain/High point, **real elevation profile** (`routes.json` `prof`, 61 samples in metres) with peak marker, difficulty badge (text + 1–3 peak icons, never colour alone), date, "View on Wikiloc". Activity filter (All / Hiking / Cycling). Wikiloc profile: https://www.wikiloc.com/wikiloc/user.do?id=3581003
 3. "Through the lens" gallery: CSS-columns masonry of Rui's 12 photos, buttons opening a `<dialog>` lightbox (prev/next, arrow keys, Esc, counter, caption = alt text from `data/photoAlt.json`, focus returns to thumbnail).
 
-**Blog**
+**All trails** (`/hobbies/trails`, data `data/allTrails.json` — all 101 Wikiloc trails, scraped Nov 2026)
+- Breadcrumb Hobbies / Trails, h1 "All trails", lede, stats line (101 trails · total km recorded · total m climbed · countries).
+- Filters: activity chips (All / Hiking / Cycling = bike-touring + gravel + MTB), Country select with counts, Sort select (Most viewed, Most recent, Longest, Most climbing), search box (accent-insensitive, matches name, place and country in EN/PT, "Azores" matches "Açores"). Live result count.
+- List: table-like rows on desktop — **map thumbnail** (104×69, route over OpenTopoMap) · Trail name + place · country + activity · **elevation sparkline** (128×31) · Distance · Gain · Difficulty (peak icons, 4 for "Very difficult") · Recorded month · Views — with a 2px ink header rule. On <900px: thumbnail left of name/place, then sparkline and stats wrap below. Each name links to the Wikiloc trail. Pre-rendered thumbnails for all 101 trails are in `assets/trail-thumbs/<id>-map.webp` and `<id>-profile.webp` (light-theme rasters; the mock darkens them in dark mode with `filter: invert(.9) hue-rotate(180deg)`). For production prefer generating them at build time from each trail's GPS track (route as SVG over a static map; profile as inline SVG so it themes natively). Footer link "Follow me on Wikiloc for new trails →".
+
+**Blog** (built but currently hidden on ruilebre.com: not in the nav, no latest-posts strip, empty state "The first posts are on the way. Check back soon." — the mock shows the design for when posts go live)
 - Index: topic chips + language chips (EN/PT), count, list rows (date, read time, title, excerpt, lang badge, tags).
 - Post: breadcrumb, title, meta, 680px prose column, sticky TOC (desktop), dashed reading-progress bar under the header, author card (avatar = cartoon `personal-website-ai/public/avatar.png`).
 - **The 3 posts in `posts.json` are samples** — replace with real MDX. Frontmatter: `title, date, updated?, lang ('en'|'pt'), tags[], summary, cover?, draft`. Compute reading time. Add RSS (route handler) and sitemap.
 
-**Footer:** "Say hello" + email `ruiclebre@gmail.com` as selectable text with Copy button (mailto as convenience) · Elsewhere: GitHub (rlebre), LinkedIn (rui-lebre-435279101), Wikiloc, Instagram (ruilebre) · Academic: ORCID, Google Scholar (WtJeCMMAAAAJ) · base line with coordinates and "Coffee-free coding", and the **language switch**: a labelled group "Language / Língua" with two links styled as chips, "English" and "Português" (each with its own `lang`, current one `aria-current="true"`), linking to the counterpart page in the other locale.
+**Footer:** "Say hello" + email `ruiclebre@gmail.com` as selectable text with Copy button (mailto as convenience) · Elsewhere: GitHub (rlebre), LinkedIn (rui-lebre-435279101), Wikiloc, Instagram (ruilebre) · Academic: ORCID, Google Scholar (WtJeCMMAAAAJ) · base line with coordinates ("40°38′N 8°39′W · Aveiro"), "Designed and built by Rui Lebre", and the **language switch**: a labelled group "Language / Língua" with two links styled as chips, "English" and "Português" (each with its own `lang`, current one `aria-current="true"`), linking to the counterpart page in the other locale.
 
 ## 5. Assets
 
