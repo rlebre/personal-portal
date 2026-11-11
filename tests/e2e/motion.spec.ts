@@ -42,7 +42,9 @@ test.describe("motion allowed", () => {
     await page.goto("/", { waitUntil: "domcontentloaded" });
     const onName = await page.evaluate(() => {
       const h1 = document.querySelector("h1")!;
+      // Time-based only: the scroll-linked depth effect sits at its identity state at the top.
       return document.getAnimations().filter((a) => {
+        if (!(a.timeline instanceof DocumentTimeline)) return false;
         const t = (a.effect as KeyframeEffect | null)?.target;
         return t instanceof Element && (t === h1 || t.contains(h1));
       }).length;
@@ -110,9 +112,9 @@ test.describe("motion allowed", () => {
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
     await expect(dialog).toHaveCSS("opacity", "1");
-    await expect(dialog).toHaveAccessibleName("Photo 3 of 12");
+    await expect(dialog).toHaveAccessibleName("Photo 3 of 18");
     await page.keyboard.press("ArrowRight");
-    await expect(dialog).toHaveAccessibleName("Photo 4 of 12");
+    await expect(dialog).toHaveAccessibleName("Photo 4 of 18");
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();
     await expect(thumbs.nth(3)).toBeFocused();

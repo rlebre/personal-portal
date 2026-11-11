@@ -5,6 +5,14 @@
 .thumb:is(:hover,:focus-visible) img{transform:scale(1.03)}
 .thumb .n{position:absolute;left:8px;bottom:8px;font:500 .7rem var(--f-mono);background:color-mix(in srgb,var(--ink) 75%,transparent);color:var(--paper);padding:2px 6px;border-radius:3px;opacity:0;transition:opacity var(--d-2)}
 .thumb:hover .n,.thumb:focus-visible .n{opacity:1}
+/* Photos rise into place as they scroll in, each from a different depth (cycling through three), so
+   neighbours arrive at slightly different speeds. `translate` composes with the hover zoom on the img. */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .thumb{--rise:40px;animation:photoIn linear both;animation-timeline:view();animation-range:entry 0% cover 35%}
+  .thumb:nth-child(3n+2){--rise:72px}
+  .thumb:nth-child(3n){--rise:104px}
+}}
+@keyframes photoIn{from{translate:0 var(--rise);opacity:.001}60%{opacity:1}to{translate:0 0}}
 /* Lightbox: always dark, whatever the theme, so it has its own palette (the theme tokens flip).
    An opaque background (same as the backdrop over the page) keeps contrast checkers honest. */
 dialog.lightbox{--lb-ink:#F1F3EA;--lb-focus:#F2C46D;--lb-bg:#0E120F;border:0;padding:0;background:var(--lb-bg);max-width:min(96vw,1100px);width:100%;color:var(--lb-ink)}

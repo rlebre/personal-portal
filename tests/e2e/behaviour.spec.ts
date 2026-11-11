@@ -184,12 +184,12 @@ test("lightbox: keyboard navigation and focus return", async ({ page }) => {
   await thumbs.nth(2).click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
-  await expect(dialog).toHaveAccessibleName("Photo 3 of 12");
+  await expect(dialog).toHaveAccessibleName("Photo 3 of 18");
   await page.keyboard.press("ArrowRight");
-  await expect(dialog).toHaveAccessibleName("Photo 4 of 12");
+  await expect(dialog).toHaveAccessibleName("Photo 4 of 18");
   await page.keyboard.press("ArrowLeft");
   await page.keyboard.press("ArrowLeft");
-  await expect(dialog).toHaveAccessibleName("Photo 2 of 12");
+  await expect(dialog).toHaveAccessibleName("Photo 2 of 18");
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
   await expect(thumbs.nth(1)).toBeFocused();
@@ -270,6 +270,7 @@ test("without JavaScript the mobile nav is visible and reachable", async ({ brow
 /* ---------------- toast & copy ---------------- */
 
 test("toast: status region exists before the click and changes on every toast", async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.resolve() } }));
   await page.goto("/");
   const status = page.locator("[data-toast-status]");
   await expect(status).toHaveAttribute("role", "status");
@@ -279,12 +280,12 @@ test("toast: status region exists before the click and changes on every toast", 
     (window as unknown as { adds: number }).adds = 0;
     new MutationObserver((ms) => ms.forEach((m) => ((window as unknown as { adds: number }).adds += m.addedNodes.length))).observe(el, { childList: true, subtree: true });
   });
-  const cv = page.getByRole("button", { name: "Download CV" });
-  await cv.click();
-  await expect(status).toHaveText("The CV PDF is coming soon.");
-  await cv.click();
+  const copy = page.getByRole("button", { name: "Copy" });
+  await copy.click();
+  await expect(status).toHaveText("Email copied");
+  await copy.click();
   await expect.poll(() => page.evaluate(() => (window as unknown as { adds: number }).adds)).toBeGreaterThanOrEqual(2);
-  await expect(page.locator('[aria-hidden="true"]').filter({ hasText: "The CV PDF is coming soon." })).toBeVisible();
+  await expect(page.locator('[aria-hidden="true"]').filter({ hasText: "Email copied" })).toBeVisible();
 });
 
 test("copy email: a refused clipboard selects the text and never says 'copied'", async ({ page }) => {

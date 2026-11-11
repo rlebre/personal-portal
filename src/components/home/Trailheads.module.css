@@ -21,4 +21,16 @@
 /* Same lit state as Card's interactive hover, focus included. */
 .th:is(:hover,:focus-visible) .go svg{transform:translateX(4px)}
 .th:is(:hover,:focus-visible) .ripple{transform:translateY(-4px);opacity:.9}
+/* Parallax between the cards: each rises into place over the same scroll range; side by side
+   (3 columns) each starts a little further down than the one before, so they arrive at slightly
+   different speeds. `translate`
+   composes with the Card hover lift (which uses `transform`). */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .th{--rise:48px;animation:cardIn linear both;animation-timeline:view();animation-range:entry 0% cover 40%}
+}}
+@media (prefers-reduced-motion:no-preference) and (min-width:861px){@supports (animation-timeline:view()){
+  .th:nth-of-type(2){--rise:88px}
+  .th:nth-of-type(3){--rise:128px}
+}}
+@keyframes cardIn{from{translate:0 var(--rise);opacity:.001}60%{opacity:1}to{translate:0 0}}
 @media (max-width:860px){.grid{grid-template-columns:1fr}.connector{display:none}}

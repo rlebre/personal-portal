@@ -5,8 +5,8 @@ export const site = {
   coords: "40°38′N 8°39′W",
   /** TODO(rui): link the thesis PDF or the university repository. */
   thesisUrl: null as string | null,
-  /** TODO(rui): add the CV PDF to /public and point at it here. */
-  cvUrl: null as string | null,
+  /** The CV PDF in /public (replace the file to update it). */
+  cvUrl: "/rui-lebre-cv.pdf" as string | null,
   links: {
     github: "https://github.com/rlebre/",
     linkedin: "https://www.linkedin.com/in/rui-lebre-435279101/",

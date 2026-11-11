@@ -34,5 +34,15 @@
 @keyframes heroRise{from{opacity:.001;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes heroFade{from{opacity:.001}to{opacity:1}}
 @keyframes scale{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+/* Depth while scrolling away (scroll-driven, over the hero's exit; the 64px inset is the sticky
+   header). Back to front: the map recedes slowest, zooming in and dimming; the copy follows a bit
+   faster and fades. The hero clips both at its bottom edge, where the Sheet slides over. */
+@media (prefers-reduced-motion:no-preference){@supports (animation-timeline:view()){
+  .hero{view-timeline:--hero block;view-timeline-inset:64px 0;border-bottom:0}
+  .hero canvas{transform-origin:50% 0;animation:mapAway linear both;animation-timeline:--hero;animation-range:exit 0% exit 100%}
+  .grid{animation:copyAway linear both;animation-timeline:--hero;animation-range:exit 0% exit 100%}
+}}
+@keyframes mapAway{to{translate:0 55%;scale:1.12;opacity:.35}}
+@keyframes copyAway{60%{opacity:.15}to{translate:0 38%;scale:.97;opacity:0}}
 /* Stacked: the legend would only repeat the nav, so it goes. */
 @media (max-width:860px){.grid{grid-template-columns:1fr}.legend{display:none}.hero::after{background:linear-gradient(180deg,color-mix(in srgb,var(--paper) 55%,transparent),var(--paper) 85%)}}

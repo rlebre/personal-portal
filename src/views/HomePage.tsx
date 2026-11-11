@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PostCard, PostCardGrid } from "@/components/blog/PostCard";
 import { About } from "@/components/home/About";
 import { Hero } from "@/components/home/Hero";
+import { Sheet } from "@/components/home/Sheet";
 import { NowStrip } from "@/components/home/NowStrip";
 import { Trailheads } from "@/components/home/Trailheads";
 import { Arrow } from "@/components/ui/Arrow";
@@ -32,62 +33,64 @@ export function HomePage({ locale }: { locale: Locale }) {
     <div className="view">
       <Hero locale={locale} legend={sections.map((c) => ({ sym: c.sym, href: href(c.page, locale), label: t(locale, c.title), value: legendValue[c.page] }))} />
 
-      <Section>
-        <h2 className="sr-only">{t(locale, "home.trailheads")}</h2>
-        <Trailheads
-          items={sections.map((c) => ({
-            href: href(c.page, locale),
-            sym: c.sym,
-            pill: pill[c.page],
-            title: t(locale, c.title),
-            body: t(locale, c.body),
-            points: c.points?.map((k) => t(locale, k)),
-            go: t(locale, c.go),
-            ripple: c.ripple,
-          }))}
-        />
-      </Section>
-
-      <About
-        eyebrow={t(locale, "about.eyebrow")}
-        title={t(locale, "about.h")}
-        paragraphs={[t(locale, "about.p1"), t(locale, "about.p2")]}
-        factsTitle={t(locale, "about.facts")}
-        facts={[
-          { term: t(locale, "fact.base"), value: "Aveiro, Portugal" },
-          { term: t(locale, "fact.top2"), value: t(locale, "fact.top2.v") },
-          { term: t(locale, "fact.learn"), value: t(locale, "fact.learn.v") },
-          { term: t(locale, "fact.shoot"), value: t(locale, "fact.shoot.v") },
-          { term: t(locale, "fact.trails"), value: t(locale, "fact.trails.v") },
-          { term: t(locale, "fact.top"), value: <Link href={href("hobbies", locale)}>{trails[0].n}</Link> },
-        ]}
-      />
-
-      <Section flush="top">
-        <h2 className="sr-only">{t(locale, "home.now")}</h2>
-        <NowStrip
-          items={(["work", "move", "weekend"] as const).map((k) => ({
-            label: t(locale, `now.${k}`),
-            value: t(locale, `now.${k}.v`),
-            detail: t(locale, `now.${k}.d`),
-          }))}
-        />
-      </Section>
-
-      {isBlogVisible(posts) && (
+      <Sheet>
         <Section>
-          <SectionHeader title={t(locale, "home.latest")}>
-            <Link href={href("blog", locale)}>
-              {t(locale, "home.allposts")} <Arrow />
-            </Link>
-          </SectionHeader>
-          <PostCardGrid>
-            {posts.slice(0, 3).map((p) => (
-              <PostCard key={p.slug} post={p} locale={locale} />
-            ))}
-          </PostCardGrid>
+          <h2 className="sr-only">{t(locale, "home.trailheads")}</h2>
+          <Trailheads
+            items={sections.map((c) => ({
+              href: href(c.page, locale),
+              sym: c.sym,
+              pill: pill[c.page],
+              title: t(locale, c.title),
+              body: t(locale, c.body),
+              points: c.points?.map((k) => t(locale, k)),
+              go: t(locale, c.go),
+              ripple: c.ripple,
+            }))}
+          />
         </Section>
-      )}
+
+        <About
+          eyebrow={t(locale, "about.eyebrow")}
+          title={t(locale, "about.h")}
+          paragraphs={[t(locale, "about.p1"), t(locale, "about.p2")]}
+          factsTitle={t(locale, "about.facts")}
+          facts={[
+            { term: t(locale, "fact.base"), value: "Aveiro, Portugal" },
+            { term: t(locale, "fact.top2"), value: t(locale, "fact.top2.v") },
+            { term: t(locale, "fact.learn"), value: t(locale, "fact.learn.v") },
+            { term: t(locale, "fact.shoot"), value: t(locale, "fact.shoot.v") },
+            { term: t(locale, "fact.trails"), value: t(locale, "fact.trails.v") },
+            { term: t(locale, "fact.top"), value: <Link href={href("hobbies", locale)}>{trails[0].n}</Link> },
+          ]}
+        />
+
+        <Section flush="top">
+          <h2 className="sr-only">{t(locale, "home.now")}</h2>
+          <NowStrip
+            items={(["work", "move", "weekend"] as const).map((k) => ({
+              label: t(locale, `now.${k}`),
+              value: t(locale, `now.${k}.v`),
+              detail: t(locale, `now.${k}.d`),
+            }))}
+          />
+        </Section>
+
+        {isBlogVisible(posts) && (
+          <Section>
+            <SectionHeader title={t(locale, "home.latest")}>
+              <Link href={href("blog", locale)}>
+                {t(locale, "home.allposts")} <Arrow />
+              </Link>
+            </SectionHeader>
+            <PostCardGrid>
+              {posts.slice(0, 3).map((p) => (
+                <PostCard key={p.slug} post={p} locale={locale} />
+              ))}
+            </PostCardGrid>
+          </Section>
+        )}
+      </Sheet>
     </div>
   );
 }
